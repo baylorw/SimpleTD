@@ -1,0 +1,50 @@
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://bmdyj28ichv7b"]
+
+[ext_resource type="Texture2D" uid="uid://dqb5a1q1q22gu" path="res://assets/tilesets/wall 50.png" id="1_pbnl0"]
+[ext_resource type="Texture2D" uid="uid://dhsde0d87kmpg" path="res://assets/tilesets/floor 50.png" id="2_k5c7u"]
+[ext_resource type="Texture2D" uid="uid://bkeg8ycap8ggt" path="res://assets/tilesets/floor gray border 50.png" id="3_4386a"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7an30"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjo4n"]
+resource_name = "wall"
+texture = ExtResource("1_pbnl0")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_7an30")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lftah"]
+vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oe5lj"]
+resource_name = "floor"
+texture = ExtResource("2_k5c7u")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lftah")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pfqhl"]
+vertices = PackedVector2Array(25, 25, -25, 25, -25, -25, 25, -25)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lot1b"]
+resource_name = "floor gray border"
+texture = ExtResource("3_4386a")
+texture_region_size = Vector2i(50, 50)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pfqhl")
+
+[resource]
+tile_size = Vector2i(50, 50)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+navigation_layer_0/layers = 1
+sources/2 = SubResource("TileSetAtlasSource_gjo4n")
+sources/3 = SubResource("TileSetAtlasSource_oe5lj")
+sources/4 = SubResource("TileSetAtlasSource_lot1b")

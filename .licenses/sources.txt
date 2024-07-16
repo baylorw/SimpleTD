@@ -1,0 +1,15 @@
+Art
+---
+
+Sound
+-----
+
+Code
+----
+All of the code here is mine but a lot of it is based on (modified versions of)
+tutorial code written by others and published on YouTube. 
+Tutorials i watched include:
+- Brackeys (intro platformer)
+- GDC (tower defense)
+- GDQuest (steering)
+- Jackie Codes (tile maps)
