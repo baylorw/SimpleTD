@@ -1,17 +1,21 @@
 extends Node2D
 
+signal creep_reached_base
+
+const good_color := Color(0,1,0, 0.5)
+const bad_color  := Color(1,0,0, 0.5)
+
+@onready var ui: LevelUI = %UI
+
 @onready var terrain_tilemap : TileMapLayer = %GroundTileMapLayer
 @onready var blocker_tilemap : TileMapLayer = %WallsTileMapLayer
 @onready var group_1_start_marker = %StartGroup1
 @onready var group_2_start_marker = %StartGroup2
 @onready var group_1_end_marker = %EndGroup1
 @onready var group_2_end_marker = %EndGroup2
+@onready var money := 200
 @onready var path_line_1: PathLine = %PathLine1
 @onready var path_line_2: PathLine = %PathLine2
-
-var should_show_path := true
-
-var astar_grid = AStarGrid2D.new()
 
 var group_1_start_coord_global : Vector2
 var group_1_start_coord_map : Vector2i
@@ -24,14 +28,43 @@ var group_1_end_coord_map : Vector2i
 var group_2_end_coord_global : Vector2
 var group_2_end_coord_map : Vector2i
 
-var spawn_delay_in_wave_ms : float = 250
+var astar_grid = AStarGrid2D.new()
+var is_attempting_tower_placement = false
+#--- The tower being dragged by the mouse when building a new tower.
+var new_tower : Tower
+var should_show_path := true
+var tower_by_map_coord : Dictionary = {}
+
+# TODO: Move this to a Wave object
+var spawn_delay_in_wave_ms : float = 300
 
 
 func _ready():
 	Engine.time_scale = 1
-
+	Music.play_song("apple")
+	
+	CurrentLevel.money_starting = money
+	CurrentLevel.reset()
+	ui.show_health()
+	ui.show_money()
+	ui.show_wave()
+	
+	creep_reached_base.connect(on_creep_reached_base)
+	
 	build_astar_grid()
+	
+	setup_path_coords()
+	calculate_default_paths()
+	show_default_paths()
+	
+	setup_build_buttons()
 
+func setup_build_buttons():
+	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
+		var tower_name = i.get_meta("tower_name")
+		i.pressed.connect(Callable(on_build_tower_button_pressed).bind(tower_name))
+
+func setup_path_coords():
 	group_1_start_coord_global = group_1_start_marker.position
 	group_2_start_coord_global = group_2_start_marker.position
 	group_1_start_coord_map = coordinate_global_to_map(group_1_start_coord_global)
@@ -41,9 +74,29 @@ func _ready():
 	group_1_end_coord_map = coordinate_global_to_map(group_1_end_marker.position)
 	group_2_end_coord_map = coordinate_global_to_map(group_2_end_marker.position)
 
-	#--- Force the path line to show.
-	calculate_default_paths()
-	show_default_paths()
+func on_build_tower_button_pressed(tower_name : String):
+	if CurrentLevel.LevelStatus.BUILD != CurrentLevel.level_status:
+		print("Can't build new towers, game currently in status=" + str(CurrentLevel.level_status))
+		return
+	is_attempting_tower_placement = true
+	var tower_scene_fqn = "res://scenes/towers/%s.tscn" % tower_name
+	#print("set_tower_preview for %s" % tower_scene_fqn)
+	var tower_data = load(tower_scene_fqn)
+	new_tower = tower_data.instantiate()
+	#--- You MUST add this to the scene graph before modifying properties that use the onready variables.
+	%Towers.add_child(new_tower)
+	new_tower.set_range_color(bad_color)
+	new_tower.show_range(true)
+
+func _physics_process(_delta: float) -> void:
+	if !is_attempting_tower_placement:
+		return
+	
+	if can_build():
+		new_tower.set_range_color(good_color)
+	else:
+		new_tower.set_range_color(bad_color)
+	new_tower.position = get_global_mouse_position()
 
 func build_astar_grid():
 	#print("build_astar_grid")
@@ -74,15 +127,59 @@ func build_astar_grid():
 		astar_grid.set_point_solid(blocker_position)
 
 func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("left_click"):
-		print_mouse_location()
-		#spawn_creep_at(get_global_mouse_position(), group_1_path_global)
-	#if event.is_action_pressed("ui_cancel"):
-		#get_tree().change_scene_to_file("res://main_menu.tscn")
-	#elif event.is_action_pressed("left_click"):
-		#plant_tree()
-	#elif event.is_action_pressed("right_click"):
-		#remove_blocker()
+	if is_attempting_tower_placement:
+		if event.is_action_pressed("left_click"):
+			if can_build():
+				build_tower()
+			else:
+				print("You can't build there")
+				cancel_build()
+		elif event.is_action_pressed("ui_cancel"):
+			cancel_build()
+			
+	elif event.is_action_pressed("left_click"):
+		var tile_position = coordinate_global_to_map(get_global_mouse_position())
+		if null == tile_position:
+			return
+		if tower_by_map_coord.has(tile_position):
+			var tower = tower_by_map_coord[tile_position]
+			#if (null != tower):
+			tower.toggle_show_range()
+	#elif !is_attempting_tower_placement and event.is_action_pressed("left_click"):
+		#new_tower.fire_at_mouse()
+		
+	elif event.is_action_pressed("ui_cancel"):
+		_on_quit_button_pressed()
+
+func build_tower():
+	is_attempting_tower_placement = false
+
+	CurrentLevel.money -= new_tower.cost
+	ui.show_money()
+
+	var map_coord = coordinate_global_to_map(new_tower.position)
+	new_tower.position = coordinate_map_to_global(map_coord)
+	tower_by_map_coord[map_coord] = new_tower
+
+	new_tower.show_range(false)
+
+func cancel_build():
+	is_attempting_tower_placement =false
+	new_tower.queue_free()
+
+func can_build():
+	if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+		print("can't build, level isn't in build mode")
+		return false
+	if !is_attempting_tower_placement:
+		print("can't build, !is_attempting_tower_placement")
+		return false
+	if new_tower.cost > CurrentLevel.money:
+		#print("can't build, tower is too expensive")
+		return false
+	if !is_a_buildable_position_global(get_global_mouse_position()):
+		return false
+	return true
 
 func print_mouse_location():
 	var mouse_place_g = get_global_mouse_position()
@@ -120,6 +217,9 @@ func show_default_paths():
 
 func spawn_creeps():
 	#print("spawn_creeps()")
+	CurrentLevel.wave_number += 1
+	ui.show_wave()
+	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
 	if group_1_path_global.is_empty() or group_2_path_global.is_empty():
 		print("no paths so calculating them")
 		calculate_default_paths()
@@ -130,22 +230,24 @@ func spawn_creeps():
 		spawn_creep_at(group_1_start_coord_global, group_1_path_global)
 		spawn_creep_at(group_2_start_coord_global, group_2_path_global)
 		await get_tree().create_timer(spawn_delay_in_wave_ms / 1000).timeout
+		print("Creep spawned. count=" + str(%Creeps.get_child_count()))
 
 func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2]):
 	#print("spawn_creep_at() global=" + str(start_position_global))
 	var new_enemy : PathFollower = %PathFollowerPrototype.duplicate()
 	new_enemy.add_to_group("creeps")
 	new_enemy.position = start_position_global
-	#print("enemy starting at global=" + str(start_position_global) + " map=" + str(coordinate_global_to_map(start_position_global)))
-	#print("fucking creep size=" + str(new_enemy.get_size()) + " scale=" + str(new_enemy.transform.get_scale()))
 	%Creeps.add_child(new_enemy, true)
+	new_enemy.destroyed.connect(on_creep_destroyed)
+	new_enemy.tree_exited.connect(on_creep_freed)
 
 	if path.is_empty():
 		print("!!! NO PATH FOUND !!! from=" + str(start_position_global))
 		new_enemy.queue_free()
-	else:
-		#--- Path following is destructive so give each agent their own copy of the path.
-		new_enemy.follow(path.duplicate())
+		return
+
+	#--- Path following is destructive so give each agent their own copy of the path.
+	new_enemy.follow(path.duplicate())
 
 func coords_map_to_global(coords_map : Array[Vector2i]) -> Array[Vector2]:
 	var coords_global : Array[Vector2] = []
@@ -154,46 +256,152 @@ func coords_map_to_global(coords_map : Array[Vector2i]) -> Array[Vector2]:
 		coords_global.push_back(coord_global)
 	return coords_global
 
-func coords_map_to_global_old(list : Array[Vector2i]) -> Array[Vector2]:
-	#--- The word "map" is used for levels, TileMaps, hash tables and collection map/reduce functions. Ugh.
-	#--- GDSscript Array.map() doesn't work with types so we use this hack.
-	var coords_local  : Array[Vector2] = []
-	coords_local.assign(list.map(terrain_tilemap.map_to_local))
-	#--- Or we could stop using stupid "functional" programming and do it the supportable way.
-	var coords_global : Array[Vector2] = []
-	for coord_local in coords_local:
-		var coord_global = to_global(coord_local)
-		coords_global.push_back(coord_global)
-	return coords_global
-
 func coordinate_global_to_map(coordinate_global : Vector2i) -> Vector2i:
 	var coordinate_local = to_local(coordinate_global)
 	var coordinate_map   = terrain_tilemap.local_to_map(coordinate_local)
 	return coordinate_map
+
+func coordinate_global_to_map_to_global(coordinate_global : Vector2i) -> Vector2:
+	var coordinate_local = to_local(coordinate_global)
+	var coordinate_map   = terrain_tilemap.local_to_map(coordinate_local)
+	var global_but_tile_centered = coordinate_map_to_global(coordinate_map)
+	return global_but_tile_centered
 
 func coordinate_map_to_global(coordinate_map : Vector2i) -> Vector2:
 	var coordinate_local  = terrain_tilemap.map_to_local(coordinate_map)
 	var coordinate_global = to_global(coordinate_local)
 	return coordinate_global
 
+
+## Needed: 
+## 1. It's a wall, not a walkable
+## 2. The wall doesn't already have a tower on it
+func is_navigable(tile_position : Vector2i) -> bool:
+	var tile_data = terrain_tilemap.get_cell_tile_data(tile_position)
+	if (null == tile_data):
+		return false
+	var nav_shape = tile_data.get_navigation_polygon(0)
+	if null == nav_shape:
+		return false
+	if 0 == nav_shape.get_outline_count():
+		return false
+	return true
+
+## Could be a wall (which we can build on), could be trees or a pit or something (which we can't).
+func is_blocked(tile_position : Vector2i) -> bool:
+	var source_id = blocker_tilemap.get_cell_source_id(tile_position)
+	var is_blocked = (-1 != source_id)
+	return is_blocked
+
+func is_occupied(tile_position : Vector2i) -> bool:
+	return tower_by_map_coord.keys().has(tile_position)
+
+func is_a_buildable_position(tile_position : Vector2i) -> bool:
+	#if is_navigable(tile_position):
+		#print("that spot is navigable, towers don't go there")
+		#return false
+	# TODO: Explicitly mark buildable positions (to differentiate from non-nav and also not-buildable)
+	if !is_blocked(tile_position):
+		return false
+	if is_occupied(tile_position):
+		return false
+	return true
+
+func is_a_buildable_position_global(position_global : Vector2) -> bool:
+	var position_local = to_local(position_global)
+	var position_tilemap = terrain_tilemap.local_to_map(position_local)
+	return is_a_buildable_position(position_tilemap)
+
+
+#####################
+##     GAME EVENTS
+#####################
+func on_creep_destroyed():
+	ui.show_money()
+	#print("Creep destroyed. count=" + str(%Creeps.get_child_count()))
+	#if 0 == %Creeps.get_child_count():
+		#print("wave over, back to build mode")
+		#CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
+
+## The creep has left the scene graph, probably after a queue_free().
+## Because it was queued, we can't get an accurate count of creeps remaining
+##	in the other methods (on_destroyed, etc.).
+func on_creep_freed():
+	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
+
+	#--- If we've already lost it doesn't matter what the creeps are doing now.
+	if CurrentLevel.level_status == CurrentLevel.LevelStatus.LOST:
+		return
+		
+	if (0 == %Creeps.get_child_count()) and (CurrentLevel.level_status == CurrentLevel.LevelStatus.WAVE):
+		if CurrentLevel.wave_number == CurrentLevel.wave_number_max:
+			CurrentLevel.level_status = CurrentLevel.LevelStatus.WON
+			on_win()
+		else:
+			print("wave over, we survived, back to build mode")
+			CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
+		
+
+func on_creep_reached_base():
+	print("on_creep_reached_base")
+	CurrentLevel.base_health -= 1
+	ui.show_health()
+	if 0 == CurrentLevel.base_health:
+		CurrentLevel.level_status = CurrentLevel.LevelStatus.LOST
+		on_lose()
+
 func _on_kill_zone_body_entered(body: Node2D):
-	if body is PathFollower:
-		body.queue_free()
+	print("kill zone entered by " + str(body))
+	if !(body is PathFollower):
+		return
+	creep_reached_base.emit()
+	body.queue_free()
+
+func on_win():
+	print("GAME OVER, you win!")
+	Music.play_song("fruit")
+	center_control(%WinnerMessage)
+
+func on_lose():
+	print("GAME OVER, you lose")
+	Music.play_song("loser")
+	center_control(%LoserMessage)
+	
+
+func center_control(control : Container):
+	control.position = Vector2(
+		get_viewport().size.x / 2 - control.get_rect().size.x / 2,
+		get_viewport().size.y / 2 - control.get_rect().size.y / 2
+	)
 
 func _on_quit_button_pressed():
 	get_tree().change_scene_to_file("res://menus/level_selection/level_selection.tscn")
 
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()
+
 func _on_send_wave_button_pressed():
+	if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+		return
 	spawn_creeps()
 
+func _on_pause_button_pressed() -> void:
+	#Engine.time_scale = 0.0
+	print("is_paused=" + str(get_tree().is_paused()))
+	get_tree().paused = !get_tree().is_paused()
+	
 func _on_speed_half_button_pressed() -> void:
 	Engine.time_scale = 0.5
-
 func _on_speed_normal_button_pressed() -> void:
 	Engine.time_scale = 1
-
 func _on_speed_2_button_pressed() -> void:
 	Engine.time_scale = 2
-
 func _on_speed_5_button_pressed() -> void:
 	Engine.time_scale = 5
+
+
+func _on_r_pressed() -> void:
+	ui.show_health()
+	ui.show_money()
+	ui.show_wave()
+	print("creep count=" + str(%Creeps.get_child_count()))

@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://dcmcaqwhl72t2"]
+[gd_scene load_steps=2 format=3 uid="uid://dcmcaqwhl72t2"]
 
-[node name="Music" type="AudioStreamPlayer2D"]
+[ext_resource type="Script" path="res://globals/music_manager.gd" id="1_8mwko"]
+
+[node name="MusicManager" type="AudioStreamPlayer2D"]
+bus = &"Music"
+script = ExtResource("1_8mwko")

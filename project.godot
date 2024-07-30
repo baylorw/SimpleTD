@@ -26,11 +26,14 @@ Steering="*res://globals/Steering.gd"
 PlayerProfile="*res://globals/PlayerProfile.gd"
 SettingsFile="*res://globals/SettingsFile.gd"
 Globals="*res://globals/Globals.gd"
+Towers="*res://globals/Towers.gd"
+CurrentLevel="*res://globals/CurrentLevel.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/initial_position_type=3
 window/stretch/mode="viewport"
 
 [input]

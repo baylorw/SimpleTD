@@ -24,57 +24,68 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+theme_override_font_sizes/font_size = 24
+current_tab = 1
 script = ExtResource("2_1opby")
 
 [node name="Video" type="TabBar" parent="UI/Settings"]
+visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 script = ExtResource("1_wsc8o")
 metadata/_tab_index = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Settings/Video"]
+[node name="GridContainer" type="GridContainer" parent="UI/Settings/Video"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Settings/Video/HBoxContainer"]
+[node name="ResolutionLabel" type="Label" parent="UI/Settings/Video/GridContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Resolution"
 
-[node name="FullScreen" type="Label" parent="UI/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="Resolution" type="OptionButton" parent="UI/Settings/Video/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+flat = true
+
+[node name="FullScreenLabel" type="Label" parent="UI/Settings/Video/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Fullscreen"
 
-[node name="Borderless" type="Label" parent="UI/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="FullScreen" type="CheckBox" parent="UI/Settings/Video/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="BorderlessLabel" type="Label" parent="UI/Settings/Video/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Borderless"
 
-[node name="VSync" type="Label" parent="UI/Settings/Video/HBoxContainer/VBoxContainer"]
+[node name="Borderless" type="CheckBox" parent="UI/Settings/Video/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[node name="VSyncLabel" type="Label" parent="UI/Settings/Video/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "VSync"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Settings/Video/HBoxContainer"]
-layout_mode = 2
-
-[node name="FullScreen" type="CheckBox" parent="UI/Settings/Video/HBoxContainer/VBoxContainer2"]
+[node name="VSync" type="OptionButton" parent="UI/Settings/Video/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Borderless" type="CheckBox" parent="UI/Settings/Video/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="VSync" type="OptionButton" parent="UI/Settings/Video/HBoxContainer/VBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
+theme_override_font_sizes/font_size = 24
 item_count = 4
 popup/item_0/text = "Disabled"
 popup/item_1/text = "Enabled"
@@ -84,9 +95,16 @@ popup/item_2/id = 2
 popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 
+[node name="ResolutionConfirmationDialog" type="ConfirmationDialog" parent="UI/Settings"]
+unique_name_in_owner = true
+title = "Keep this size?"
+initial_position = 2
+dialog_text = "Keep this size?"
+dialog_autowrap = true
+
 [node name="Audio" type="TabBar" parent="UI/Settings"]
-visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 script = ExtResource("2_7bsqy")
 metadata/_tab_index = 1
 
@@ -109,14 +127,17 @@ layout_mode = 2
 
 [node name="Master" type="Label" parent="UI/Settings/Audio/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Master"
 
 [node name="Music" type="Label" parent="UI/Settings/Audio/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "Music"
 
 [node name="SFX" type="Label" parent="UI/Settings/Audio/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "SFX"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/Settings/Audio/HBoxContainer"]
@@ -222,9 +243,12 @@ text = "Exit"
 [connection signal="tab_clicked" from="UI/Settings" to="UI/Settings" method="_on_tab_clicked"]
 [connection signal="tab_hovered" from="UI/Settings" to="UI/Settings" method="_on_tab_hovered"]
 [connection signal="tab_selected" from="UI/Settings" to="UI/Settings" method="_on_tab_selected"]
-[connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/FullScreen" to="UI/Settings/Video" method="_on_full_screen_toggled"]
-[connection signal="toggled" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/Borderless" to="UI/Settings/Video" method="_on_borderless_toggled"]
-[connection signal="item_selected" from="UI/Settings/Video/HBoxContainer/VBoxContainer2/VSync" to="UI/Settings/Video" method="_on_v_sync_item_selected"]
+[connection signal="item_selected" from="UI/Settings/Video/GridContainer/Resolution" to="UI/Settings/Video" method="_on_resolution_item_selected"]
+[connection signal="toggled" from="UI/Settings/Video/GridContainer/FullScreen" to="UI/Settings/Video" method="_on_full_screen_toggled"]
+[connection signal="toggled" from="UI/Settings/Video/GridContainer/Borderless" to="UI/Settings/Video" method="_on_borderless_toggled"]
+[connection signal="item_selected" from="UI/Settings/Video/GridContainer/VSync" to="UI/Settings/Video" method="_on_v_sync_item_selected"]
+[connection signal="canceled" from="UI/Settings/ResolutionConfirmationDialog" to="UI/Settings/Video" method="_on_resolution_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="UI/Settings/ResolutionConfirmationDialog" to="UI/Settings/Video" method="_on_resolution_confirmation_dialog_confirmed"]
 [connection signal="tab_button_pressed" from="UI/Settings/Audio" to="UI/Settings/Audio" method="_on_tab_button_pressed"]
 [connection signal="tab_changed" from="UI/Settings/Audio" to="UI/Settings/Audio" method="_on_tab_changed"]
 [connection signal="tab_clicked" from="UI/Settings/Audio" to="UI/Settings/Audio" method="_on_tab_clicked"]

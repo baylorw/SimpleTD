@@ -2,18 +2,17 @@ extends TabBar
 
 @onready var tab_container = $".."
 
-var background_track
+#var background_track
 
 func _ready():
-	background_track = load("res://assets/audio/music/time_for_adventure.mp3")
-	Music.stream = background_track
-	
 	%Master.value = SettingsFile.config.get_value("Audio", str(0))
 	AudioServer.set_bus_volume_db(0, linear_to_db(%Master.value))
 	%Music.value = SettingsFile.config.get_value("Audio", str(1))
 	AudioServer.set_bus_volume_db(1, linear_to_db(%Music.value))
 	%SFX.value = SettingsFile.config.get_value("Audio", str(2))
 	AudioServer.set_bus_volume_db(2, linear_to_db(%SFX.value))
+	
+	Music.play_song("apple")
 
 func _on_master_value_changed(value):
 	set_volume(0, value)
@@ -26,6 +25,7 @@ func _on_sfx_value_changed(value):
 
 func set_volume(bus_index, value):
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+	AudioServer.set_bus_mute(bus_index, value < 0.05)
 	SettingsFile.config.set_value("Audio", str(bus_index), value)
 	SettingsFile.save_data()
 

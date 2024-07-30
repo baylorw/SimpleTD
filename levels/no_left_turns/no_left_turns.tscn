@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://csev2k4j06e3i"]
+[gd_scene load_steps=20 format=4 uid="uid://csev2k4j06e3i"]
 
 [ext_resource type="PackedScene" uid="uid://bvpqeqrft7ixh" path="res://scenes/path_line/path_line.tscn" id="1_jjqhd"]
 [ext_resource type="Script" path="res://levels/no_left_turns/no_left_turns.gd" id="1_o2v86"]
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="2_jw46g"]
+[ext_resource type="Script" path="res://levels/no_left_turns/ui.gd" id="3_77cl6"]
 [ext_resource type="Texture2D" uid="uid://c2merbdufjhx" path="res://assets/images/creeps/angel 50.png" id="7_ay732"]
 [ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="7_cl00d"]
 [ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="8_4axf4"]
@@ -13,13 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="12_135ms"]
 [ext_resource type="PackedScene" uid="uid://doi7efayw5psr" path="res://scenes/path_follower/path_follower.tscn" id="13_ouxtd"]
 [ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="13_ybgkt"]
-
-[sub_resource type="InputEventKey" id="InputEventKey_dcjft"]
-device = -1
-keycode = 4194305
-
-[sub_resource type="Shortcut" id="Shortcut_v6trn"]
-events = [SubResource("InputEventKey_dcjft")]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="15_r0nj3"]
+[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="16_gxvm4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
@@ -46,6 +42,8 @@ texture = ExtResource("9_ebiga")
 flip_h = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_77cl6")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 11
@@ -71,7 +69,7 @@ text = "Towers"
 layout_mode = 2
 columns = 3
 
-[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -79,8 +77,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("7_cl00d")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "blue1"
 
-[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -88,8 +87,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("8_4axf4")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "brown1"
 
-[node name="G1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="G1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -97,8 +97,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("9_2ytip")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "green_1_tower"
 
-[node name="G2Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="G2Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -106,8 +107,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("10_eofkt")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "green2"
 
-[node name="G3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="G3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -115,8 +117,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("11_0f26a")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "green3"
 
-[node name="R1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="R1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -124,8 +127,9 @@ size_flags_vertical = 5
 texture_normal = ExtResource("12_135ms")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "red1"
 
-[node name="R3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer"]
+[node name="R3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
@@ -133,11 +137,37 @@ size_flags_vertical = 5
 texture_normal = ExtResource("13_ybgkt")
 ignore_texture_size = true
 stretch_mode = 5
+metadata/tower_name = "red3"
 
 [node name="DetailsLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="WaveLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Wave: 0 / 6"
+autowrap_mode = 3
+
+[node name="HealthLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lives: 20/20"
+autowrap_mode = 3
+
+[node name="MoneyLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lives: 20/20"
 autowrap_mode = 3
 
 [node name="WaveHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
@@ -148,14 +178,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Send Wave"
 
+[node name="R" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R"
+
 [node name="QuitButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-shortcut = SubResource("Shortcut_v6trn")
 text = "Quit"
 
 [node name="SpeedHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "II"
 
 [node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
@@ -238,18 +277,149 @@ shape = SubResource("RectangleShape2D_yyeby")
 
 [node name="PathFollowerPrototype" parent="LevelData" instance=ExtResource("13_ouxtd")]
 unique_name_in_owner = true
-position = Vector2(-80, 77)
+position = Vector2(1320, 744)
 scale = Vector2(0.8, 0.8)
 max_speed = 150.0
 texture = ExtResource("7_ay732")
 
+[node name="TowerPrototypes" type="Node2D" parent="."]
+
+[node name="Towers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="Creeps" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WinnerMessage" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1328.0
+offset_top = 8.0
+offset_right = 1702.0
+offset_bottom = 267.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WinnerMessage"]
+modulate = Color(1, 1, 0.788235, 1)
+layout_mode = 2
+texture = ExtResource("15_r0nj3")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/WinnerMessage"]
+layout_mode = 2
+texture = ExtResource("16_gxvm4")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinnerMessage"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0.542482, 5.77569e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 72
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="LoserMessage" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1328.0
+offset_top = 288.0
+offset_right = 1702.0
+offset_bottom = 547.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LoserMessage"]
+modulate = Color(0.392345, 7.94759e-06, 3.63387e-06, 1)
+layout_mode = 2
+texture = ExtResource("15_r0nj3")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/LoserMessage"]
+layout_mode = 2
+texture = ExtResource("16_gxvm4")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LoserMessage"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.589806, 1.54018e-06, 3.85046e-07, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 72
+text = "Oh No!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/R" to="." method="_on_r_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedHalfButton" to="." method="_on_speed_half_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed2Button" to="." method="_on_speed_2_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed5Button" to="." method="_on_speed_5_button_pressed"]
 [connection signal="body_entered" from="LevelData/Paths/KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

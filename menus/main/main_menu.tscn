@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b1sevivxrbf43"]
+[gd_scene load_steps=19 format=3 uid="uid://b1sevivxrbf43"]
 
 [ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_42s7t"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_73mdt"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="11_xc3l5"]
 [ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="12_1pr03"]
 [ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="13_3yman"]
+[ext_resource type="Theme" uid="uid://couiaiuvnhxfa" path="res://resources/theme_2.tres" id="14_y851h"]
+[ext_resource type="Texture2D" uid="uid://cgchsrrgij4d6" path="res://assets/ui/button_rectangle_depth_gradient.png" id="15_3ccp4"]
+[ext_resource type="Texture2D" uid="uid://36o530vbr4eg" path="res://assets/ui/button_rectangle_depth_flat.png" id="16_mitxq"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_7co8h"]
 device = -1
@@ -174,6 +177,107 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("14_y851h")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/separation = 35
+
+[node name="NewGameButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(375, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("15_3ccp4")
+texture_pressed = ExtResource("16_mitxq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NewGameButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(375, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("15_3ccp4")
+texture_pressed = ExtResource("16_mitxq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SettingsButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AboutButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(375, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("15_3ccp4")
+texture_pressed = ExtResource("16_mitxq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AboutButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "About"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(375, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("15_3ccp4")
+texture_pressed = ExtResource("16_mitxq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/QuitButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewGameButton2" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton2" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton2" to="." method="_on_quit_button_pressed"]
