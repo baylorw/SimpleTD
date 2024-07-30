@@ -120,9 +120,9 @@ _data = {
 
 [node name="Green1Tower" type="Node2D"]
 script = ExtResource("1_a562t")
-cost = 50
-damage_per_shot = 1
-shot_delay_in_ms = 500
+cost = 100
+damage_per_shot = 4
+shot_delay_in_ms = 50
 range_in_pixels = 300
 
 [node name="RangeSprite" type="Sprite2D" parent="."]

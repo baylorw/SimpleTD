@@ -50,7 +50,12 @@ func fire():
 	%FireSound.play()
 	
 	var seconds_to_wait : float = shot_delay_in_ms / 1000.0
-	get_tree().create_timer(seconds_to_wait).timeout
+	#print("waiting to fire=" + str(seconds_to_wait))
+	#if Engine.time_scale > 0:
+		#print("time scale is non-0")
+		#seconds_to_wait /= Engine.time_scale
+	#print("now waiting to fire=" + str(seconds_to_wait))
+	await get_tree().create_timer(seconds_to_wait).timeout
 	is_ready_to_fire = true
 
 func print_variables():
