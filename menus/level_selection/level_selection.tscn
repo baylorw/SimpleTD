@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://kjtk0whpobva"]
+[gd_scene load_steps=14 format=3 uid="uid://kjtk0whpobva"]
 
 [ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_6kid4"]
 [ext_resource type="Script" path="res://menus/level_selection/level_selection.gd" id="2_a4n2b"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="3_cngd4"]
-[ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/NoLeftTurns.png" id="4_ence3"]
+[ext_resource type="Texture2D" uid="uid://dhg7v14deqce8" path="res://levels/void/void.png" id="4_b38sq"]
+[ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/NoLeftTurns icon.png" id="4_ence3"]
+[ext_resource type="Texture2D" uid="uid://bghc7251rncy6" path="res://levels/frog/frog.png" id="5_agqfp"]
+[ext_resource type="Texture2D" uid="uid://3oou3k6qdt1q" path="res://levels/elementalish/elementalish.png" id="6_mbahb"]
+[ext_resource type="Texture2D" uid="uid://dyjxycgesjq0q" path="res://levels/slim_pickings/slim_pickings.png" id="8_qo08g"]
+[ext_resource type="Texture2D" uid="uid://dr4rw0a6s80jk" path="res://levels/snaking_path/snaking_path.png" id="9_52mo7"]
+[ext_resource type="Texture2D" uid="uid://8rnaixlkagi8" path="res://levels/switchback/switchback.png" id="10_j12pi"]
+[ext_resource type="Texture2D" uid="uid://bvhvksreyybw8" path="res://levels/up_and_down/up_and_down.png" id="11_i73yu"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_0lgvy"]
 device = -1
@@ -71,22 +78,21 @@ columns = 4
 [node name="Level1Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("4_b38sq")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Level2Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("5_agqfp")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Level3Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-disabled = true
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("6_mbahb")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -133,32 +139,28 @@ layout_mode = 2
 [node name="TextureButton5" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-disabled = true
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("8_qo08g")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="TextureButton6" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-disabled = true
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("9_52mo7")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="TextureButton7" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-disabled = true
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("10_j12pi")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="TextureButton8" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
 custom_minimum_size = Vector2(120, 90)
 layout_mode = 2
-disabled = true
-texture_normal = ExtResource("3_cngd4")
+texture_normal = ExtResource("11_i73yu")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -187,3 +189,7 @@ horizontal_alignment = 1
 [connection signal="pressed" from="CanvasLayer/LevelsContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/LevelsContainer/Level3Button" to="." method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/LevelsContainer/Level4Button" to="." method="_on_level_4_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelsContainer/TextureButton5" to="." method="_on_texture_button_5_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelsContainer/TextureButton6" to="." method="_on_texture_button_6_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelsContainer/TextureButton7" to="." method="_on_texture_button_7_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelsContainer/TextureButton8" to="." method="_on_texture_button_8_pressed"]

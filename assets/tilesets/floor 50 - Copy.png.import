@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciqrum86viies"
-path="res://.godot/imported/NoLeftTurns.png-e21be7991553582027a84cf9fbc688e7.ctex"
+uid="uid://dcjym4bpfcwer"
+path="res://.godot/imported/floor 50 - Copy.png-547283cb74523cc433bede17ad752216.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/no_left_turns/NoLeftTurns.png"
-dest_files=["res://.godot/imported/NoLeftTurns.png-e21be7991553582027a84cf9fbc688e7.ctex"]
+source_file="res://assets/tilesets/floor 50 - Copy.png"
+dest_files=["res://.godot/imported/floor 50 - Copy.png-547283cb74523cc433bede17ad752216.ctex"]
 
 [params]
 

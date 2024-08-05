@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dos4cfuhm2v3"]
+[gd_scene load_steps=9 format=3 uid="uid://m77yp7pmxumh"]
 
-[ext_resource type="Script" path="res://scenes/towers/green_1_tower.gd" id="1_gtsu7"]
-[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="2_kp6dm"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_vxs4l"]
-[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_xanjk"]
+[ext_resource type="Script" path="res://scenes/towers/green_2_tower.gd" id="1_f8pg2"]
+[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_0fakw"]
+[ext_resource type="Texture2D" uid="uid://c4ee0oo3kyv8a" path="res://assets/images/towers/g2 50.png" id="3_5jjlf"]
+[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_uu42k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
 radius = 25.0
@@ -118,20 +118,20 @@ _data = {
 "fire": SubResource("Animation_wp6ed")
 }
 
-[node name="Green1Tower" type="Node2D"]
-script = ExtResource("1_gtsu7")
-cost = 100
-damage_per_shot = 22
+[node name="Green2Tower" type="Node2D"]
+script = ExtResource("1_f8pg2")
+cost = 400
+damage_per_shot = 45
 shot_delay_in_ms = 100
 range_in_pixels = 350
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_vxs4l")
+texture = ExtResource("2_0fakw")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_kp6dm")
+texture = ExtResource("3_5jjlf")
 
 [node name="RangeArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -156,7 +156,7 @@ libraries = {
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_xanjk")
+stream = ExtResource("4_uu42k")
 pitch_scale = 5.0
 
 [node name="ShotTimer" type="Timer" parent="."]

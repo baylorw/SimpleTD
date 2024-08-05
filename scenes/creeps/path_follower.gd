@@ -120,11 +120,10 @@ func on_destroy():
 	
 	# TODO: Play an explosion animation
 	
-	
 	# TODO: Why do we do this? Sound effect maybe?
 	#await get_tree().create_timer(0.2).timeout
 	self.queue_free()
-	print("i'm a destroyed creep and i'm free!")
+	#print("i'm a destroyed creep and i'm free!")
 	destroyed.emit()
 
 func on_hit(damage : int):

@@ -1,0 +1,365 @@
+[gd_scene load_steps=14 format=3 uid="uid://clp7bwlrw68bu"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_swtn7"]
+[ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_dahxg"]
+[ext_resource type="Script" path="res://scenes/level/ui.gd" id="3_gk4dd"]
+[ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="4_facag"]
+[ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="5_115wb"]
+[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="6_mj80e"]
+[ext_resource type="Texture2D" uid="uid://c4ee0oo3kyv8a" path="res://assets/images/towers/g2 50.png" id="7_qu7j0"]
+[ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="8_gmiax"]
+[ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="9_1tm1l"]
+[ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="10_dyw8e"]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="15_xxaqn"]
+[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="16_f5rfo"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
+size = Vector2(1150, 850)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_swtn7")
+money = 4000
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_dahxg")
+flip_h = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+script = ExtResource("3_gk4dd")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer"]
+self_modulate = Color(0.0431373, 0.152941, 0.25098, 1)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Towers"
+
+[node name="GridContainer" type="GridContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("4_facag")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "blue1"
+
+[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("5_115wb")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "brown1"
+
+[node name="G1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("6_mj80e")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "green_1_tower"
+
+[node name="G2Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("7_qu7j0")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "green_2_tower"
+
+[node name="G3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("8_gmiax")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "green_3_tower"
+
+[node name="R1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("9_1tm1l")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "red1"
+
+[node name="R3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("10_dyw8e")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "red3"
+
+[node name="DetailsLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 3
+
+[node name="WaveLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Wave: 0 / 6"
+autowrap_mode = 3
+
+[node name="HealthLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lives: 20/20"
+autowrap_mode = 3
+
+[node name="MoneyLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Lives: 20/20"
+autowrap_mode = 3
+
+[node name="WaveHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SendWaveButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Send Wave"
+
+[node name="R" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "R"
+
+[node name="QuitButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quit"
+
+[node name="SpeedHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "II"
+
+[node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1/2"
+
+[node name="SpeedNormalButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1"
+
+[node name="Speed2Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2"
+
+[node name="Speed5Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5"
+
+[node name="LevelData" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="MapArea" type="Sprite2D" parent="LevelData"]
+position = Vector2(525, 375)
+texture = SubResource("PlaceholderTexture2D_n6u17")
+metadata/_edit_lock_ = true
+
+[node name="TowerPrototypes" type="Node2D" parent="."]
+
+[node name="Towers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Creeps" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="WinnerMessage" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1328.0
+offset_top = 8.0
+offset_right = 1702.0
+offset_bottom = 267.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WinnerMessage"]
+modulate = Color(1, 1, 0.788235, 1)
+layout_mode = 2
+texture = ExtResource("15_xxaqn")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/WinnerMessage"]
+layout_mode = 2
+texture = ExtResource("16_f5rfo")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinnerMessage"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0.542482, 5.77569e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 72
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinScoreLabel" type="Label" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score: 10/10"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="LoserMessage" type="MarginContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1328.0
+offset_top = 288.0
+offset_right = 1702.0
+offset_bottom = 547.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LoserMessage"]
+modulate = Color(0.392345, 7.94759e-06, 3.63387e-06, 1)
+layout_mode = 2
+texture = ExtResource("15_xxaqn")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/LoserMessage"]
+layout_mode = 2
+texture = ExtResource("16_f5rfo")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LoserMessage"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(350, 200)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.589806, 1.54018e-06, 3.85046e-07, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 72
+text = "Oh No!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/R" to="." method="_on_r_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedHalfButton" to="." method="_on_speed_half_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed2Button" to="." method="_on_speed_2_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed5Button" to="." method="_on_speed_5_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

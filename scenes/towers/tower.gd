@@ -35,6 +35,8 @@ func fire_at_mouse():
 	shot_animator.play("fire")
 
 func fire():
+	# Towers with special types of firing can override this
+	
 	is_ready_to_fire = false
 	
 	var points  := [Vector2.ZERO]
@@ -69,13 +71,18 @@ func set_range(new_range : int):
 	var fucking_scale_factor = new_range / (range_sprite.texture.get_width() as float)
 	#print("fucking sprite scaling factor=" + str(fucking_scale_factor))
 	range_sprite.scale = Vector2(fucking_scale_factor, fucking_scale_factor)
+	#print("range_in_pixels=%s, collider radius=%s, scale=%s" % [range_in_pixels, range_collider.shape.radius, range_sprite.scale])
 
 func set_range_color(color: Color):
 	if range_sprite.modulate != color:
 		range_sprite.modulate = color
+func set_tower_color(color: Color):
+	if %TowerSprite.modulate != color:
+		%TowerSprite.modulate = color
 
 func show_range(should_show : bool):
 	range_sprite.visible = should_show
+	#print("show_range=" + str(should_show))
 func toggle_show_range():
 	show_range(!range_sprite.visible)
 

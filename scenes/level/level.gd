@@ -5,17 +5,21 @@ signal creep_reached_base
 const good_color := Color(0,1,0, 0.5)
 const bad_color  := Color(1,0,0, 0.5)
 
+@export var money := 200
+
 @onready var ui: LevelUI = %UI
 
-@onready var terrain_tilemap : TileMapLayer = %GroundTileMapLayer
-@onready var blocker_tilemap : TileMapLayer = %WallsTileMapLayer
-@onready var group_1_start_marker = %StartGroup1
-@onready var group_2_start_marker = %StartGroup2
-@onready var group_1_end_marker = %EndGroup1
-@onready var group_2_end_marker = %EndGroup2
-@onready var money := 200
-@onready var path_line_1: PathLine = %PathLine1
-@onready var path_line_2: PathLine = %PathLine2
+#--- Pointers to run-time loaded map.
+var terrain_tilemap : TileMapLayer 
+var blocker_tilemap : TileMapLayer 
+var group_1_start_marker 
+var group_2_start_marker 
+var group_1_end_marker 
+var group_2_end_marker 
+var path_line_1: PathLine 
+var path_line_2: PathLine 
+var path_follower_prototype: PathFollower 
+var kill_zone: Area2D 
 
 var group_1_start_coord_global : Vector2
 var group_1_start_coord_map : Vector2i
@@ -43,6 +47,8 @@ func _ready():
 	Engine.time_scale = 1
 	Music.play_song("apple")
 	
+	load_level()
+	
 	CurrentLevel.money_starting = money
 	CurrentLevel.reset()
 	ui.show_health()
@@ -58,6 +64,36 @@ func _ready():
 	show_default_paths()
 	
 	setup_build_buttons()
+
+func load_level():
+	if "" == Globals.level_name:
+		Globals.level_name = "res://levels/default/default_level.tscn"
+	var packed_scene = load(Globals.level_name)
+	if (null == packed_scene):
+		print("Globals.level_name was blank or an invalid file")
+		assert(packed_scene)
+	var play_area = packed_scene.instantiate()
+	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
+	#---	where it would block the Win message.
+	%LevelData.add_child(play_area)
+	
+	#--- Normally we'd want these variables set by @onready but we load them late
+	#---	so we have to set the variables here.
+	#--- Set variables to point to the loaded map data.
+	#terrain_tilemap = %GroundTileMapLayer
+	terrain_tilemap = %LevelData/Map/GroundTileMapLayer
+	blocker_tilemap = %LevelData/Map/WallsTileMapLayer
+	group_1_start_marker = %LevelData/Map/Paths/StartGroup1
+	group_2_start_marker = %LevelData/Map/Paths/StartGroup2
+	group_1_end_marker = %LevelData/Map/Paths/EndGroup1
+	group_2_end_marker = %LevelData/Map/Paths/EndGroup2
+	path_line_1 = %LevelData/Map/Paths/PathLine1
+	path_line_2 = %LevelData/Map/Paths/PathLine2
+	path_follower_prototype = %LevelData/Map/PathFollowerPrototype
+	kill_zone = %LevelData/Map/Paths/KillZone
+	
+	kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+	
 
 func setup_build_buttons():
 	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
@@ -80,7 +116,7 @@ func on_build_tower_button_pressed(tower_name : String):
 		return
 	is_attempting_tower_placement = true
 	var tower_scene_fqn = "res://scenes/towers/%s.tscn" % tower_name
-	#print("set_tower_preview for %s" % tower_scene_fqn)
+	#print("build button pressed for %s" % tower_scene_fqn)
 	var tower_data = load(tower_scene_fqn)
 	new_tower = tower_data.instantiate()
 	#--- You MUST add this to the scene graph before modifying properties that use the onready variables.
@@ -94,13 +130,13 @@ func _physics_process(_delta: float) -> void:
 	
 	if can_build():
 		new_tower.set_range_color(good_color)
+		new_tower.set_tower_color(Color.WHITE)
 	else:
 		new_tower.set_range_color(bad_color)
+		new_tower.set_tower_color(bad_color)
 	new_tower.position = get_global_mouse_position()
 
 func build_astar_grid():
-	#print("build_astar_grid")
-
 	astar_grid.cell_size = terrain_tilemap.tile_set.tile_size
 	astar_grid.region = terrain_tilemap.get_used_rect()
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
@@ -234,7 +270,8 @@ func spawn_creeps():
 
 func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2]):
 	#print("spawn_creep_at() global=" + str(start_position_global))
-	var new_enemy : PathFollower = %PathFollowerPrototype.duplicate()
+	# TODO: Need more than one creep type
+	var new_enemy : PathFollower = path_follower_prototype.duplicate()
 	new_enemy.add_to_group("creeps")
 	new_enemy.position = start_position_global
 	%Creeps.add_child(new_enemy, true)
@@ -359,6 +396,7 @@ func _on_kill_zone_body_entered(body: Node2D):
 
 func on_win():
 	print("GAME OVER, you win!")
+	%WinScoreLabel.text = "Score: %s/%s" % [CurrentLevel.base_health, CurrentLevel.base_health_max]
 	Music.play_song("fruit")
 	center_control(%WinnerMessage)
 
@@ -386,8 +424,6 @@ func _on_send_wave_button_pressed():
 	spawn_creeps()
 
 func _on_pause_button_pressed() -> void:
-	#Engine.time_scale = 0.0
-	print("is_paused=" + str(get_tree().is_paused()))
 	get_tree().paused = !get_tree().is_paused()
 	
 func _on_speed_half_button_pressed() -> void:

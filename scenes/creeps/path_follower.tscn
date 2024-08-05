@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://doi7efayw5psr"]
 
-[ext_resource type="Script" path="res://scenes/path_follower/path_follower.gd" id="1_bkf8f"]
+[ext_resource type="Script" path="res://scenes/creeps/path_follower.gd" id="1_bkf8f"]
 [ext_resource type="Texture2D" uid="uid://b2r82gqumvuq7" path="res://assets/images/creeps/devil 50.png" id="2_1k4sc"]
 [ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_jhkba"]
 [ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="4_j2q0m"]
@@ -13,6 +13,7 @@ collision_layer = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_bkf8f")
+max_health = 650
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
