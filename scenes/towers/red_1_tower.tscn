@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5vk1gohq6v7y"]
+[gd_scene load_steps=9 format=3 uid="uid://lh7y6bfbl0i3"]
 
-[ext_resource type="Script" path="res://scenes/towers/green_3_tower.gd" id="1_ejmky"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_7gacg"]
-[ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="3_bo6li"]
-[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_on4et"]
+[ext_resource type="Script" path="res://scenes/towers/red_1_tower.gd" id="1_il3db"]
+[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_iawhd"]
+[ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="2_wh1de"]
+[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_x34ur"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
 radius = 25.0
@@ -20,11 +20,11 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 1, 0, 1)]
+"values": [Color(1, 0, 0, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Beam:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -65,7 +65,7 @@ length = 0.1
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Beam:modulate.a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -118,21 +118,21 @@ _data = {
 "fire": SubResource("Animation_wp6ed")
 }
 
-[node name="Green3Tower" type="Node2D"]
-script = ExtResource("1_ejmky")
-cost = 2000
-damage_per_shot = 180
-shot_delay_in_ms = 100
-range_in_pixels = 300
-purpose = "Fast tower. Bounces twice."
+[node name="Red1Tower" type="Node2D"]
+script = ExtResource("1_il3db")
+cost = 200
+damage_per_shot = 110
+shot_delay_in_ms = 500
+range_in_pixels = 350
+purpose = "Area of Effect."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_7gacg")
+texture = ExtResource("2_iawhd")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("3_bo6li")
+texture = ExtResource("2_wh1de")
 
 [node name="RangeArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -145,9 +145,9 @@ shape = SubResource("CircleShape2D_ku21i")
 
 [node name="Beam" type="Line2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(0, 1, 0, 1)
 points = PackedVector2Array(0, 0, 100, 100)
 width = 5.0
+default_color = Color(1, 0, 0, 1)
 
 [node name="FireAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -157,11 +157,25 @@ libraries = {
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_on4et")
+stream = ExtResource("4_x34ur")
 pitch_scale = 5.0
 
 [node name="ShotTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ShotVisibilityTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
 wait_time = 0.25
+one_shot = true
+
+[node name="Shots" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="RangeArea" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="RangeArea" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="ShotVisibilityTimer" to="." method="_on_shot_visibility_timer_timeout"]

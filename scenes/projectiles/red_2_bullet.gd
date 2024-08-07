@@ -1,0 +1,1 @@
+class_name Red2Bullet extends Projectile

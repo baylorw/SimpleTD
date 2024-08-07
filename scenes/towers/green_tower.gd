@@ -1,5 +1,6 @@
 class_name GreenTower extends Tower
 
+@onready var beam: Line2D = %Beam
 @onready var fire_sound: AudioStreamPlayer2D = %FireSound
 
 var max_targets := 1
@@ -7,6 +8,7 @@ var max_targets := 1
 
 func _ready() -> void:
 	super._ready()
+	beam.visible = false
 	randomize_beam_color()
 	print("default_color=" + str(beam.default_color) + " modulate=" + str(beam.modulate))
 
@@ -46,7 +48,7 @@ func randomize_beam_color_old():
 	#print("actual  beam color=" + str(beam.default_color))
 
 func fire():
-	is_ready_to_fire = false
+	super.fire()
 	
 	var points  := [Vector2.ZERO]
 	var enemies : Array[PathFollower] = []
@@ -60,7 +62,6 @@ func fire():
 		enemy.on_hit(damage_per_shot)
 	shot_animator.play("fire")
 	fire_sound.play()
-	
-	var seconds_to_wait : float = shot_delay_in_ms / 1000.0
-	await get_tree().create_timer(seconds_to_wait).timeout
-	is_ready_to_fire = true
+
+func get_description() -> String:
+	return super.get_description()

@@ -8,6 +8,8 @@ const bad_color  := Color(1,0,0, 0.5)
 @export var money := 200
 
 @onready var ui: LevelUI = %UI
+@onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
+
 
 #--- Pointers to run-time loaded map.
 var terrain_tilemap : TileMapLayer 
@@ -46,6 +48,8 @@ var spawn_delay_in_wave_ms : float = 300
 func _ready():
 	Engine.time_scale = 1
 	Music.play_song("apple")
+	
+	map_view_settings_panel.hide()
 	
 	load_level()
 	
@@ -99,6 +103,7 @@ func setup_build_buttons():
 	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
 		var tower_name = i.get_meta("tower_name")
 		i.pressed.connect(Callable(on_build_tower_button_pressed).bind(tower_name))
+		i.mouse_entered.connect(Callable(on_build_tower_button_mouse_entered).bind(tower_name))
 
 func setup_path_coords():
 	group_1_start_coord_global = group_1_start_marker.position
@@ -110,7 +115,18 @@ func setup_path_coords():
 	group_1_end_coord_map = coordinate_global_to_map(group_1_end_marker.position)
 	group_2_end_coord_map = coordinate_global_to_map(group_2_end_marker.position)
 
+func on_build_tower_button_mouse_entered(tower_name: String):
+	if !Towers.towers.keys().has(tower_name):
+		ui.show_details("missing info in Towers global")
+		return
+	var tower : Tower = Towers.towers[tower_name]
+	ui.show_details(tower.get_description())
+
 func on_build_tower_button_pressed(tower_name : String):
+	#--- If they are already trying to build something, cancel that one.
+	if is_attempting_tower_placement:
+		cancel_build()
+	
 	if CurrentLevel.LevelStatus.BUILD != CurrentLevel.level_status:
 		print("Can't build new towers, game currently in status=" + str(CurrentLevel.level_status))
 		return
@@ -170,8 +186,10 @@ func _unhandled_input(event: InputEvent):
 			else:
 				print("You can't build there")
 				cancel_build()
-		elif event.is_action_pressed("ui_cancel"):
+		elif event.is_action_pressed("ui_cancel") or event.is_action_pressed("right_click"):
 			cancel_build()
+		#else:
+			#print("input=" + str(event))
 			
 	elif event.is_action_pressed("left_click"):
 		var tile_position = coordinate_global_to_map(get_global_mouse_position())
@@ -179,8 +197,8 @@ func _unhandled_input(event: InputEvent):
 			return
 		if tower_by_map_coord.has(tile_position):
 			var tower = tower_by_map_coord[tile_position]
-			#if (null != tower):
 			tower.toggle_show_range()
+			ui.show_details(tower.get_description())
 	#elif !is_attempting_tower_placement and event.is_action_pressed("left_click"):
 		#new_tower.fire_at_mouse()
 		
@@ -365,6 +383,8 @@ func on_creep_destroyed():
 ##	in the other methods (on_destroyed, etc.).
 func on_creep_freed():
 	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
+	#ui.log("creeps=" + str(%Creeps.get_child_count()))
+	ui.show_details("creeps=" + str(%Creeps.get_child_count()))
 
 	#--- If we've already lost it doesn't matter what the creeps are doing now.
 	if CurrentLevel.level_status == CurrentLevel.LevelStatus.LOST:
@@ -376,6 +396,7 @@ func on_creep_freed():
 			on_win()
 		else:
 			print("wave over, we survived, back to build mode")
+			ui.log("wave done")
 			CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
 		
 
@@ -441,3 +462,4 @@ func _on_r_pressed() -> void:
 	ui.show_money()
 	ui.show_wave()
 	print("creep count=" + str(%Creeps.get_child_count()))
+	map_view_settings_panel.popup_centered()

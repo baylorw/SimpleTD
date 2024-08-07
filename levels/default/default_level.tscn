@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bmcw0wxj1er73"]
+[gd_scene load_steps=8 format=4 uid="uid://bmcw0wxj1er73"]
 
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="2_gkb5w"]
 [ext_resource type="PackedScene" uid="uid://bvpqeqrft7ixh" path="res://scenes/path_line/path_line.tscn" id="2_k7pgg"]
+[ext_resource type="PackedScene" uid="uid://doi7efayw5psr" path="res://scenes/creeps/path_follower.tscn" id="3_0lfnh"]
+[ext_resource type="Texture2D" uid="uid://c2merbdufjhx" path="res://assets/images/creeps/angel 50.png" id="4_qliba"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
@@ -69,3 +71,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/KillZone"]
 position = Vector2(121, 235)
 shape = SubResource("RectangleShape2D_nrtyu")
+
+[node name="PathFollowerPrototype" parent="." instance=ExtResource("3_0lfnh")]
+unique_name_in_owner = true
+position = Vector2(1320, 744)
+scale = Vector2(0.8, 0.8)
+max_speed = 150.0
+texture = ExtResource("4_qliba")

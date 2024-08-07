@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://q6hcr81nfjms"]
+
+[ext_resource type="Script" path="res://scenes/towers/red_2_tower.gd" id="1_3gyme"]
+[ext_resource type="PackedScene" uid="uid://i0cklcagdnbg" path="res://scenes/projectiles/red_2_bullet.tscn" id="2_cslcq"]
+[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_j06u3"]
+[ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="3_1elqh"]
+[ext_resource type="AudioStream" uid="uid://bce67dmg1ag28" path="res://assets/audio/effects/cannon_shell.wav" id="4_8uhce"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
+radius = 25.0
+
+[sub_resource type="Animation" id="Animation_8aowm"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_wp6ed"]
+resource_name = "fire"
+length = 0.1
+step = 0.025
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ayckp"]
+_data = {
+"RESET": SubResource("Animation_8aowm"),
+"fire": SubResource("Animation_wp6ed")
+}
+
+[node name="Red2Tower" type="Node2D"]
+script = ExtResource("1_3gyme")
+cost = 800
+damage_per_shot = 400
+shot_delay_in_ms = 100
+range_in_pixels = 350
+projectile_resource = ExtResource("2_cslcq")
+purpose = "Fast tower. Random targets."
+
+[node name="RangeSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_j06u3")
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("3_1elqh")
+
+[node name="RangeArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="RangeCollider" type="CollisionShape2D" parent="RangeArea"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_ku21i")
+
+[node name="FireAnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ayckp")
+}
+
+[node name="FireSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_8uhce")
+pitch_scale = 5.0
+
+[node name="ShotTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="Shots" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="RangeArea" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="RangeArea" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://clp7bwlrw68bu"]
+[gd_scene load_steps=16 format=3 uid="uid://clp7bwlrw68bu"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_swtn7"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_dahxg"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://c4ee0oo3kyv8a" path="res://assets/images/towers/g2 50.png" id="7_qu7j0"]
 [ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="8_gmiax"]
 [ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="9_1tm1l"]
+[ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="10_c7e8k"]
 [ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="10_dyw8e"]
+[ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="14_k0vac"]
 [ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="15_xxaqn"]
 [ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="16_f5rfo"]
 
@@ -31,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dahxg")
 flip_h = true
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -119,7 +122,17 @@ size_flags_vertical = 5
 texture_normal = ExtResource("9_1tm1l")
 ignore_texture_size = true
 stretch_mode = 5
-metadata/tower_name = "red1"
+metadata/tower_name = "red_1_tower"
+
+[node name="R2Button2" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("10_c7e8k")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "red_2_tower"
 
 [node name="R3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
@@ -129,7 +142,7 @@ size_flags_vertical = 5
 texture_normal = ExtResource("10_dyw8e")
 ignore_texture_size = true
 stretch_mode = 5
-metadata/tower_name = "red3"
+metadata/tower_name = "red_3_tower"
 
 [node name="DetailsLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -170,15 +183,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Send Wave"
 
-[node name="R" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "R"
-
 [node name="QuitButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
+
+[node name="R" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "?"
 
 [node name="SpeedHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -351,9 +364,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Restart"
 
+[node name="PopupPanel" type="PopupPanel" parent="CanvasLayer/LoserMessage"]
+
+[node name="MapViewSettingsPanel" parent="." instance=ExtResource("14_k0vac")]
+unique_name_in_owner = true
+process_mode = 2
+
+[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
+[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_exited"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/R" to="." method="_on_r_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/R" to="." method="_on_r_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedHalfButton" to="." method="_on_speed_half_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]

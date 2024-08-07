@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://kjtk0whpobva"]
 
-[ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_6kid4"]
+[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_rg7jx"]
 [ext_resource type="Script" path="res://menus/level_selection/level_selection.gd" id="2_a4n2b"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="3_cngd4"]
 [ext_resource type="Texture2D" uid="uid://dhg7v14deqce8" path="res://levels/void/void.png" id="4_b38sq"]
@@ -26,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_6kid4")
+theme = ExtResource("1_rg7jx")
 script = ExtResource("2_a4n2b")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -49,7 +49,7 @@ offset_left = -147.0
 offset_top = -99.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("1_6kid4")
+theme = ExtResource("1_rg7jx")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20

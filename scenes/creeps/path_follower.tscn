@@ -13,7 +13,7 @@ collision_layer = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_bkf8f")
-max_health = 650
+max_health = 6500
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true

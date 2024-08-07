@@ -135,6 +135,7 @@ func on_hit(damage : int):
 	health_bar.value = health
 	if health_bar.ratio < 0.5:
 		health_bar.tint_progress = Color("red")
+	#print("creep took %s damage, hp=%s" % [damage, health])
 	if health <= 0:
 		on_destroy()
 

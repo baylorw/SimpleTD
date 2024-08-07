@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0qn226nbfu51"]
+
+[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_q3lm0"]
+[ext_resource type="Script" path="res://menus/map_view_settings/map_view_settings_panel.gd" id="2_h5k5g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3owma"]
+bg_color = Color(0.956247, 0.899996, 0.693103, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="MapViewSettingsPanel" type="PopupPanel"]
+process_mode = 3
+title = "View Options"
+initial_position = 1
+size = Vector2i(316, 425)
+visible = true
+theme = ExtResource("1_q3lm0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_3owma")
+script = ExtResource("2_h5k5g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 311.0
+offset_bottom = 420.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[b]Range[/b]"
+
+[node name="CheckBox2" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[u][b]Grid[/b][/u]"
+
+[node name="Label7" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Lines"
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Buildable"
+
+[node name="CheckBox6" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[u][b]Path[/b][/u]"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Path"
+
+[node name="CheckBox3" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Path Time Color"
+
+[node name="CheckBox4" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Path Step"
+
+[node name="CheckBox5" type="CheckBox" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="popup_hide" from="." to="." method="_on_popup_hide"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

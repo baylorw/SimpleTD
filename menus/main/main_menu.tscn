@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://b1sevivxrbf43"]
 
-[ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_42s7t"]
+[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_t35b5"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_73mdt"]
 [ext_resource type="Script" path="res://menus/main/main_menu.gd" id="2_p7udw"]
 [ext_resource type="Texture2D" uid="uid://cjqk2jhqo1u3b" path="res://assets/images/creeps/Ajit 50.png" id="4_ljbut"]
@@ -31,7 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_42s7t")
+theme = ExtResource("1_t35b5")
 script = ExtResource("2_p7udw")
 
 [node name="BackgroundTextureRect" type="TextureRect" parent="."]
