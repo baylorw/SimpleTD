@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://lh7y6bfbl0i3"]
 
 [ext_resource type="Script" path="res://scenes/towers/red_1_tower.gd" id="1_il3db"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_iawhd"]
+[ext_resource type="Texture2D" uid="uid://d4nrb7gbcj8xo" path="res://assets/images/towers/range_circle_edge_colored.png" id="2_amgkt"]
 [ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="2_wh1de"]
 [ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_x34ur"]
 
@@ -128,7 +128,7 @@ purpose = "Area of Effect."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_iawhd")
+texture = ExtResource("2_amgkt")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

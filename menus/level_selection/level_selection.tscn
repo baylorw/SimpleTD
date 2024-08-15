@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhg7v14deqce8" path="res://levels/void/void.png" id="4_b38sq"]
 [ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/NoLeftTurns icon.png" id="4_ence3"]
 [ext_resource type="Texture2D" uid="uid://bghc7251rncy6" path="res://levels/frog/frog.png" id="5_agqfp"]
-[ext_resource type="Texture2D" uid="uid://3oou3k6qdt1q" path="res://levels/elementalish/elementalish.png" id="6_mbahb"]
+[ext_resource type="Texture2D" uid="uid://3oou3k6qdt1q" path="res://levels/kyle BD/elementalish.png" id="6_mbahb"]
 [ext_resource type="Texture2D" uid="uid://dyjxycgesjq0q" path="res://levels/slim_pickings/slim_pickings.png" id="8_qo08g"]
 [ext_resource type="Texture2D" uid="uid://dr4rw0a6s80jk" path="res://levels/snaking_path/snaking_path.png" id="9_52mo7"]
 [ext_resource type="Texture2D" uid="uid://8rnaixlkagi8" path="res://levels/switchback/switchback.png" id="10_j12pi"]

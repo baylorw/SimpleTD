@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/towers/green_1_tower.gd" id="1_gtsu7"]
 [ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="2_kp6dm"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_vxs4l"]
+[ext_resource type="Texture2D" uid="uid://37wxjgq3kga8" path="res://assets/images/towers/range_circle_edge_colored_no_center.png" id="2_rtg5u"]
 [ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_xanjk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
@@ -128,7 +128,7 @@ purpose = "Fast tower."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_vxs4l")
+texture = ExtResource("2_rtg5u")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

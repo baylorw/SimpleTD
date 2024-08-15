@@ -9,3 +9,8 @@ Author:  Kenney
 Name:    Tower Defense (Top-Down)
 Link:    https://kenney.nl/assets/tower-defense-top-down
 License: CCO 1.0 Universal
+
+Author:  Unity
+Name:    CC0
+Link:    https://unity.com/blog/engine-platform/free-vfx-image-sequences-flipbooks
+License: 

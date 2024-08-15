@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://ow325c030ff4"]
 
 [ext_resource type="Script" path="res://scenes/towers/red_3_tower.gd" id="1_d0gro"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_j7bei"]
 [ext_resource type="PackedScene" uid="uid://btnpll41dmqqm" path="res://scenes/projectiles/red_3_bullet.tscn" id="2_j71lq"]
+[ext_resource type="Texture2D" uid="uid://d4nrb7gbcj8xo" path="res://assets/images/towers/range_circle_edge_colored.png" id="3_7wa5d"]
 [ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="3_hlutk"]
 [ext_resource type="AudioStream" uid="uid://bce67dmg1ag28" path="res://assets/audio/effects/cannon_shell.wav" id="4_lv5s2"]
 
@@ -34,7 +34,7 @@ purpose = "Slow but powerful."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_j7bei")
+texture = ExtResource("3_7wa5d")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

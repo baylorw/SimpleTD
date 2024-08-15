@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5vk1gohq6v7y"]
 
 [ext_resource type="Script" path="res://scenes/towers/green_3_tower.gd" id="1_ejmky"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_7gacg"]
+[ext_resource type="Texture2D" uid="uid://d4nrb7gbcj8xo" path="res://assets/images/towers/range_circle_edge_colored.png" id="2_ca4s1"]
 [ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="3_bo6li"]
 [ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_on4et"]
 
@@ -128,7 +128,7 @@ purpose = "Fast tower. Bounces twice."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_7gacg")
+texture = ExtResource("2_ca4s1")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

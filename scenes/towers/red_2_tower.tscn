@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/towers/red_2_tower.gd" id="1_3gyme"]
 [ext_resource type="PackedScene" uid="uid://i0cklcagdnbg" path="res://scenes/projectiles/red_2_bullet.tscn" id="2_cslcq"]
-[ext_resource type="Texture2D" uid="uid://c7lb6bt5wrdow" path="res://assets/images/towers/white_circle.png" id="2_j06u3"]
 [ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="3_1elqh"]
+[ext_resource type="Texture2D" uid="uid://d4nrb7gbcj8xo" path="res://assets/images/towers/range_circle_edge_colored.png" id="3_p78ts"]
 [ext_resource type="AudioStream" uid="uid://bce67dmg1ag28" path="res://assets/audio/effects/cannon_shell.wav" id="4_8uhce"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
@@ -34,7 +34,7 @@ purpose = "Fast tower. Random targets."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_j06u3")
+texture = ExtResource("3_p78ts")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
