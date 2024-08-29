@@ -96,6 +96,9 @@ func load_level():
 	path_follower_prototype = %LevelData/Map/PathFollowerPrototype
 	kill_zone = %LevelData/Map/Paths/KillZone
 	
+	# TODO: If we aren't using the prototype then remove this line, otherwise also remove it
+	path_follower_prototype.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	kill_zone.body_entered.connect(_on_kill_zone_body_entered)
 	
 
@@ -117,7 +120,7 @@ func setup_path_coords():
 
 func on_build_tower_button_mouse_entered(tower_name: String):
 	if !Towers.towers.keys().has(tower_name):
-		ui.show_details("missing info in Towers global")
+		ui.show_details("missing info in Towers global. tower_name=" + tower_name)
 		return
 	var tower : Tower = Towers.towers[tower_name]
 	ui.show_details(tower.get_description())
@@ -130,11 +133,14 @@ func on_build_tower_button_pressed(tower_name : String):
 	if CurrentLevel.LevelStatus.BUILD != CurrentLevel.level_status:
 		print("Can't build new towers, game currently in status=" + str(CurrentLevel.level_status))
 		return
-	is_attempting_tower_placement = true
 	var tower_scene_fqn = "res://scenes/towers/%s.tscn" % tower_name
 	#print("build button pressed for %s" % tower_scene_fqn)
 	var tower_data = load(tower_scene_fqn)
+	if !tower_data:
+		print("ERROR: Unknown tower. FQN=" + tower_scene_fqn)
+		return
 	new_tower = tower_data.instantiate()
+	is_attempting_tower_placement = true
 	#--- You MUST add this to the scene graph before modifying properties that use the onready variables.
 	%Towers.add_child(new_tower)
 	new_tower.set_range_color(bad_color)
@@ -270,7 +276,6 @@ func show_default_paths():
 	#print("show_default_paths, path1.size=" + str(path_line_1.points.size()) + " path2.size=" + str(path_line_2.points.size()))
 
 func spawn_creeps():
-	#print("spawn_creeps()")
 	CurrentLevel.wave_number += 1
 	ui.show_wave()
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
@@ -279,22 +284,27 @@ func spawn_creeps():
 		calculate_default_paths()
 		show_default_paths()
 
-	#print("spawn time")
 	for i in 5:
-		spawn_creep_at(group_1_start_coord_global, group_1_path_global)
-		spawn_creep_at(group_2_start_coord_global, group_2_path_global)
+		spawn_creep_at(group_1_start_coord_global, group_1_path_global, "creep_A_"+str(i))
+		spawn_creep_at(group_2_start_coord_global, group_2_path_global, "creep_B_"+str(i))
 		await get_tree().create_timer(spawn_delay_in_wave_ms / 1000).timeout
 		print("Creep spawned. count=" + str(%Creeps.get_child_count()))
 
-func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2]):
+func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2], creep_name: String):
 	#print("spawn_creep_at() global=" + str(start_position_global))
 	# TODO: Need more than one creep type
 	var new_enemy : PathFollower = path_follower_prototype.duplicate()
+	#var resource = load("res://scenes/creeps/path_follower.tscn")
+	#print("resource="+ str(resource))
+	#var new_enemy : PathFollower = load("res://scenes/creeps/path_follower.tscn").instantiate()
+	#print("new_enemy.sprite.texture=" + str(new_enemy.sprite.texture))
+	new_enemy.name = creep_name
 	new_enemy.add_to_group("creeps")
 	new_enemy.position = start_position_global
 	%Creeps.add_child(new_enemy, true)
 	new_enemy.destroyed.connect(on_creep_destroyed)
 	new_enemy.tree_exited.connect(on_creep_freed)
+	new_enemy.process_mode = Node.PROCESS_MODE_INHERIT
 
 	if path.is_empty():
 		print("!!! NO PATH FOUND !!! from=" + str(start_position_global))

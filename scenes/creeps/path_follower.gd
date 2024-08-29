@@ -13,8 +13,11 @@ signal destroyed
 @export var close_enough := 10.0
 
 @export var max_health := 100
-var health : int
 @export var kill_value := 10
+
+# Don't initialize here from export variables, they won't be initialized when this is set.
+var health : int
+var speed  : float
 
 var _texture : Texture2D
 @export var texture : Texture2D :
@@ -27,6 +30,8 @@ var _texture : Texture2D
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var health_bar : TextureProgressBar = %HealthBar
+@onready var effects_polling_timer: Timer = %EffectsPollingTimer
+@onready var status_icon_container: HBoxContainer = %StatusIconContainer
 
 var current_slow_radius := midpoint_slow_radius
 
@@ -34,18 +39,35 @@ var path : Array[Vector2]
 var desired_position : Vector2
 var is_seeking := false
 
+## EFFECTS
+const tick_length_in_ms := 100
+var slow_ticks := 0
+var stun_ticks := 0
+
 
 func _ready():
+	#--- Set here because setting in declaration doesn't work when setting from export variables.
+	health = max_health
+	speed  = max_speed
+	
 	sprite.texture = _texture
 	health = max_health
 	health_bar.max_value = health
 	health_bar.value = health
 	#--- HP bar doesn't match object's position, rotation, etc.
 	#health_bar.top_level = true
+	
+	for icon in status_icon_container.get_children():
+		icon.visible = false
+	
+	#--- The IDE wiring doesn't work for duplicated objects. The event calls the original object instead.
+	effects_polling_timer.timeout.connect(_on_effects_polling_timer_timeout)
+	#--- Have to do this even though it's set in the IDE because Godot can suck my balls. 
+	effects_polling_timer.autostart = true
 
 func get_size() -> Vector2 :
 	return $Sprite2D.texture.get_size()
-	
+
 func follow(new_path : Array[Vector2]):
 	self.path = new_path
 	
@@ -60,6 +82,7 @@ func follow(new_path : Array[Vector2]):
 	is_seeking = true
 
 func _physics_process(delta):
+	#print("_physics_process slow_ticks="+str(self.slow_ticks) + " for name=" + name)
 	_physics_process_steering(delta)
 	
 func _physics_process_simple(_delta):
@@ -102,7 +125,7 @@ func _physics_process_steering(_delta):
 		velocity,
 		global_position,
 		desired_position,
-		max_speed,
+		speed,
 		current_slow_radius
 	)
 	move_and_slide()
@@ -126,6 +149,15 @@ func on_destroy():
 	#print("i'm a destroyed creep and i'm free!")
 	destroyed.emit()
 
+## Right now this assumes there's only one level of slow, 50%
+func slow(my_tick_count: int):
+	self.slow_ticks = my_tick_count
+	modify_speed()
+
+func stun(tick_count: int):
+	stun_ticks = tick_count
+	modify_speed()
+
 func on_hit(damage : int):
 	#impact()
 	#--- Deal with race conditions
@@ -147,3 +179,36 @@ func on_hit(damage : int):
 	#var new_impact = gun_impact.instantiate()
 	#new_impact.position = impact_location
 	#impact_area.add_child(new_impact)
+
+func _on_effects_polling_timer_timeout() -> void:
+
+	# damage ticks
+	
+	#print("poll time="+ str(Time.get_ticks_msec()) + " slow_ticks=" + str(slow_ticks) + " creep="+name)
+	
+	# status ticks
+	if slow_ticks > 0:
+		slow_ticks -= 1
+		if 0 == slow_ticks:
+			modify_speed()
+	if stun_ticks > 0:
+		stun_ticks -= 1
+		if 0 == stun_ticks:
+			modify_speed()
+
+func modify_speed():
+	if stun_ticks > 0:
+		print("sturn means turning off the slow icon")
+		%StunIcon.visible = true
+		%SlowIcon.visible = false
+		speed = 0.0
+	elif slow_ticks > 0:
+		print("turning on the slow icon")
+		%StunIcon.visible = false
+		%SlowIcon.visible = true
+		speed = 0.50 * max_speed
+	else:
+		print("turning off the slow icon")
+		%StunIcon.visible = false
+		%SlowIcon.visible = false
+		speed = max_speed

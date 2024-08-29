@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dos4cfuhm2v3"]
+[gd_scene load_steps=9 format=3 uid="uid://icdm7sekwgwa"]
 
-[ext_resource type="Script" path="res://scenes/towers/green_1_tower.gd" id="1_gtsu7"]
-[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="2_kp6dm"]
-[ext_resource type="Texture2D" uid="uid://37wxjgq3kga8" path="res://assets/images/towers/range_circle_edge_colored_no_center.png" id="2_rtg5u"]
-[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_xanjk"]
+[ext_resource type="Script" path="res://scenes/towers/blue_1_tower.gd" id="1_0ubbq"]
+[ext_resource type="Texture2D" uid="uid://37wxjgq3kga8" path="res://assets/images/towers/range_circle_edge_colored_no_center.png" id="2_mca8l"]
+[ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="3_4kop4"]
+[ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_rdmjy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
 radius = 25.0
@@ -13,38 +13,38 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
-tracks/0/path = NodePath("Beam:modulate:a")
+tracks/0/path = NodePath("Beam:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Beam:visible")
+tracks/1/path = NodePath("Beam:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [1.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Beam:width")
+tracks/2/path = NodePath("Beam:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.0]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wp6ed"]
@@ -53,7 +53,7 @@ length = 0.1
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Beam:modulate.a")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -65,27 +65,27 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Beam:visible")
+tracks/1/enabled = false
+tracks/1/path = NodePath("Beam:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
+"update": 0,
+"values": [Color(0.980392, 0, 0, 0), Color(0, 1, 0, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("Beam:width")
+tracks/2/enabled = true
+tracks/2/path = NodePath("Beam:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 5.0]
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ayckp"]
@@ -94,21 +94,21 @@ _data = {
 "fire": SubResource("Animation_wp6ed")
 }
 
-[node name="Green1Tower" type="Node2D"]
-script = ExtResource("1_gtsu7")
-cost = 100
-damage_per_shot = 22
-shot_delay_in_ms = 100
+[node name="Blue1Tower" type="Node2D"]
+script = ExtResource("1_0ubbq")
+cost = 300
+damage_per_shot = 500
+shot_delay_in_ms = 500
 range_in_pixels = 300
-purpose = "Fast tower."
+purpose = "Slowing. Slows 4 creeps 50%."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_rtg5u")
+texture = ExtResource("2_mca8l")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_kp6dm")
+texture = ExtResource("3_4kop4")
 
 [node name="RangeArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -123,6 +123,7 @@ shape = SubResource("CircleShape2D_ku21i")
 unique_name_in_owner = true
 points = PackedVector2Array(0, 0, 100, 100)
 width = 3.0
+default_color = Color(0, 1, 1, 1)
 
 [node name="FireAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -132,11 +133,25 @@ libraries = {
 
 [node name="FireSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_xanjk")
+stream = ExtResource("4_rdmjy")
 pitch_scale = 5.0
 
 [node name="ShotTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ShotVisibilityTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
 wait_time = 0.25
+one_shot = true
+
+[node name="Shots" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="RangeArea" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="RangeArea" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="ShotVisibilityTimer" to="." method="_on_shot_visibility_timer_timeout"]

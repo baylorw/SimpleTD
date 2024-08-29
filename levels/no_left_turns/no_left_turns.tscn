@@ -36,7 +36,7 @@ tile_set = ExtResource("2_jw46g")
 [node name="StartGroup1" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 1, 1)
-position = Vector2(-25, 125)
+position = Vector2(-24, 128)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
 [node name="PathLine1" parent="Paths" instance=ExtResource("1_jjqhd")]
@@ -51,7 +51,7 @@ texture = SubResource("PlaceholderTexture2D_0gmvk")
 [node name="StartGroup2" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 1, 1)
-position = Vector2(-25, 225)
+position = Vector2(-24, 224)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
 [node name="PathLine2" parent="Paths" instance=ExtResource("1_jjqhd")]
@@ -76,7 +76,6 @@ shape = SubResource("RectangleShape2D_yyeby")
 unique_name_in_owner = true
 position = Vector2(1320, 744)
 scale = Vector2(0.8, 0.8)
-max_speed = 150.0
 texture = ExtResource("7_ay732")
 
 [connection signal="body_entered" from="Paths/KillZone" to="." method="_on_kill_zone_body_entered"]

@@ -29,7 +29,7 @@ func randomize_beam_color():
 	
 	var beam_color = Color(r, g, b, 1)
 	beam.default_color = beam_color
-	beam.modulate = Color.WHITE
+	#beam.modulate = Color.WHITE
 
 func randomize_beam_color_old():
 	#--- Start as green then tweak each channel just a little.
@@ -56,7 +56,10 @@ func fire():
 	var number_of_targets = min(max_targets, enemies_in_range.size())
 	for i in number_of_targets:
 		enemies.append(enemies_in_range[i])
-		points.append(beam.to_local(enemies_in_range[i].position))
+		var x_offset = randf_range(-5, 5)
+		var y_offset = randf_range(-5, 5)
+		var shoot_point = enemies_in_range[i].position + Vector2(x_offset, y_offset)
+		points.append(beam.to_local(shoot_point))
 	beam.points = points
 	for enemy in enemies:
 		enemy.on_hit(damage_per_shot)

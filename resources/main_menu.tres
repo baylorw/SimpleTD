@@ -1,8 +1,18 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bndkslnqff03v"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bndkslnqff03v"]
 
-[ext_resource type="StyleBox" path="res://resources/green_menu_button.tres" id="1_w5etf"]
+[ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="1_w5etf"]
+[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="2_mv3gk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dxapw"]
+texture = ExtResource("2_mv3gk")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+draw_center = false
 
 [resource]
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/font_sizes/font_size = 28
 Button/styles/normal = ExtResource("1_w5etf")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_dxapw")

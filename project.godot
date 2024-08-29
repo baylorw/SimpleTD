@@ -28,6 +28,7 @@ SettingsFile="*res://globals/SettingsFile.gd"
 Globals="*res://globals/Globals.gd"
 Towers="*res://globals/Towers.gd"
 CurrentLevel="*res://globals/CurrentLevel.gd"
+SceneNavigation="*res://globals/SceneNavigation.gd"
 
 [display]
 
