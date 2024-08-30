@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://kjtk0whpobva"]
+[gd_scene load_steps=16 format=3 uid="uid://kjtk0whpobva"]
 
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_rg7jx"]
 [ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_yo5ie"]
 [ext_resource type="Script" path="res://menus/level_selection/level_selection.gd" id="2_a4n2b"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="3_cngd4"]
 [ext_resource type="Texture2D" uid="uid://dhg7v14deqce8" path="res://levels/void/void.png" id="4_b38sq"]
-[ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/NoLeftTurns icon.png" id="4_ence3"]
+[ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/no_left_turns.png" id="4_ence3"]
 [ext_resource type="Texture2D" uid="uid://bghc7251rncy6" path="res://levels/frog/frog.png" id="5_agqfp"]
 [ext_resource type="Texture2D" uid="uid://3oou3k6qdt1q" path="res://levels/kyle BD/elementalish.png" id="6_mbahb"]
 [ext_resource type="Texture2D" uid="uid://dyjxycgesjq0q" path="res://levels/slim_pickings/slim_pickings.png" id="8_qo08g"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://8rnaixlkagi8" path="res://levels/switchback/switchback.png" id="10_j12pi"]
 [ext_resource type="Texture2D" uid="uid://bvhvksreyybw8" path="res://levels/up_and_down/up_and_down.png" id="11_i73yu"]
 [ext_resource type="Texture2D" uid="uid://u244e4h8igqx" path="res://assets/icon.svg" id="12_6gc7v"]
-[ext_resource type="Texture2D" uid="uid://shwf1dip2ral" path="res://levels/elementalish/elementalish.png" id="13_jhndx"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_0lgvy"]
 device = -1
@@ -271,41 +270,65 @@ theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2"]
+[node name="Panel" type="Panel" parent="MarginContainer2"]
+visible = false
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/PanelContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer2/MarginContainer"]
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="ButtonVBoxContainer" type="VBoxContainer" parent="MarginContainer2/PanelContainer/MarginContainer/ScrollContainer"]
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 5
 
-[node name="PlaceholderButton" type="Button" parent="MarginContainer2/PanelContainer/MarginContainer/ScrollContainer/ButtonVBoxContainer"]
+[node name="PlaceholderButton" type="Button" parent="MarginContainer2/MarginContainer/ScrollContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "** placeholder **"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2"]
+visible = false
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 323.0
 offset_top = 62.0
-offset_right = 1060.0
-offset_bottom = 563.0
+offset_right = 1048.0
+offset_bottom = 562.0
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+[node name="level_preview_image" type="TextureRect" parent="PanelContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("13_jhndx")
-expand_mode = 5
+texture = ExtResource("12_6gc7v")
+expand_mode = 1
+
+[node name="LoadLevelButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 902.0
+offset_top = 568.0
+offset_right = 1055.0
+offset_bottom = 627.0
+text = "Play"
+
+[node name="CurrentLevelNameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 331.0
+offset_top = 565.0
+offset_right = 473.0
+offset_bottom = 588.0
+text = "level_name"
 
 [connection signal="pressed" from="MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="LoadLevelButton" to="." method="_on_load_level_button_pressed"]

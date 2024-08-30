@@ -6,7 +6,7 @@ signal destroyed
 # TODO: The export values don't seem to do anything. Investigate.
 #@export var acceleration := 9000.0
 #@export var decceleration := 5000.0
-@export var max_speed := 300.0
+@export var max_speed := 75.0
 @export var endpoint_slow_radius := 25.0
 @export var midpoint_slow_radius := 0.0
 # TODO: have one for midpoints and endpoint
@@ -19,14 +19,14 @@ signal destroyed
 var health : int
 var speed  : float
 
-var _texture : Texture2D
-@export var texture : Texture2D :
-	set(value):
-		_texture = value
-		if (null != sprite):
-			sprite.texture = _texture
-	get:
-		return _texture
+#var _texture : Texture2D
+#@export var texture : Texture2D :
+	#set(value):
+		#_texture = value
+		#if (null != sprite):
+			#sprite.texture = _texture
+	#get:
+		#return _texture
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var health_bar : TextureProgressBar = %HealthBar
@@ -50,7 +50,7 @@ func _ready():
 	health = max_health
 	speed  = max_speed
 	
-	sprite.texture = _texture
+	#sprite.texture = _texture
 	health = max_health
 	health_bar.max_value = health
 	health_bar.value = health

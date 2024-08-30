@@ -8,6 +8,8 @@ var money_starting := 300
 
 var wave_number := 0
 var wave_number_max := 3
+#--- If a wave has 20 creeps spawning twice per second, which creep is it on?
+var wave_tick := 0
 
 enum LevelStatus {BUILD, WAVE, WON, LOST}
 var level_status : LevelStatus = LevelStatus.BUILD

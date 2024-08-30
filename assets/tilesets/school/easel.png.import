@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciqrum86viies"
-path="res://.godot/imported/NoLeftTurns icon.png-f325332fc2d8765c6293f33db0ea879a.ctex"
+uid="uid://dbxt2lq7now02"
+path="res://.godot/imported/easel.png-8a057fc838ccf2b21e8efc7a5ef379a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://levels/no_left_turns/NoLeftTurns icon.png"
-dest_files=["res://.godot/imported/NoLeftTurns icon.png-f325332fc2d8765c6293f33db0ea879a.ctex"]
+source_file="res://assets/tilesets/school/easel.png"
+dest_files=["res://.godot/imported/easel.png-8a057fc838ccf2b21e8efc7a5ef379a2.ctex"]
 
 [params]
 

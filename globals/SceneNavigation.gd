@@ -8,4 +8,4 @@ func go_to_level_manager():
 
 func go_to_level(level_name: String):
 	Globals.level_name = "res://levels/%s/%s.tscn" % [level_name, level_name]
-	get_tree().change_scene_to_file("res://scenes/level/level_manager.tscn")
+	get_tree().change_scene_to_file("res://scenes/level_manager/level_manager.tscn")

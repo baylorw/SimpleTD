@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://clp7bwlrw68bu"]
+[gd_scene load_steps=19 format=3 uid="uid://clp7bwlrw68bu"]
 
-[ext_resource type="Script" path="res://scenes/level/level_manager.gd" id="1_sy73o"]
+[ext_resource type="Script" path="res://scenes/level_manager/level_manager.gd" id="1_sy73o"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_517ca"]
-[ext_resource type="Script" path="res://scenes/level/ui.gd" id="3_w3ckq"]
+[ext_resource type="Script" path="res://scenes/level_manager/ui.gd" id="3_w3ckq"]
 [ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="4_ai65a"]
 [ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="5_26e73"]
 [ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="6_bngil"]
@@ -12,13 +12,17 @@
 [ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="10_l0ise"]
 [ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="11_4rw3p"]
 [ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="12_0bwqm"]
+[ext_resource type="TileSet" uid="uid://hpa7s01mxw5t" path="res://assets/tilesets/annotations/school_tileset.tres" id="12_ap8eu"]
+[ext_resource type="Script" path="res://scenes/tilemap_annotations/annotations_tile_map.gd" id="13_068kf"]
 [ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="13_br6wb"]
 [ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="14_qajva"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_0odd4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
 
-[node name="Level" type="Node2D"]
+[node name="LevelManager" type="Node2D"]
 script = ExtResource("1_sy73o")
 money = 4000
 
@@ -204,30 +208,63 @@ text = "II"
 [node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_0odd4")
 text = "1/2"
 
 [node name="SpeedNormalButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_0odd4")
 text = "1"
 
 [node name="Speed2Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_0odd4")
 text = "2"
 
 [node name="Speed5Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_0odd4")
 text = "5"
 
 [node name="LevelData" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="MapArea" type="Sprite2D" parent="LevelData"]
+[node name="MapAreaBoundaries" type="Sprite2D" parent="LevelData"]
 position = Vector2(525, 375)
 texture = SubResource("PlaceholderTexture2D_n6u17")
 metadata/_edit_lock_ = true
+
+[node name="Annotations" type="Node2D" parent="."]
+
+[node name="ShadeTileMap" type="TileMapLayer" parent="Annotations"]
+unique_name_in_owner = true
+tile_set = ExtResource("12_ap8eu")
+script = ExtResource("13_068kf")
+
+[node name="TileBordersTileMap" type="TileMapLayer" parent="Annotations"]
+unique_name_in_owner = true
+tile_set = ExtResource("12_ap8eu")
+script = ExtResource("13_068kf")
+
+[node name="PathTileMap" type="TileMapLayer" parent="Annotations"]
+unique_name_in_owner = true
+tile_set = ExtResource("12_ap8eu")
+script = ExtResource("13_068kf")
+
+[node name="AnnotationsTileMap" type="TileMapLayer" parent="Annotations"]
+unique_name_in_owner = true
+tile_set = ExtResource("12_ap8eu")
+script = ExtResource("13_068kf")
+
+[node name="Paths" type="Node2D" parent="Annotations"]
+unique_name_in_owner = true
 
 [node name="Creeps" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -367,6 +404,11 @@ text = "Restart"
 [node name="MapViewSettingsPanel" parent="." instance=ExtResource("14_qajva")]
 unique_name_in_owner = true
 process_mode = 2
+visible = false
+
+[node name="WaveTickTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.25
 
 [connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/GridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
@@ -384,3 +426,4 @@ process_mode = 2
 [connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]

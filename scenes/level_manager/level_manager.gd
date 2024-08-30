@@ -1,6 +1,7 @@
 extends Node2D
 
 signal creep_reached_base
+signal wave_ended
 
 const good_color := Color(0,1,0, 0.5)
 const bad_color  := Color(1,0,0, 0.5)
@@ -10,29 +11,19 @@ const bad_color  := Color(1,0,0, 0.5)
 @onready var ui: LevelUI = %UI
 @onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
 
+@onready var shade_tile_map: TileMapLayer = %ShadeTileMap
+@onready var tile_borders_tile_map: TileMapLayer = %TileBordersTileMap
+@onready var path_tile_map: TileMapLayer = %PathTileMap
+@onready var annotations_tile_map: TileMapLayer = %AnnotationsTileMap
+
+var play_area : LevelData
+var path_by_name := {}
+
 
 #--- Pointers to run-time loaded map.
 var terrain_tilemap : TileMapLayer 
 var blocker_tilemap : TileMapLayer 
-var group_1_start_marker 
-var group_2_start_marker 
-var group_1_end_marker 
-var group_2_end_marker 
-var path_line_1: PathLine 
-var path_line_2: PathLine 
 var path_follower_prototype: PathFollower 
-var kill_zone: Area2D 
-
-var group_1_start_coord_global : Vector2
-var group_1_start_coord_map : Vector2i
-var group_1_path_global : Array[Vector2] = []
-var group_2_start_coord_global : Vector2
-var group_2_start_coord_map : Vector2i
-var group_2_path_global : Array[Vector2] = []
-var group_1_end_coord_global : Vector2
-var group_1_end_coord_map : Vector2i
-var group_2_end_coord_global : Vector2
-var group_2_end_coord_map : Vector2i
 
 var astar_grid = AStarGrid2D.new()
 var is_attempting_tower_placement = false
@@ -42,7 +33,9 @@ var should_show_path := true
 var tower_by_map_coord : Dictionary = {}
 
 # TODO: Move this to a Wave object
-var spawn_delay_in_wave_ms : float = 300
+#var spawn_delay_in_wave_ms : float = 300
+var current_wave : Wave
+var max_wave_ticks : int
 
 
 func _ready():
@@ -52,6 +45,9 @@ func _ready():
 	map_view_settings_panel.hide()
 	
 	load_level()
+	build_astar_grid()
+	calculate_default_paths()
+	show_default_paths()
 	
 	CurrentLevel.money_starting = money
 	CurrentLevel.reset()
@@ -60,12 +56,6 @@ func _ready():
 	ui.show_wave()
 	
 	creep_reached_base.connect(on_creep_reached_base)
-	
-	build_astar_grid()
-	
-	setup_path_coords()
-	calculate_default_paths()
-	show_default_paths()
 	
 	setup_build_buttons()
 
@@ -76,47 +66,36 @@ func load_level():
 	if (null == packed_scene):
 		print("Globals.level_name was blank or an invalid file")
 		assert(packed_scene)
-	var play_area = packed_scene.instantiate()
+	play_area = packed_scene.instantiate() as LevelData
 	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
 	#---	where it would block the Win message.
 	%LevelData.add_child(play_area)
 	
 	#--- Normally we'd want these variables set by @onready but we load them late
 	#---	so we have to set the variables here.
-	#--- Set variables to point to the loaded map data.
-	#terrain_tilemap = %GroundTileMapLayer
 	terrain_tilemap = %LevelData/Map/GroundTileMapLayer
 	blocker_tilemap = %LevelData/Map/WallsTileMapLayer
-	group_1_start_marker = %LevelData/Map/Paths/StartGroup1
-	group_2_start_marker = %LevelData/Map/Paths/StartGroup2
-	group_1_end_marker = %LevelData/Map/Paths/EndGroup1
-	group_2_end_marker = %LevelData/Map/Paths/EndGroup2
-	path_line_1 = %LevelData/Map/Paths/PathLine1
-	path_line_2 = %LevelData/Map/Paths/PathLine2
-	path_follower_prototype = %LevelData/Map/PathFollowerPrototype
-	kill_zone = %LevelData/Map/Paths/KillZone
 	
-	# TODO: If we aren't using the prototype then remove this line, otherwise also remove it
-	path_follower_prototype.process_mode = Node.PROCESS_MODE_DISABLED
+	path_by_name = play_area.path_by_name
+	var path_line_resource = load("res://scenes/path_line/path_line.tscn")
+	for path in path_by_name.values():
+		path.kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+		#--- Calculate some data.
+		path.start_coord_global = coordinate_map_to_global(path.start_coord_map)
+		path.end_coord_global   = coordinate_map_to_global(path.end_coord_map)
+		#--- Create the visual representation of the paths.
+		var path_view = path_line_resource.instantiate()
+		path_view.name = path.name + "_view"
+		path.display = path_view
+		%Paths.add_child(path_view)
 	
-	kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+	CurrentLevel.wave_number_max = play_area.waves.size()
 	
-
 func setup_build_buttons():
 	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
 		var tower_name = i.get_meta("tower_name")
 		i.pressed.connect(Callable(on_build_tower_button_pressed).bind(tower_name))
 		i.mouse_entered.connect(Callable(on_build_tower_button_mouse_entered).bind(tower_name))
-
-func setup_path_coords():
-	group_1_start_coord_global = group_1_start_marker.position
-	group_2_start_coord_global = group_2_start_marker.position
-	group_1_start_coord_map = coordinate_global_to_map(group_1_start_coord_global)
-	group_2_start_coord_map = coordinate_global_to_map(group_2_start_coord_global)
-	group_1_end_coord_global = group_1_end_marker.position
-	group_2_end_coord_global = group_2_end_marker.position
-	group_1_end_coord_map = coordinate_global_to_map(group_1_end_marker.position)
-	group_2_end_coord_map = coordinate_global_to_map(group_2_end_marker.position)
 
 func on_build_tower_button_mouse_entered(tower_name: String):
 	if !Towers.towers.keys().has(tower_name):
@@ -247,57 +226,56 @@ func print_mouse_location():
 	var mt = terrain_tilemap.local_to_map(l)
 	var mb = blocker_tilemap.local_to_map(l)
 	print("g="+str(mouse_place_g)+" l="+str(l)+" mt="+str(mt)+" mb="+str(mb))
-	
-#func repath_creeps():
-	#calculate_default_paths()
-	#show_default_paths()
-#
-	#var creeps = get_tree().get_nodes_in_group("creeps")
-	#for creep in creeps:
-		#var creep_position_map = coordinate_global_to_map(creep.position)
-		#var path_in_map_coords = astar_grid.get_id_path(creep_position_map, goal_coord_map)
-		#var path = coords_map_to_global(path_in_map_coords)
-		#creep.follow(path)
 
 func calculate_default_paths():
-	#print("calculate_default_paths")
-
-	var path_1_in_map_coords = astar_grid.get_id_path(group_1_start_coord_map, group_1_end_coord_map)
-	group_1_path_global = coords_map_to_global(path_1_in_map_coords)
-	#print("path map from=" + str(group_1_start_coord_map) + " to=" + str(group_1_end_coord_map) + " path=" + str(path_1_in_map_coords))
-	#print("path local=" + str(coords_map_to_local(path_1_in_map_coords)))
-	
-	var path_2_in_map_coords = astar_grid.get_id_path(group_2_start_coord_map, group_2_end_coord_map)
-	group_2_path_global = coords_map_to_global(path_2_in_map_coords)
+	for path in path_by_name.values():
+		path.waypoints_map = astar_grid.get_id_path(path.start_coord_map, path.end_coord_map)
+		path.waypoints_global = coords_map_to_global(path.waypoints_map)
 
 func show_default_paths():
-	path_line_1.points = PackedVector2Array(group_1_path_global)
-	path_line_2.points = PackedVector2Array(group_2_path_global)
-	#print("show_default_paths, path1.size=" + str(path_line_1.points.size()) + " path2.size=" + str(path_line_2.points.size()))
+	for path in path_by_name.values():
+		path.display.points = PackedVector2Array(path.waypoints_global)
 
 func spawn_creeps():
 	CurrentLevel.wave_number += 1
-	ui.show_wave()
+	CurrentLevel.wave_tick = 0
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
-	if group_1_path_global.is_empty() or group_2_path_global.is_empty():
-		print("no paths so calculating them")
-		calculate_default_paths()
-		show_default_paths()
+	ui.show_wave()
 
-	for i in 5:
-		spawn_creep_at(group_1_start_coord_global, group_1_path_global, "creep_A_"+str(i))
-		spawn_creep_at(group_2_start_coord_global, group_2_path_global, "creep_B_"+str(i))
-		await get_tree().create_timer(spawn_delay_in_wave_ms / 1000).timeout
-		print("Creep spawned. count=" + str(%Creeps.get_child_count()))
+	current_wave = play_area.waves[CurrentLevel.wave_number-1]
+	max_wave_ticks = current_wave.max_wave_ticks()
+	%WaveTickTimer.wait_time = current_wave.time_between_creeps_sec
+	%WaveTickTimer.start()
+	
+	# TODO: Move to Wave Tick
+	#for i in 5:
+		#spawn_creep_at(paths[0].start_coord_global, paths[0].waypoints_global, "creep_A_"+str(i))
+		#spawn_creep_at(paths[1].start_coord_global, paths[1].waypoints_global, "creep_B_"+str(i))
+		#await get_tree().create_timer(spawn_delay_in_wave_ms / 1000).timeout
+		#print("Creep spawned. count=" + str(%Creeps.get_child_count()))
 
-func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2], creep_name: String):
-	#print("spawn_creep_at() global=" + str(start_position_global))
-	# TODO: Need more than one creep type
-	var new_enemy : PathFollower = path_follower_prototype.duplicate()
-	#var resource = load("res://scenes/creeps/path_follower.tscn")
-	#print("resource="+ str(resource))
+func _on_wave_tick_timer_timeout() -> void:
+	CurrentLevel.wave_tick += 1
+	#--- If there are no more creeps to spawn, turn off the timer.
+	if CurrentLevel.wave_tick >= max_wave_ticks:
+		%WaveTickTimer.stop()
+	
+	for path_name in current_wave.wave_by_path.keys():
+		var path_wave = current_wave.wave_by_path[path_name]
+		if CurrentLevel.wave_tick >= path_wave.creeps.size():
+			continue
+		var creep_name = path_wave.creeps[CurrentLevel.wave_tick-1]
+		var creep_resource = CreepBook.creep_by_name[creep_name]
+		if !creep_resource:
+			continue
+		var path : Path = path_by_name[path_name]
+		var creep_instance_name = "creep_%s_%s" % [path_name, CurrentLevel.wave_tick]
+		spawn_creep_at(path.start_coord_global, path.waypoints_global, creep_instance_name, creep_resource)
+
+func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2], creep_name: String, creep_resource):
+	var resource = load("res://scenes/creeps/path_follower.tscn")
 	#var new_enemy : PathFollower = load("res://scenes/creeps/path_follower.tscn").instantiate()
-	#print("new_enemy.sprite.texture=" + str(new_enemy.sprite.texture))
+	var new_enemy : PathFollower = creep_resource.instantiate()
 	new_enemy.name = creep_name
 	new_enemy.add_to_group("creeps")
 	new_enemy.position = start_position_global
@@ -408,6 +386,9 @@ func on_creep_freed():
 			print("wave over, we survived, back to build mode")
 			ui.log("wave done")
 			CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
+			CurrentLevel.money += current_wave.completion_bonus
+			# TODO: Show "$ for completing round" message
+			ui.show_money()
 		
 
 func on_creep_reached_base():
@@ -443,8 +424,13 @@ func center_control(control : Container):
 		get_viewport().size.y / 2 - control.get_rect().size.y / 2
 	)
 
+
+###########################################################
+# UI Buttons
+###########################################################
 func _on_quit_button_pressed():
-	get_tree().change_scene_to_file("res://menus/level_selection/level_selection.tscn")
+	#get_tree().change_scene_to_file("res://menus/level_selection/level_selection.tscn")
+	SceneNavigation.go_to_level_manager()
 
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()

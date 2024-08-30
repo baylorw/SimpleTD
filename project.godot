@@ -26,9 +26,10 @@ Steering="*res://globals/Steering.gd"
 PlayerProfile="*res://globals/PlayerProfile.gd"
 SettingsFile="*res://globals/SettingsFile.gd"
 Globals="*res://globals/Globals.gd"
-Towers="*res://globals/Towers.gd"
+Towers="*res://globals/TowerBook.gd"
 CurrentLevel="*res://globals/CurrentLevel.gd"
 SceneNavigation="*res://globals/SceneNavigation.gd"
+CreepBook="*res://globals/CreepBook.gd"
 
 [display]
 

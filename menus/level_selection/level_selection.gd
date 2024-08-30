@@ -11,29 +11,29 @@ var level_name_by_id := {
 	"snaking_path": "Snaking Path",
 	"switchback": "Switchback",
 	"up_and_down": "Up And Down",
-	"void": "Void"
+	"void": "Void",
+	#"t1": "test",
+	#"t2": "test",
+	#"t3": "test",
+	"dq_zelemir": "Zelemir"
 }
 var current_level : String
 
 func _ready():
-	#for control in %LevelsContainer.get_children():
-		#if control is TextureButton:
-			#var level_name = control.get_meta("level_name")
-			#if !level_name:
-				#print("No level defined for " + control.name)
-				#control.disabled = true
-			#control.pressed.connect(Callable(_on_level_selection_button_pressed).bind(level_name))
-		#if control is TextureButton and control.disabled:
-			##--- Couldn't find a named version of gray that looked right
-			#control.modulate = grayed_out_color
-			
 	setup_level_buttons()
+	#--- Click on the first button.
+	var first_button = %ButtonVBoxContainer.get_child(0) as Button
+	#print("first_button="+str(first_button) + " name=" + first_button.name)
+	#first_button.grab_focus()
+	first_button.button_pressed = true
+	first_button.emit_signal("pressed")
 
 func setup_level_buttons():
 	#--- This button helps when designing the screen to see how much room stuff takes.
 	#--- But we don't want to show it at runtime.
 	%PlaceholderButton.free()
 	
+	var group := ButtonGroup.new()
 	level_name_by_id.keys().sort()
 	for id in level_name_by_id.keys():
 		var button = Button.new()
@@ -41,55 +41,26 @@ func setup_level_buttons():
 		button.name = display_name + "Button"
 		button.text = display_name
 		button.set_meta("level_name", id)
+		button.toggle_mode = true
+		button.button_group = group
 		button.pressed.connect(Callable(_on_level_selection_button_pressed).bind(id))
 		%ButtonVBoxContainer.add_child(button)
 
 func _on_quit_button_pressed():
 	get_tree().change_scene_to_file("res://menus/main/main_menu.tscn")
 
-#func _on_level_1_button_pressed():
-	##Globals.level_name = "res://levels/void/void.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("void")
-#
-#func _on_level_2_button_pressed():
-	##Globals.level_name = "res://levels/frog/frog.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("frog")
-#
-#func _on_level_3_button_pressed():
-	##Globals.level_name = "res://levels/elementalish/elementalish.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("elementalish")
-#
-#func _on_level_4_button_pressed():
-	##Globals.level_name = "res://levels/no_left_turns/no_left_turns.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("no_left_turns")
-#
-#func _on_texture_button_5_pressed() -> void:
-	##Globals.level_name = "res://levels/slim_pickings/slim_pickings.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("slim_pickings")
-#
-#func _on_texture_button_6_pressed() -> void:
-	##Globals.level_name = "res://levels/snaking_path/snaking_path.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("snaking_path")
-#
-#func _on_texture_button_7_pressed() -> void:
-	##Globals.level_name = "res://levels/switchback/switchback.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("switchback")
-#
-#func _on_texture_button_8_pressed() -> void:
-	##Globals.level_name = "res://levels/up_and_down/up_and_down.tscn"
-	##get_tree().change_scene_to_file("res://scenes/level/level.tscn")
-	#SceneNavigation.go_to_level("up_and_down")
+func _on_level_selection_button_pressed(level_id : String):
+	current_level = level_id
+	show_level_info(level_id)
 
-func _on_level_selection_button_pressed(level_name : String):
-	print("_on_level_selection_button_pressed=" + level_name)
-	SceneNavigation.go_to_level(level_name)
+
+func show_level_info(level_id: String):
+	var preview_texture_fqn = "res://levels/%s/%s.png" % [level_id, level_id]
+	%CurrentLevelNameLabel.text = level_id
+	%level_preview_image.texture = load(preview_texture_fqn)
+
+func _on_load_level_button_pressed() -> void:
+	SceneNavigation.go_to_level(current_level)
 
 
 # TODO: Fix the alert window
