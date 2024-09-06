@@ -3,24 +3,28 @@ extends Node
 const creep_names := [
 	#--- Normal
 	"weak_1", "normal_1", "tough_slow_1",
-	"weak_2", "normal_2", "tough_slow_2",
-	"weak_3", "normal_3", "tough_slow_3",
+	"weak", "normal", "tough",
+	"chicken",
+	#"weak_2", "normal_2", "tough_slow_2",
+	#"weak_3", "normal_3", "tough_slow_3",
 	#--- Fast
-	"rocket", "fast_on_straights", "sprint_on_damage", "sprint_near_death",
+	"fast", "fast_1",
+	#"fast_on_straights", "sprint_on_damage", "sprint_near_death",
 	#--- Special
-	"disable_tower", "front_shield", "juggernaut", "haste_others", "heal_others", 
-	"loner", "martyr", "regenerate", "shield_others", "spawner",
+	#"disable_tower", "front_shield", "juggernaut", "haste_others", "heal_others", 
+	#"loner", "martyr", "regenerate", "shield_others", "spawner",
 	#--- Special on death
-	"clown_car", "disable_tower_on_death", "explode", "heal_on_death", "lootbox",
+	#"clown_car", "disable_tower_on_death", "explode", "heal_on_death", "lootbox",
 	#--- Steering
-	"drunk", "overshoots",
+	#"drunk", "overshoots",
 	#--- Audibles
-	"screamer",
+	#"screamer",
 	#--- Fireworks
-	"confetti",
+	#"confetti",
 	# unfair, i don't wanna!, cry, laugh, dattebayo
 	#--- Unwanted
-	"armor", "flying", "resist_certain_towers", "untargetable_by_certain_towers", "untargetable_at_times"
+	#"armor", "flying", "resist_certain_towers", "untargetable_by_certain_towers", 
+	"untargetable_at_times"
 ]
 var creep_by_name := {
 	"no_op": null

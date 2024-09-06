@@ -3,12 +3,10 @@
 [ext_resource type="Script" path="res://levels/dq_zelemir/dq_zelemir.gd" id="1_5menr"]
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="2_1i7em"]
 [ext_resource type="Texture2D" uid="uid://8wjbidyesgmw" path="res://levels/dq_zelemir/elliott-butler-screenshot01.jpg" id="2_we7ul"]
+[ext_resource type="PackedScene" uid="uid://cawdmj8me57o0" path="res://scenes/strobe_square/strobe_square.tscn" id="4_tus8s"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_w5hd5"]
 size = Vector2(1150, 850)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0gmvk"]
-size = Vector2(50, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyeby"]
 size = Vector2(30, 50)
@@ -39,29 +37,22 @@ tile_set = ExtResource("2_1i7em")
 
 [node name="Paths" type="Node2D" parent="."]
 
-[node name="StartGroup1" type="Sprite2D" parent="Paths"]
+[node name="StartGroup1" parent="Paths" instance=ExtResource("4_tus8s")]
 unique_name_in_owner = true
-modulate = Color(0, 0, 1, 1)
 position = Vector2(225, 125)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="StartGroup2" type="Sprite2D" parent="Paths"]
+[node name="StartGroup2" parent="Paths" instance=ExtResource("4_tus8s")]
 unique_name_in_owner = true
-modulate = Color(0, 0, 1, 1)
 position = Vector2(325, 375)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="StartGroup3" type="Sprite2D" parent="Paths"]
+[node name="StartGroup3" parent="Paths" instance=ExtResource("4_tus8s")]
 unique_name_in_owner = true
-modulate = Color(0, 0, 1, 1)
 position = Vector2(225, 625)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="EndPoint" type="Sprite2D" parent="Paths"]
+[node name="EndPoint" parent="Paths" instance=ExtResource("4_tus8s")]
 unique_name_in_owner = true
-modulate = Color(1, 0, 0, 1)
-position = Vector2(925, 375)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
+position = Vector2(925, 376)
+default_animation_name = "red_grow"
 
 [node name="KillZone" type="Area2D" parent="Paths"]
 unique_name_in_owner = true

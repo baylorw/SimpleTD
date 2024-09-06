@@ -1,7 +1,7 @@
-extends Node2D
+class_name LevelManager extends Node2D
 
 signal creep_reached_base
-signal wave_ended
+#signal wave_ended
 
 const good_color := Color(0,1,0, 0.5)
 const bad_color  := Color(1,0,0, 0.5)
@@ -23,7 +23,7 @@ var path_by_name := {}
 #--- Pointers to run-time loaded map.
 var terrain_tilemap : TileMapLayer 
 var blocker_tilemap : TileMapLayer 
-var path_follower_prototype: PathFollower 
+var path_follower_prototype: Creep 
 
 var astar_grid = AStarGrid2D.new()
 var is_attempting_tower_placement = false
@@ -66,7 +66,10 @@ func load_level():
 	if (null == packed_scene):
 		print("Globals.level_name was blank or an invalid file")
 		assert(packed_scene)
+	var p2 = packed_scene.instantiate()
+	print("p2="+str(p2))
 	play_area = packed_scene.instantiate() as LevelData
+	print("play_area=" + str(play_area))
 	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
 	#---	where it would block the Win message.
 	%LevelData.add_child(play_area)
@@ -245,37 +248,33 @@ func spawn_creeps():
 	current_wave = play_area.waves[CurrentLevel.wave_number-1]
 	max_wave_ticks = current_wave.max_wave_ticks()
 	%WaveTickTimer.wait_time = current_wave.time_between_creeps_sec
-	%WaveTickTimer.start()
 	
-	# TODO: Move to Wave Tick
-	#for i in 5:
-		#spawn_creep_at(paths[0].start_coord_global, paths[0].waypoints_global, "creep_A_"+str(i))
-		#spawn_creep_at(paths[1].start_coord_global, paths[1].waypoints_global, "creep_B_"+str(i))
-		#await get_tree().create_timer(spawn_delay_in_wave_ms / 1000).timeout
-		#print("Creep spawned. count=" + str(%Creeps.get_child_count()))
+	# TODO: Show player a Starting Wave message
+	
+	%WaveTickTimer.start()
 
 func _on_wave_tick_timer_timeout() -> void:
 	CurrentLevel.wave_tick += 1
 	#--- If there are no more creeps to spawn, turn off the timer.
-	if CurrentLevel.wave_tick >= max_wave_ticks:
+	if CurrentLevel.wave_tick > max_wave_ticks:
 		%WaveTickTimer.stop()
 	
 	for path_name in current_wave.wave_by_path.keys():
 		var path_wave = current_wave.wave_by_path[path_name]
-		if CurrentLevel.wave_tick >= path_wave.creeps.size():
+		if CurrentLevel.wave_tick > path_wave.creeps.size():
 			continue
-		var creep_name = path_wave.creeps[CurrentLevel.wave_tick-1]
+		var creep_specifier = path_wave.creeps[CurrentLevel.wave_tick-1]
+		var creep_name = creep_specifier.name
 		var creep_resource = CreepBook.creep_by_name[creep_name]
 		if !creep_resource:
 			continue
 		var path : Path = path_by_name[path_name]
 		var creep_instance_name = "creep_%s_%s" % [path_name, CurrentLevel.wave_tick]
-		spawn_creep_at(path.start_coord_global, path.waypoints_global, creep_instance_name, creep_resource)
+		spawn_creep_at(path.start_coord_global, path.waypoints_global, creep_instance_name, creep_resource, creep_specifier.level)
 
-func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2], creep_name: String, creep_resource):
-	var resource = load("res://scenes/creeps/path_follower.tscn")
-	#var new_enemy : PathFollower = load("res://scenes/creeps/path_follower.tscn").instantiate()
-	var new_enemy : PathFollower = creep_resource.instantiate()
+func spawn_creep_at(start_position_global : Vector2, path : Array[Vector2], creep_name: String, creep_resource, level: int):
+	var new_enemy : Creep = creep_resource.instantiate()
+	new_enemy.set_level(level)
 	new_enemy.name = creep_name
 	new_enemy.add_to_group("creeps")
 	new_enemy.position = start_position_global
@@ -333,8 +332,8 @@ func is_navigable(tile_position : Vector2i) -> bool:
 ## Could be a wall (which we can build on), could be trees or a pit or something (which we can't).
 func is_blocked(tile_position : Vector2i) -> bool:
 	var source_id = blocker_tilemap.get_cell_source_id(tile_position)
-	var is_blocked = (-1 != source_id)
-	return is_blocked
+	var position_is_blocked = (-1 != source_id)
+	return position_is_blocked
 
 func is_occupied(tile_position : Vector2i) -> bool:
 	return tower_by_map_coord.keys().has(tile_position)
@@ -370,7 +369,7 @@ func on_creep_destroyed():
 ## Because it was queued, we can't get an accurate count of creeps remaining
 ##	in the other methods (on_destroyed, etc.).
 func on_creep_freed():
-	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
+	#print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
 	#ui.log("creeps=" + str(%Creeps.get_child_count()))
 	ui.show_details("creeps=" + str(%Creeps.get_child_count()))
 
@@ -383,16 +382,21 @@ func on_creep_freed():
 			CurrentLevel.level_status = CurrentLevel.LevelStatus.WON
 			on_win()
 		else:
-			print("wave over, we survived, back to build mode")
-			ui.log("wave done")
-			CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
-			CurrentLevel.money += current_wave.completion_bonus
-			# TODO: Show "$ for completing round" message
-			ui.show_money()
-		
+			on_wave_ended()
+
+func on_wave_ended():
+	print("wave over, we survived, back to build mode")
+	ui.log("wave done")
+	#OS.alert("Ain't done this yet, yo", 'Nope')
+	#OS.alert("Wave completion bonus: $" + str(current_wave.completion_bonus), "Survived wave " + str(CurrentLevel.wave_number))
+	CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
+	CurrentLevel.money += current_wave.completion_bonus
+	# TODO: Show "$ for completing round" message
+	ui.show_money()
+	%SendWaveButton.disabled = false
 
 func on_creep_reached_base():
-	print("on_creep_reached_base")
+	#print("on_creep_reached_base")
 	CurrentLevel.base_health -= 1
 	ui.show_health()
 	if 0 == CurrentLevel.base_health:
@@ -400,8 +404,8 @@ func on_creep_reached_base():
 		on_lose()
 
 func _on_kill_zone_body_entered(body: Node2D):
-	print("kill zone entered by " + str(body))
-	if !(body is PathFollower):
+	#print("kill zone entered by " + str(body))
+	if !(body is Creep):
 		return
 	creep_reached_base.emit()
 	body.queue_free()
@@ -416,7 +420,6 @@ func on_lose():
 	print("GAME OVER, you lose")
 	Music.play_song("loser")
 	center_control(%LoserMessage)
-	
 
 func center_control(control : Container):
 	control.position = Vector2(
@@ -437,7 +440,9 @@ func _on_restart_button_pressed():
 
 func _on_send_wave_button_pressed():
 	if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+		print("Can't send then next wave, we're in status=" + str(CurrentLevel.level_status))
 		return
+	%SendWaveButton.disabled = true
 	spawn_creeps()
 
 func _on_pause_button_pressed() -> void:

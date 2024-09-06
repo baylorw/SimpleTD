@@ -1,29 +1,39 @@
-[gd_scene load_steps=9 format=3 uid="uid://6np22fhsqjxq"]
+[gd_scene load_steps=10 format=3 uid="uid://6np22fhsqjxq"]
 
-[ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_o0b7w"]
-[ext_resource type="Texture2D" uid="uid://cjqk2jhqo1u3b" path="res://assets/images/creeps/Ajit 50.png" id="2_83q51"]
+[ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_y2fgp"]
+[ext_resource type="Texture2D" uid="uid://bsrgfe8rg0q7q" path="res://assets/images/creeps/plus.png" id="2_5jiib"]
 [ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_o0rja"]
 [ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="4_sive0"]
 [ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="5_4vdpp"]
 [ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="6_xj6ox"]
 [ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="7_g7o67"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_8y4oo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5jiib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r2fe"]
-radius = 19.0
+radius = 17.0
 
 [node name="Normal1" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_o0b7w")
-max_speed = 100.0
-max_health = 50
-kill_value = 5
+script = ExtResource("1_y2fgp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+modulate = Color(0, 1, 1, 1)
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_83q51")
+sprite_frames = SubResource("SpriteFrames_8y4oo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -32,9 +42,9 @@ shape = SubResource("CircleShape2D_4r2fe")
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = -17.0
-offset_top = -31.0
+offset_top = -24.0
 offset_right = 17.0
-offset_bottom = -21.0
+offset_bottom = -19.0
 value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("3_o0rja")
@@ -43,9 +53,9 @@ tint_progress = Color(0, 1, 0, 1)
 [node name="StatusIconContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 offset_left = -17.0
-offset_top = -42.0
+offset_top = -35.0
 offset_right = 33.0
-offset_bottom = -32.0
+offset_bottom = -25.0
 theme_override_constants/separation = 2
 
 [node name="SlowIcon" type="TextureRect" parent="StatusIconContainer"]

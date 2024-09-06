@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="1_yxlw8"]
 [ext_resource type="PackedScene" uid="uid://bvpqeqrft7ixh" path="res://scenes/path_line/path_line.tscn" id="2_inscg"]
-[ext_resource type="PackedScene" uid="uid://doi7efayw5psr" path="res://scenes/creeps/path_follower.tscn" id="3_iob6r"]
+[ext_resource type="PackedScene" uid="uid://doi7efayw5psr" path="res://scenes/creeps/creep.tscn" id="3_iob6r"]
 [ext_resource type="Texture2D" uid="uid://c2merbdufjhx" path="res://assets/images/creeps/angel 50.png" id="4_tfd25"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]

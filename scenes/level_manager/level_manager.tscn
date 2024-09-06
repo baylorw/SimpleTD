@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://clp7bwlrw68bu"]
+[gd_scene load_steps=20 format=3 uid="uid://clp7bwlrw68bu"]
 
-[ext_resource type="Script" path="res://scenes/level_manager/level_manager.gd" id="1_sy73o"]
+[ext_resource type="Script" path="res://scenes/level_manager/LevelManager.gd" id="1_sy73o"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_517ca"]
 [ext_resource type="Script" path="res://scenes/level_manager/ui.gd" id="3_w3ckq"]
 [ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="4_ai65a"]
@@ -17,6 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="13_br6wb"]
 [ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="14_qajva"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1rr4"]
+bg_color = Color(1.63645e-06, 0, 0.534552, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
 [sub_resource type="ButtonGroup" id="ButtonGroup_0odd4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
@@ -25,6 +32,7 @@ size = Vector2(1150, 850)
 [node name="LevelManager" type="Node2D"]
 script = ExtResource("1_sy73o")
 money = 4000
+metadata/_edit_vertical_guides_ = [-84.0]
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -183,6 +191,7 @@ autowrap_mode = 3
 layout_mode = 2
 
 [node name="SendWaveButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Send Wave"
@@ -208,6 +217,7 @@ text = "II"
 [node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "1/2"
@@ -215,13 +225,16 @@ text = "1/2"
 [node name="SpeedNormalButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
 toggle_mode = true
+button_pressed = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "1"
 
 [node name="Speed2Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "2"
@@ -229,6 +242,7 @@ text = "2"
 [node name="Speed5Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "5"
@@ -272,21 +286,21 @@ unique_name_in_owner = true
 [node name="Towers" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MessagesCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="WinnerMessage" type="MarginContainer" parent="CanvasLayer"]
+[node name="WinnerMessage" type="MarginContainer" parent="MessagesCanvasLayer"]
 unique_name_in_owner = true
 offset_left = 1328.0
 offset_top = 8.0
 offset_right = 1702.0
 offset_bottom = 267.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/WinnerMessage"]
+[node name="TextureRect" type="TextureRect" parent="MessagesCanvasLayer/WinnerMessage"]
 modulate = Color(1, 1, 0.788235, 1)
 layout_mode = 2
 texture = ExtResource("12_0bwqm")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/WinnerMessage"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MessagesCanvasLayer/WinnerMessage"]
 layout_mode = 2
 texture = ExtResource("13_br6wb")
 patch_margin_left = 12
@@ -294,17 +308,17 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/WinnerMessage"]
+[node name="MarginContainer" type="MarginContainer" parent="MessagesCanvasLayer/WinnerMessage"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(350, 200)
 layout_mode = 2
 size_flags_vertical = 6
@@ -320,39 +334,39 @@ text = "You Win!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WinScoreLabel" type="Label" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+[node name="WinScoreLabel" type="Label" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Score: 10/10"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitButton" type="Button" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
 
-[node name="RestartButton" type="Button" parent="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RestartButton" type="Button" parent="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Restart"
 
-[node name="LoserMessage" type="MarginContainer" parent="CanvasLayer"]
+[node name="LoserMessage" type="MarginContainer" parent="MessagesCanvasLayer"]
 unique_name_in_owner = true
 offset_left = 1328.0
 offset_top = 288.0
 offset_right = 1702.0
 offset_bottom = 547.0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/LoserMessage"]
+[node name="TextureRect" type="TextureRect" parent="MessagesCanvasLayer/LoserMessage"]
 modulate = Color(0.392345, 7.94759e-06, 3.63387e-06, 1)
 layout_mode = 2
 texture = ExtResource("12_0bwqm")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/LoserMessage"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MessagesCanvasLayer/LoserMessage"]
 layout_mode = 2
 texture = ExtResource("13_br6wb")
 patch_margin_left = 12
@@ -360,17 +374,17 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LoserMessage"]
+[node name="MarginContainer" type="MarginContainer" parent="MessagesCanvasLayer/LoserMessage"]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MessagesCanvasLayer/LoserMessage/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(350, 200)
 layout_mode = 2
 size_flags_vertical = 6
@@ -386,20 +400,20 @@ text = "Oh No!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="QuitButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitButton" type="Button" parent="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Main Menu"
 
-[node name="RestartButton" type="Button" parent="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RestartButton" type="Button" parent="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Restart"
 
-[node name="PopupPanel" type="PopupPanel" parent="CanvasLayer/LoserMessage"]
+[node name="PopupPanel" type="PopupPanel" parent="MessagesCanvasLayer/LoserMessage"]
 
 [node name="MapViewSettingsPanel" parent="." instance=ExtResource("14_qajva")]
 unique_name_in_owner = true
@@ -422,8 +436,8 @@ wait_time = 0.25
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed2Button" to="." method="_on_speed_2_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed5Button" to="." method="_on_speed_5_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]

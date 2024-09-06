@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://csev2k4j06e3i"]
+[gd_scene load_steps=7 format=4 uid="uid://csev2k4j06e3i"]
 
-[ext_resource type="PackedScene" uid="uid://bvpqeqrft7ixh" path="res://scenes/path_line/path_line.tscn" id="1_jjqhd"]
+[ext_resource type="Script" path="res://levels/no_left_turns/no_left_turns.gd" id="1_8kgr2"]
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="2_jw46g"]
-[ext_resource type="Texture2D" uid="uid://c2merbdufjhx" path="res://assets/images/creeps/angel 50.png" id="7_ay732"]
-[ext_resource type="PackedScene" uid="uid://doi7efayw5psr" path="res://scenes/creeps/path_follower.tscn" id="13_ouxtd"]
+[ext_resource type="PackedScene" uid="uid://cawdmj8me57o0" path="res://scenes/strobe_square/strobe_square.tscn" id="3_r5ifw"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
@@ -15,6 +14,7 @@ size = Vector2(50, 50)
 size = Vector2(210, 45)
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_8kgr2")
 
 [node name="MapArea" type="Sprite2D" parent="."]
 position = Vector2(525, 375)
@@ -39,8 +39,8 @@ modulate = Color(0, 0, 1, 1)
 position = Vector2(-24, 128)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="PathLine1" parent="Paths" instance=ExtResource("1_jjqhd")]
-unique_name_in_owner = true
+[node name="StrobeSquare" parent="Paths" instance=ExtResource("3_r5ifw")]
+position = Vector2(25, 125)
 
 [node name="EndGroup1" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
@@ -48,14 +48,19 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(975, 775)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
+[node name="StrobeSquare2" parent="Paths" instance=ExtResource("3_r5ifw")]
+position = Vector2(25, 225)
+
 [node name="StartGroup2" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 1, 1)
 position = Vector2(-24, 224)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="PathLine2" parent="Paths" instance=ExtResource("1_jjqhd")]
-unique_name_in_owner = true
+[node name="StrobeSquare3" parent="Paths" instance=ExtResource("3_r5ifw")]
+position = Vector2(975, 675)
+rotation = 1.5708
+default_animation_name = "red_grow"
 
 [node name="EndGroup2" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
@@ -63,7 +68,13 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(875, 775)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
+[node name="StrobeSquare4" parent="Paths" instance=ExtResource("3_r5ifw")]
+position = Vector2(875, 675)
+rotation = 1.5708
+default_animation_name = "red_grow"
+
 [node name="KillZone" type="Area2D" parent="Paths"]
+unique_name_in_owner = true
 position = Vector2(720, 694)
 collision_layer = 0
 collision_mask = 2
@@ -71,11 +82,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/KillZone"]
 position = Vector2(203, 84.5)
 shape = SubResource("RectangleShape2D_yyeby")
-
-[node name="PathFollowerPrototype" parent="." instance=ExtResource("13_ouxtd")]
-unique_name_in_owner = true
-position = Vector2(1320, 744)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("7_ay732")
 
 [connection signal="body_entered" from="Paths/KillZone" to="." method="_on_kill_zone_body_entered"]

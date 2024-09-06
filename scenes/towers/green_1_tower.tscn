@@ -97,8 +97,8 @@ _data = {
 [node name="Green1Tower" type="Node2D"]
 script = ExtResource("1_gtsu7")
 cost = 100
-damage_per_shot = 22
-shot_delay_in_ms = 100
+damage_per_shot = 11
+shot_delay_in_ms = 50
 range_in_pixels = 300
 purpose = "Fast tower."
 

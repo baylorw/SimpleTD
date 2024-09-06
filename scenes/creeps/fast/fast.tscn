@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://cq34hjqi8b0da"]
+
+[ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_082v6"]
+[ext_resource type="Texture2D" uid="uid://bk6hnvdbyb1r2" path="res://assets/images/creeps/fast_sheet.png" id="2_u1jyd"]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_04er7"]
+[ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="4_ty6tu"]
+[ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="5_75ia4"]
+[ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="6_sofov"]
+[ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="7_lb7qm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rq55"]
+atlas = ExtResource("2_u1jyd")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvtj3"]
+atlas = ExtResource("2_u1jyd")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_din1w"]
+atlas = ExtResource("2_u1jyd")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s1b7"]
+atlas = ExtResource("2_u1jyd")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i6u4x"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_5rq55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvtj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_din1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s1b7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r2fe"]
+radius = 13.0
+
+[node name="Fast" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_082v6")
+max_speed = 150.0
+base_max_health = 150
+base_kill_value = 4
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_i6u4x")
+autoplay = "default"
+frame_progress = 0.0667835
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_4r2fe")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -12.0
+offset_top = -20.0
+offset_right = 13.0
+offset_bottom = -15.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_04er7")
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="StatusIconContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = -12.0
+offset_top = -31.0
+offset_right = 38.0
+offset_bottom = -21.0
+theme_override_constants/separation = 2
+
+[node name="SlowIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_ty6tu")
+
+[node name="StunIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("5_75ia4")
+
+[node name="PoisonIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_sofov")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_lb7qm")
+
+[node name="EffectsPollingTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.1
+autostart = true

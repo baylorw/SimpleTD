@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://b6m23vowma6s"]
+[gd_scene load_steps=8 format=4 uid="uid://b6m23vowma6s"]
 
 [ext_resource type="Script" path="res://levels/dq_halls_of_the_god_king/dq_halls_of_the_god_king.gd" id="1_6sm56"]
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="1_65gur"]
+[ext_resource type="PackedScene" uid="uid://cawdmj8me57o0" path="res://scenes/strobe_square/strobe_square.tscn" id="3_vy038"]
+[ext_resource type="Texture2D" uid="uid://b6l5b7oklc8b3" path="res://assets/tilesets/floor 50 white.png" id="4_ev083"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
@@ -38,17 +40,19 @@ modulate = Color(0, 0, 1, 1)
 position = Vector2(-25, 25)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
-[node name="StartGroup2" type="Sprite2D" parent="Paths"]
-unique_name_in_owner = true
-modulate = Color(0, 0, 1, 1)
-position = Vector2(926, 625)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
+[node name="StartGroup1View" parent="Paths" instance=ExtResource("3_vy038")]
+position = Vector2(25, 24)
 
-[node name="EndPoint" type="Sprite2D" parent="Paths"]
+[node name="StartGroup2" parent="Paths" instance=ExtResource("3_vy038")]
 unique_name_in_owner = true
-modulate = Color(1, 0, 0, 1)
+position = Vector2(975, 625)
+flip_h = true
+
+[node name="EndPoint" parent="Paths" instance=ExtResource("3_vy038")]
+unique_name_in_owner = true
 position = Vector2(475, 325)
-texture = SubResource("PlaceholderTexture2D_0gmvk")
+texture = ExtResource("4_ev083")
+default_animation_name = "red_grow"
 
 [node name="KillZone" type="Area2D" parent="Paths"]
 unique_name_in_owner = true

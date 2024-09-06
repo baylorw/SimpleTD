@@ -9,8 +9,8 @@ var max_targets := 1
 func _ready() -> void:
 	super._ready()
 	beam.visible = false
-	randomize_beam_color()
-	print("default_color=" + str(beam.default_color) + " modulate=" + str(beam.modulate))
+	#randomize_beam_color()
+	#print("default_color=" + str(beam.default_color) + " modulate=" + str(beam.modulate))
 
 func randomize_beam_color():
 	#--- Start as green then tweak each channel just a little.
@@ -51,7 +51,7 @@ func fire():
 	super.fire()
 	
 	var points  := [Vector2.ZERO]
-	var enemies : Array[PathFollower] = []
+	var enemies : Array[Creep] = []
 	#print("min(%s, %s)" % [max_targets, enemies_in_range.size()])
 	var number_of_targets = min(max_targets, enemies_in_range.size())
 	for i in number_of_targets:

@@ -1,8 +1,8 @@
 extends LevelData
 
-func _ready() -> void:
-	setup_paths()
-	setup_waves()
+#func _ready() -> void:
+	#setup_paths()
+	#setup_waves()
 
 func setup_paths():
 	var path := Path.new()
@@ -48,13 +48,32 @@ func setup_waves():
 	waves.push_back(wave)
 	path_wave = PathWave.new()
 	wave.wave_by_path["path_1"] = path_wave
-	add_creep_to_path_wave(path_wave, "weak_1", 10)
+	add_creep_to_path_wave(path_wave, "normal_1", 10)
 	path_wave = PathWave.new()
 	wave.wave_by_path["path_2"] = path_wave
-	add_creep_to_path_wave(path_wave, "normal_1", 10)
+	add_creep_to_path_wave(path_wave, "fast", 10)
+	path_wave = PathWave.new()
 	wave.wave_by_path["path_3"] = path_wave
-	add_creep_to_path_wave(path_wave, "weak_1", 10)
+	add_creep_to_path_wave(path_wave, "normal_1", 10)
 	
-func add_creep_to_path_wave(path_wave: PathWave, creep_name: String, count: int):
-	for i in count:
-		path_wave.creeps.push_back(creep_name)
+	#--- Wave 4: All 3 paths
+	wave = Wave.new()
+	waves.push_back(wave)
+	path_wave = PathWave.new()
+	wave.wave_by_path["path_1"] = path_wave
+	add_creep_to_path_wave(path_wave, "tough_slow_1", 10)
+	path_wave = PathWave.new()
+	wave.wave_by_path["path_3"] = path_wave
+	add_creep_to_path_wave(path_wave, "normal_1", 10)
+	path_wave = PathWave.new()
+	wave.wave_by_path["path_2"] = path_wave
+	add_creep_to_path_wave(path_wave, "fast", 1)
+	add_creep_to_path_wave(path_wave, "chicken", 1)
+	add_creep_to_path_wave(path_wave, "fast", 1)
+	add_creep_to_path_wave(path_wave, "chicken", 1)
+	add_creep_to_path_wave(path_wave, "fast", 1)
+	add_creep_to_path_wave(path_wave, "chicken", 1)
+	add_creep_to_path_wave(path_wave, "fast", 1)
+	add_creep_to_path_wave(path_wave, "chicken", 1)
+	add_creep_to_path_wave(path_wave, "fast", 1)
+	add_creep_to_path_wave(path_wave, "chicken", 1)

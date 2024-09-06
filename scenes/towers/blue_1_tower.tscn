@@ -95,6 +95,7 @@ _data = {
 }
 
 [node name="Blue1Tower" type="Node2D"]
+position = Vector2(510, 332)
 script = ExtResource("1_0ubbq")
 cost = 300
 damage_per_shot = 500

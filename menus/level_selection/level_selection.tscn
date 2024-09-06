@@ -1,17 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://kjtk0whpobva"]
+[gd_scene load_steps=8 format=3 uid="uid://kjtk0whpobva"]
 
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_rg7jx"]
 [ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_yo5ie"]
 [ext_resource type="Script" path="res://menus/level_selection/level_selection.gd" id="2_a4n2b"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="3_cngd4"]
-[ext_resource type="Texture2D" uid="uid://dhg7v14deqce8" path="res://levels/void/void.png" id="4_b38sq"]
-[ext_resource type="Texture2D" uid="uid://ciqrum86viies" path="res://levels/no_left_turns/no_left_turns.png" id="4_ence3"]
-[ext_resource type="Texture2D" uid="uid://bghc7251rncy6" path="res://levels/frog/frog.png" id="5_agqfp"]
-[ext_resource type="Texture2D" uid="uid://3oou3k6qdt1q" path="res://levels/kyle BD/elementalish.png" id="6_mbahb"]
-[ext_resource type="Texture2D" uid="uid://dyjxycgesjq0q" path="res://levels/slim_pickings/slim_pickings.png" id="8_qo08g"]
-[ext_resource type="Texture2D" uid="uid://dr4rw0a6s80jk" path="res://levels/snaking_path/snaking_path.png" id="9_52mo7"]
-[ext_resource type="Texture2D" uid="uid://8rnaixlkagi8" path="res://levels/switchback/switchback.png" id="10_j12pi"]
-[ext_resource type="Texture2D" uid="uid://bvhvksreyybw8" path="res://levels/up_and_down/up_and_down.png" id="11_i73yu"]
 [ext_resource type="Texture2D" uid="uid://u244e4h8igqx" path="res://assets/icon.svg" id="12_6gc7v"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_0lgvy"]
@@ -39,204 +31,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_cngd4")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="LevelsContainer" type="GridContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -283.0
-offset_top = -223.5
-offset_right = 353.0
-offset_bottom = 256.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 25
-columns = 4
-
-[node name="Level1Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("4_b38sq")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "void"
-
-[node name="Level2Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("5_agqfp")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "frog"
-
-[node name="Level3Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("6_mbahb")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "elementalish"
-
-[node name="Level4Button" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("4_ence3")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "no_left_turns"
-
-[node name="Label" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Separating"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Stretching"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Clumping"
-horizontal_alignment = 1
-
-[node name="Label4" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Time Asymmetry"
-horizontal_alignment = 1
-
-[node name="Control" type="Control" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="Control3" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="Control4" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="TextureButton5" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("8_qo08g")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "slim_pickings"
-
-[node name="TextureButton6" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("9_52mo7")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "snaking_path"
-
-[node name="TextureButton7" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("10_j12pi")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "switchback"
-
-[node name="TextureButton8" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("11_i73yu")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "up_and_down"
-
-[node name="Label5" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 5"
-horizontal_alignment = 1
-
-[node name="Label6" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 6"
-horizontal_alignment = 1
-
-[node name="Label7" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 7"
-horizontal_alignment = 1
-
-[node name="Label8" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 8"
-horizontal_alignment = 1
-
-[node name="Control5" type="Control" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="Control6" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="Control7" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="Control8" type="Control" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-
-[node name="TextureButton9" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("12_6gc7v")
-ignore_texture_size = true
-stretch_mode = 0
-metadata/level_name = "dq_halls_of_the_god_king"
-
-[node name="TextureButton10" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("9_52mo7")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="TextureButton11" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("10_j12pi")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="TextureButton12" type="TextureButton" parent="CanvasLayer/LevelsContainer"]
-custom_minimum_size = Vector2(120, 90)
-layout_mode = 2
-texture_normal = ExtResource("11_i73yu")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label9" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level"
-horizontal_alignment = 1
-
-[node name="Label10" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 6"
-horizontal_alignment = 1
-
-[node name="Label11" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 7"
-horizontal_alignment = 1
-
-[node name="Label12" type="Label" parent="CanvasLayer/LevelsContainer"]
-layout_mode = 2
-text = "Level 8"
-horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -271,7 +65,6 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="Panel" parent="MarginContainer2"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
@@ -296,18 +89,18 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "** placeholder **"
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer2"]
+[node name="MapListPanelContainer" type="PanelContainer" parent="MarginContainer2"]
 visible = false
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PreviewPanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 323.0
 offset_top = 62.0
 offset_right = 1048.0
 offset_bottom = 562.0
 
-[node name="level_preview_image" type="TextureRect" parent="PanelContainer"]
+[node name="level_preview_image" type="TextureRect" parent="PreviewPanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("12_6gc7v")
@@ -315,10 +108,10 @@ expand_mode = 1
 
 [node name="LoadLevelButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 902.0
-offset_top = 568.0
-offset_right = 1055.0
-offset_bottom = 627.0
+offset_left = 328.0
+offset_top = 592.0
+offset_right = 1045.0
+offset_bottom = 651.0
 text = "Play"
 
 [node name="CurrentLevelNameLabel" type="Label" parent="."]

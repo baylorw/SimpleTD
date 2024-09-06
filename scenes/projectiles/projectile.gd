@@ -13,9 +13,9 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _physics_process(_delta: float) -> void:
-	if target:
-		move_by_steering()
-		#move_by_position()
+	if is_instance_valid(target) and target.i_am:
+			move_by_steering()
+			#move_by_position()
 	else:
 		#--- Target is gone, just keep going straight.
 		move_and_slide()
@@ -29,6 +29,8 @@ func move_by_steering():
 	if !target:
 		#print("target stopped existing somehow")
 		#print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+		#print("velocity=" + str(self.velocity))
+		move_and_slide()
 		return
 	#if !is_instance_valid(target):
 		#print("target isn't valid")
@@ -62,6 +64,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func impact():
 	# Can play an animated sprite or particle effect.
 	# Can play a sound.
+	# TODO: Is this needed?
 	#--- Wait a little for impact animations and sounds to finish.
 	await get_tree().create_timer(0.2).timeout
 	self.queue_free()

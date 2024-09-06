@@ -3,6 +3,7 @@ extends Control
 const grayed_out_color := Color("48484888")
 
 var level_name_by_id := {
+	"tutorial": "Tutorial",
 	"elementalish": "Elementalish",
 	"frog": "Frog",
 	"dq_halls_of_the_god_king": "God King",
@@ -34,11 +35,12 @@ func setup_level_buttons():
 	%PlaceholderButton.free()
 	
 	var group := ButtonGroup.new()
-	level_name_by_id.keys().sort()
+	#--- i can't find a way to sort keys :(
+	#level_name_by_id.keys().sort()
 	for id in level_name_by_id.keys():
 		var button = Button.new()
 		var display_name = level_name_by_id[id]
-		button.name = display_name + "Button"
+		button.name = id + "Button"
 		button.text = display_name
 		button.set_meta("level_name", id)
 		button.toggle_mode = true
@@ -46,21 +48,26 @@ func setup_level_buttons():
 		button.pressed.connect(Callable(_on_level_selection_button_pressed).bind(id))
 		%ButtonVBoxContainer.add_child(button)
 
-func _on_quit_button_pressed():
-	get_tree().change_scene_to_file("res://menus/main/main_menu.tscn")
+func _on_load_level_button_pressed() -> void:
+	if current_level == "tutorial":
+		Globals.level_name = "res://levels/%s/%s.tscn" % [current_level, current_level]
+		print("gonna load " + Globals.level_name)
+		get_tree().change_scene_to_file("res://scenes/level_manager_tutorial/tutorial_level_manager.tscn")
+	else:
+		SceneNavigation.go_to_level(current_level)
 
 func _on_level_selection_button_pressed(level_id : String):
 	current_level = level_id
 	show_level_info(level_id)
+
+func _on_quit_button_pressed():
+	get_tree().change_scene_to_file("res://menus/main/main_menu.tscn")
 
 
 func show_level_info(level_id: String):
 	var preview_texture_fqn = "res://levels/%s/%s.png" % [level_id, level_id]
 	%CurrentLevelNameLabel.text = level_id
 	%level_preview_image.texture = load(preview_texture_fqn)
-
-func _on_load_level_button_pressed() -> void:
-	SceneNavigation.go_to_level(current_level)
 
 
 # TODO: Fix the alert window

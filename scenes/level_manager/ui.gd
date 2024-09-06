@@ -12,9 +12,11 @@ func show_wave():
 func show_details(message: String):
 	%DetailsLabel.text = message
 
+func clear_lof():
+	%DetailsLabel.text += ""
+	
 func log(message: String):
 	%DetailsLabel.text += "\n" + message
-
 
 #func _on_blue_button_mouse_entered() -> void:
 	#var message = """

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://bejq6kybboanu"]
+[gd_scene load_steps=7 format=4 uid="uid://bejq6kybboanu"]
 
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="1_1v2pv"]
 [ext_resource type="Script" path="res://levels/elementalish/elementalish.gd" id="1_io2cm"]
+[ext_resource type="PackedScene" uid="uid://cawdmj8me57o0" path="res://scenes/strobe_square/strobe_square.tscn" id="3_lf4nn"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
@@ -38,6 +39,10 @@ modulate = Color(0, 0, 1, 1)
 position = Vector2(176, -26)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
 
+[node name="StrobeSquare" parent="Paths" instance=ExtResource("3_lf4nn")]
+position = Vector2(175, 25)
+rotation = 1.5708
+
 [node name="EndGroup1" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
 modulate = Color(1, 0, 0, 1)
@@ -52,11 +57,20 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/EndGroup1/KillZone"]
 shape = SubResource("RectangleShape2D_yyeby")
 
+[node name="StrobeSquare2" parent="Paths" instance=ExtResource("3_lf4nn")]
+position = Vector2(225, 25)
+rotation = 1.5708
+
 [node name="StartGroup2" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
 modulate = Color(0, 0, 1, 1)
 position = Vector2(226, -26)
 texture = SubResource("PlaceholderTexture2D_0gmvk")
+
+[node name="StrobeSquare3" parent="Paths" instance=ExtResource("3_lf4nn")]
+position = Vector2(375, 25)
+rotation = 4.71239
+default_animation_name = "red_grow"
 
 [node name="EndGroup2" type="Sprite2D" parent="Paths"]
 unique_name_in_owner = true
@@ -71,3 +85,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/EndGroup2/KillZone"]
 shape = SubResource("RectangleShape2D_yyeby")
+
+[node name="StrobeSquare4" parent="Paths" instance=ExtResource("3_lf4nn")]
+position = Vector2(425, 25)
+rotation = 4.71239
+default_animation_name = "red_grow"

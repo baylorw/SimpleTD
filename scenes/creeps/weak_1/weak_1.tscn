@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbju1uqhldqsr"]
+[gd_scene load_steps=10 format=3 uid="uid://dbju1uqhldqsr"]
 
 [ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_0k2xl"]
 [ext_resource type="Texture2D" uid="uid://brmd1e87sw0oe" path="res://assets/images/creeps/Rufus 50.png" id="2_gi8s7"]
@@ -7,6 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="5_pdrbd"]
 [ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="6_pri3m"]
 [ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="7_be7cd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_43cnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gi8s7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4r2fe"]
 radius = 13.0
@@ -20,10 +31,10 @@ max_speed = 100.0
 max_health = 50
 kill_value = 5
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_gi8s7")
+sprite_frames = SubResource("SpriteFrames_43cnu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -32,7 +43,7 @@ shape = SubResource("CircleShape2D_4r2fe")
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = -13.0
-offset_top = -25.0
+offset_top = -20.0
 offset_right = 13.0
 offset_bottom = -15.0
 value = 50.0
@@ -43,9 +54,9 @@ tint_progress = Color(0, 1, 0, 1)
 [node name="StatusIconContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 offset_left = -13.0
-offset_top = -36.0
+offset_top = -31.0
 offset_right = 37.0
-offset_bottom = -26.0
+offset_bottom = -21.0
 theme_override_constants/separation = 2
 
 [node name="SlowIcon" type="TextureRect" parent="StatusIconContainer"]

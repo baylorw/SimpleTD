@@ -13,7 +13,7 @@ func _ready() -> void:
 func fire():
 	super.fire()
 	
-	var enemies : Array[PathFollower] = []
+	var enemies : Array[Creep] = []
 	var number_of_targets = enemies_in_range.size()
 	for i in number_of_targets:
 		enemies.append(enemies_in_range[i])

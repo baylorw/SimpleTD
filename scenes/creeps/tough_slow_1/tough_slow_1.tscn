@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkg818fe4ffyt"]
+
+[ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_5xx61"]
+[ext_resource type="Texture2D" uid="uid://b2r82gqumvuq7" path="res://assets/images/creeps/devil 50.png" id="2_1ehbo"]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_r7hnl"]
+[ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="4_5f5r7"]
+[ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="5_yst8r"]
+[ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="6_lg2go"]
+[ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="7_n6b2w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqmx7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1ehbo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r2fe"]
+radius = 22.0
+
+[node name="ToughSlow1" type="CharacterBody2D"]
+collision_layer = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_5xx61")
+max_health = 400
+kill_value = 40
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_qqmx7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_4r2fe")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -24.0
+offset_top = -37.0
+offset_right = 24.0
+offset_bottom = -27.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_r7hnl")
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="StatusIconContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = -24.0
+offset_top = -48.0
+offset_right = 26.0
+offset_bottom = -38.0
+theme_override_constants/separation = 2
+
+[node name="SlowIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_5f5r7")
+
+[node name="StunIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("5_yst8r")
+
+[node name="PoisonIcon" type="TextureRect" parent="StatusIconContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_lg2go")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_n6b2w")
+
+[node name="EffectsPollingTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+wait_time = 0.1
+autostart = true
