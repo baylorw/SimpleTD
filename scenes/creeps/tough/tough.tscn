@@ -1,18 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://ce4njc0ry87ov"]
+[gd_scene load_steps=11 format=3 uid="uid://ce4njc0ry87ov"]
 
 [ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_tffpg"]
-[ext_resource type="Texture2D" uid="uid://bo1po7bdqxd7k" path="res://assets/images/creeps/square hollow.png" id="2_q5fex"]
+[ext_resource type="Texture2D" uid="uid://c70estaa6h375" path="res://assets/images/creeps/square filled.png" id="2_7c4o5"]
 [ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_piwet"]
 [ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="4_3rw0q"]
 [ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="5_b4sid"]
 [ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="6_o478u"]
 [ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="7_tm4oe"]
+[ext_resource type="PackedScene" uid="uid://bhlt8ou5mjiwg" path="res://effects/effect.tscn" id="8_tv35g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qqmx7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_q5fex")
+"texture": ExtResource("2_7c4o5")
 }],
 "loop": true,
 "name": &"default",
@@ -22,7 +23,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vy0l3"]
 size = Vector2(35, 35)
 
-[node name="ToughSlow1" type="CharacterBody2D"]
+[node name="Tough" type="CharacterBody2D"]
 collision_layer = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -89,3 +90,9 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 autostart = true
+
+[node name="DeathAnimation" parent="." instance=ExtResource("8_tv35g")]
+unique_name_in_owner = true
+modulate = Color(1, 0.739298, 0.696879, 1)
+position = Vector2(-4, -5)
+scale = Vector2(0.29902, 0.29902)

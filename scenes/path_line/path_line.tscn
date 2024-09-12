@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvpqeqrft7ixh"]
 
 [ext_resource type="Shader" path="res://scenes/path_line/animated_line.gdshader" id="1_3nid6"]
-[ext_resource type="Texture2D" uid="uid://ff4nqrymo0od" path="res://scenes/path_line/line segment.png" id="2_xrrp7"]
+[ext_resource type="Texture2D" uid="uid://ff4nqrymo0od" path="res://scenes/path_line/line segment.png" id="2_2w77m"]
 [ext_resource type="Script" path="res://scenes/path_line/path_line.gd" id="3_83fvq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hp682"]
 shader = ExtResource("1_3nid6")
-shader_parameter/speed = 1.0
+shader_parameter/speed = 0.75
 
 [node name="PathLine" type="Line2D"]
 material = SubResource("ShaderMaterial_hp682")
 width = 20.0
 default_color = Color(0.690196, 0.188235, 0.376471, 1)
-texture = ExtResource("2_xrrp7")
+texture = ExtResource("2_2w77m")
 texture_mode = 1
 script = ExtResource("3_83fvq")

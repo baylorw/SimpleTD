@@ -538,7 +538,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_733ct")
 }],
-"loop": true,
+"loop": false,
 "name": &"explode",
 "speed": 40.0
 }, {
@@ -618,7 +618,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jyehb")
 }],
-"loop": true,
+"loop": false,
 "name": &"exploding_smoke",
 "speed": 40.0
 }, {
@@ -815,12 +815,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opmhj")
 }],
-"loop": true,
+"loop": false,
 "name": &"wispy_smoke",
 "speed": 30.0
 }]
 
 [node name="Effect" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ccnv2")
-animation = &"wispy_smoke"
-frame_progress = 0.800799
+animation = &"exploding_smoke"
+frame = 24
+frame_progress = 1.0

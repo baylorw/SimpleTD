@@ -8,6 +8,9 @@ class_name LevelData extends Node2D
 var path_by_name := {}
 var waves : Array[Wave] = []
 
+@export var starting_money := 275
+var allowed_towers : Array[String] = []
+
 
 func _ready() -> void:
 	setup_paths()
@@ -18,10 +21,12 @@ func setup_paths():
 	pass
 func setup_waves():
 	pass
-	 
+ 
 
-func create_uniform_wave(number_of_paths: int, creep_name: String, number_per_path: int, level:=1) -> Wave:
+func create_uniform_wave(number_of_paths: int, creep_name: String, number_per_path: int, level:=1, time_between_creeps_s: float=-1) -> Wave:
 	var wave = Wave.new()
+	if time_between_creeps_s > 0:
+		wave.time_between_creeps_sec = time_between_creeps_s
 	for path_number in number_of_paths:
 		var path_name = "path_" + str(path_number+1)
 		var path_wave = PathWave.new()

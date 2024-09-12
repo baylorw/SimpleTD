@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://doi7efayw5psr"]
+[gd_scene load_steps=11 format=3 uid="uid://doi7efayw5psr"]
 
 [ext_resource type="Script" path="res://scenes/creeps/creep.gd" id="1_bkf8f"]
 [ext_resource type="Texture2D" uid="uid://bs5c1dj3qw22l" path="res://assets/images/creeps/Ash 50.png" id="2_we0xi"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://biiegmp87oqnm" path="res://assets/images/status_effects/snowflake frame.png" id="5_7nvx5"]
 [ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="6_co67e"]
 [ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="6_n2qao"]
+[ext_resource type="PackedScene" uid="uid://bhlt8ou5mjiwg" path="res://effects/effect.tscn" id="8_wiftn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3ercb"]
 animations = [{
@@ -28,9 +29,6 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_bkf8f")
 fade_mode = "Loop"
-
-[node name="Sprite2D backup" type="Sprite2D" parent="."]
-texture = ExtResource("2_we0xi")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -83,3 +81,10 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 autostart = true
+
+[node name="DeathAnimation" parent="." instance=ExtResource("8_wiftn")]
+unique_name_in_owner = true
+visible = false
+animation = &"explode"
+frame = 0
+frame_progress = 0.0

@@ -5,11 +5,16 @@ signal creep_reached_base
 
 const good_color := Color(0,1,0, 0.5)
 const bad_color  := Color(1,0,0, 0.5)
+const message_time_s : float = 0.75
 
-@export var money := 200
+var money : int
 
 @onready var ui: LevelUI = %UI
 @onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
+@onready var wave_start_message: VBoxContainer = %WaveStartMessage
+@onready var wave_end_message: VBoxContainer = %WaveEndMessage
+@onready var wave_start_label: Label = %WaveStartLabel
+@onready var wave_end_label: Label = %WaveEndLabel
 
 @onready var shade_tile_map: TileMapLayer = %ShadeTileMap
 @onready var tile_borders_tile_map: TileMapLayer = %TileBordersTileMap
@@ -43,6 +48,8 @@ func _ready():
 	Music.play_song("apple")
 	
 	map_view_settings_panel.hide()
+	wave_start_message.visible = false
+	wave_end_message.visible = false
 	
 	load_level()
 	build_astar_grid()
@@ -54,6 +61,7 @@ func _ready():
 	ui.show_health()
 	ui.show_money()
 	ui.show_wave()
+	show_wave_contents(1)
 	
 	creep_reached_base.connect(on_creep_reached_base)
 	
@@ -66,10 +74,12 @@ func load_level():
 	if (null == packed_scene):
 		print("Globals.level_name was blank or an invalid file")
 		assert(packed_scene)
-	var p2 = packed_scene.instantiate()
-	print("p2="+str(p2))
 	play_area = packed_scene.instantiate() as LevelData
-	print("play_area=" + str(play_area))
+	
+	print("play_area.starting_money=" + str(play_area.starting_money))
+	self.money = play_area.starting_money
+	print("my money=" + str(money))
+	
 	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
 	#---	where it would block the Win message.
 	%LevelData.add_child(play_area)
@@ -78,6 +88,13 @@ func load_level():
 	#---	so we have to set the variables here.
 	terrain_tilemap = %LevelData/Map/GroundTileMapLayer
 	blocker_tilemap = %LevelData/Map/WallsTileMapLayer
+	
+	#--- Sometimes we draw stuff over both the tilemap AND the path.
+	#--- We have a special place in the scenetree for that.
+	var decorations_tilemap = %LevelData/Map/DecorationsTileMapLayer
+	if decorations_tilemap:
+		decorations_tilemap.get_parent().remove_child(decorations_tilemap)
+		%Decorations.add_child(decorations_tilemap)
 	
 	path_by_name = play_area.path_by_name
 	var path_line_resource = load("res://scenes/path_line/path_line.tscn")
@@ -239,19 +256,66 @@ func show_default_paths():
 	for path in path_by_name.values():
 		path.display.points = PackedVector2Array(path.waypoints_global)
 
+func show_wave_contents(wave_number: int):
+	var first_creep : Creep = get_first_creep_in_wave(wave_number)
+	var sprite : AnimatedSprite2D = first_creep.get_sprite()
+	var animation_name = sprite.animation
+	%CurrentWaveIcon.texture = sprite.sprite_frames.get_frame_texture(animation_name, 0)
+	%CurrentWaveIcon.modulate = sprite.modulate
+	%CurrentWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.base_kill_value]
+	
+	if wave_number >= CurrentLevel.wave_number_max:
+		%NextWaveIcon.texture = null
+		%NextWaveDetails.text = ""
+	else:
+		first_creep = get_first_creep_in_wave(wave_number+1)
+		sprite = first_creep.get_sprite()
+		animation_name = sprite.animation
+		%NextWaveIcon.texture = sprite.sprite_frames.get_frame_texture(animation_name, 0)
+		%NextWaveIcon.modulate = sprite.modulate
+		%NextWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.base_kill_value]
+
+func get_first_creep_in_wave(wave_number: int) -> Creep:
+	var current_wave : Wave = play_area.waves[wave_number-1]
+	var first_creep : Creep
+	for path_wave in current_wave.wave_by_path.values():
+		var specifier : CreepSpecifier = path_wave.creeps[0]
+		var creep_resource = CreepBook.creep_by_name[specifier.name]
+		#var new_enemy : Creep = creep_resource.instantiate()
+		first_creep = creep_resource.instantiate()
+		first_creep.set_level(specifier.level)
+	return first_creep
+
 func spawn_creeps():
 	CurrentLevel.wave_number += 1
 	CurrentLevel.wave_tick = 0
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
 	ui.show_wave()
-
+	#show_wave_contents(CurrentLevel.wave_number)
+	
 	current_wave = play_area.waves[CurrentLevel.wave_number-1]
 	max_wave_ticks = current_wave.max_wave_ticks()
 	%WaveTickTimer.wait_time = current_wave.time_between_creeps_sec
 	
-	# TODO: Show player a Starting Wave message
+	wave_start_label.text = "Wave %s" % [CurrentLevel.wave_number]
+	wave_start_message.visible = true
+	var tween = fade(wave_start_message, 0, 1, 0.5)
+	await tween.finished
+	await get_tree().create_timer(message_time_s).timeout
+	tween = fade(wave_start_message, 1, 0, 0.5)
+	await tween.finished
+	wave_start_message.visible = false
 	
 	%WaveTickTimer.start()
+
+func fade(object, start: float, end: float, time_length_s: float, should_loop: bool=false) -> Tween:
+	var tween = create_tween()
+	if should_loop:
+		tween.set_loops()
+	tween.tween_property(object, "modulate:a", end, time_length_s).from(start)
+	if should_loop:
+		tween.tween_property(object, "modulate:a", start, time_length_s).from(end)
+	return tween
 
 func _on_wave_tick_timer_timeout() -> void:
 	CurrentLevel.wave_tick += 1
@@ -265,6 +329,8 @@ func _on_wave_tick_timer_timeout() -> void:
 			continue
 		var creep_specifier = path_wave.creeps[CurrentLevel.wave_tick-1]
 		var creep_name = creep_specifier.name
+		if "no-op" == creep_name:    # These are time spacers, not real creeps
+			continue
 		var creep_resource = CreepBook.creep_by_name[creep_name]
 		if !creep_resource:
 			continue
@@ -369,9 +435,8 @@ func on_creep_destroyed():
 ## Because it was queued, we can't get an accurate count of creeps remaining
 ##	in the other methods (on_destroyed, etc.).
 func on_creep_freed():
-	#print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
-	#ui.log("creeps=" + str(%Creeps.get_child_count()))
-	ui.show_details("creeps=" + str(%Creeps.get_child_count()))
+	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
+	ui.show_details("#creeps=" + str(%Creeps.get_child_count()))
 
 	#--- If we've already lost it doesn't matter what the creeps are doing now.
 	if CurrentLevel.level_status == CurrentLevel.LevelStatus.LOST:
@@ -386,7 +451,19 @@ func on_creep_freed():
 
 func on_wave_ended():
 	print("wave over, we survived, back to build mode")
-	ui.log("wave done")
+	#ui.log("wave done")
+	
+	wave_end_label.text = "Completion Bonus $%s" % [current_wave.completion_bonus]
+	wave_end_message.visible = true
+	var tween = fade(wave_end_message, 0, 1, 0.5)
+	await tween.finished
+	await get_tree().create_timer(message_time_s).timeout
+	tween = fade(wave_end_message, 1, 0, 0.5)
+	await tween.finished
+	wave_end_message.visible = false
+	
+	show_wave_contents(CurrentLevel.wave_number+1)
+	
 	#OS.alert("Ain't done this yet, yo", 'Nope')
 	#OS.alert("Wave completion bonus: $" + str(current_wave.completion_bonus), "Survived wave " + str(CurrentLevel.wave_number))
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD

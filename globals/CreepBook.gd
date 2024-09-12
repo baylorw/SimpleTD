@@ -2,13 +2,12 @@ extends Node
 
 const creep_names := [
 	#--- Normal
-	"weak_1", "normal_1", "tough_slow_1",
 	"weak", "normal", "tough",
 	"chicken",
 	#"weak_2", "normal_2", "tough_slow_2",
 	#"weak_3", "normal_3", "tough_slow_3",
 	#--- Fast
-	"fast", "fast_1",
+	"fast", "fast",
 	#"fast_on_straights", "sprint_on_damage", "sprint_near_death",
 	#--- Special
 	#"disable_tower", "front_shield", "juggernaut", "haste_others", "heal_others", 

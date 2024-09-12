@@ -36,12 +36,13 @@ base_kill_value = 2
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-modulate = Color(0, 1, 0, 1)
+modulate = Color(0, 0.572197, 3.85046e-07, 1)
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_43cnu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 shape = SubResource("CircleShape2D_4r2fe")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]

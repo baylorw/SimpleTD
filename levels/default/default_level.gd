@@ -36,19 +36,24 @@ func setup_paths():
 func setup_waves():
 	var wave = Wave.new()
 	waves.push_back(wave)
+	#wave.time_between_creeps_sec = 1
 	var path_wave = PathWave.new()
 	wave.wave_by_path["path_1"] = path_wave
-	#add_creep_to_path_wave(path_wave, "weak_1", 5)
-	#add_creep_to_path_wave(path_wave, "normal_1", 10, 2)
-	#wave.time_between_creeps_sec = 1
-	add_creep_to_path_wave(path_wave, "weak", 1, 1)
-	add_creep_to_path_wave(path_wave, "normal", 1, 2)
+	add_creep_to_path_wave(path_wave, "weak", 5)
+	add_creep_to_path_wave(path_wave, "normal", 10, 2)
+	add_creep_to_path_wave(path_wave, "weak", 3, 1)
+	add_creep_to_path_wave(path_wave, "normal", 2, 2)
 	add_creep_to_path_wave(path_wave, "tough", 1, 3)
-	add_creep_to_path_wave(path_wave, "fast", 1, 4)
-	add_creep_to_path_wave(path_wave, "weak", 1, 5)
-	add_creep_to_path_wave(path_wave, "normal", 1, 6)
+	add_creep_to_path_wave(path_wave, "fast", 5, 4)
+	add_creep_to_path_wave(path_wave, "weak", 3, 5)
+	add_creep_to_path_wave(path_wave, "normal", 2, 6)
 	add_creep_to_path_wave(path_wave, "tough", 1, 7)
-	add_creep_to_path_wave(path_wave, "fast", 1, 8)
+	add_creep_to_path_wave(path_wave, "fast", 4, 8)
+	add_creep_to_path_wave(path_wave, "chicken", 1, 9)
+	add_creep_to_path_wave(path_wave, "no-op", 3)
+	add_creep_to_path_wave(path_wave, "chicken", 1, 9)
+	add_creep_to_path_wave(path_wave, "no-op", 3)
+	add_creep_to_path_wave(path_wave, "chicken", 1, 9)
 	
 	wave = Wave.new()
 	waves.push_back(wave)

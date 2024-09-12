@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq34hjqi8b0da"]
+[gd_scene load_steps=15 format=3 uid="uid://cq34hjqi8b0da"]
 
 [ext_resource type="Script" path="res://scenes/creeps/basic_creep.gd" id="1_082v6"]
 [ext_resource type="Texture2D" uid="uid://bk6hnvdbyb1r2" path="res://assets/images/creeps/fast_sheet.png" id="2_u1jyd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1o11eyvaqr3q" path="res://assets/images/status_effects/stun frame.png" id="5_75ia4"]
 [ext_resource type="Texture2D" uid="uid://rse63ldwlbmo" path="res://assets/images/status_effects/poison face frame.png" id="6_sofov"]
 [ext_resource type="AudioStream" uid="uid://bbs5v8c14u6mt" path="res://assets/audio/effects/sakura.wav" id="7_lb7qm"]
+[ext_resource type="PackedScene" uid="uid://bhlt8ou5mjiwg" path="res://effects/effect.tscn" id="8_6537y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rq55"]
 atlas = ExtResource("2_u1jyd")
@@ -44,8 +45,8 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4r2fe"]
-radius = 13.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2b2t"]
+size = Vector2(40, 20)
 
 [node name="Fast" type="CharacterBody2D"]
 collision_layer = 2
@@ -59,14 +60,13 @@ base_kill_value = 4
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 modulate = Color(1, 1, 0, 1)
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_i6u4x")
 autoplay = "default"
 frame_progress = 0.0667835
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-shape = SubResource("CircleShape2D_4r2fe")
+shape = SubResource("RectangleShape2D_w2b2t")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
@@ -111,3 +111,10 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 autostart = true
+
+[node name="DeathAnimation" parent="." instance=ExtResource("8_6537y")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 0, 1)
+position = Vector2(-2.5, -5)
+scale = Vector2(0.338235, 0.270588)
+animation = &"explode"

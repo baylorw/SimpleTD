@@ -1,28 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://b1sevivxrbf43"]
+[gd_scene load_steps=10 format=3 uid="uid://b1sevivxrbf43"]
 
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_t35b5"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_73mdt"]
 [ext_resource type="Script" path="res://menus/main/main_menu.gd" id="2_p7udw"]
-[ext_resource type="Texture2D" uid="uid://cjqk2jhqo1u3b" path="res://assets/images/creeps/Ajit 50.png" id="4_ljbut"]
-[ext_resource type="Texture2D" uid="uid://c0f528xhcu4hw" path="res://assets/images/creeps/Rissa 50.png" id="5_m60iu"]
-[ext_resource type="Texture2D" uid="uid://bs5c1dj3qw22l" path="res://assets/images/creeps/Ash 50.png" id="6_jxre2"]
-[ext_resource type="Texture2D" uid="uid://brmd1e87sw0oe" path="res://assets/images/creeps/Rufus 50.png" id="7_m4l0b"]
-[ext_resource type="Texture2D" uid="uid://c2merbdufjhx" path="res://assets/images/creeps/angel 50.png" id="7_qemth"]
-[ext_resource type="Texture2D" uid="uid://b2r82gqumvuq7" path="res://assets/images/creeps/devil 50.png" id="8_d2oyf"]
-[ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="10_sk4vg"]
-[ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="11_xc3l5"]
-[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="12_1pr03"]
-[ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="13_3yman"]
+[ext_resource type="Texture2D" uid="uid://b535bf25jyc15" path="res://menus/main/std gameplay.png" id="4_mtvbw"]
 [ext_resource type="Theme" uid="uid://couiaiuvnhxfa" path="res://resources/theme_2.tres" id="14_y851h"]
 [ext_resource type="Texture2D" uid="uid://cgchsrrgij4d6" path="res://assets/ui/button_rectangle_depth_gradient.png" id="15_3ccp4"]
 [ext_resource type="Texture2D" uid="uid://36o530vbr4eg" path="res://assets/ui/button_rectangle_depth_flat.png" id="16_mitxq"]
+[ext_resource type="Shortcut" uid="uid://d78ymx7m4ad2" path="res://resources/quit_key_shortcut.tres" id="17_j7v6t"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_7co8h"]
-device = -1
-keycode = 4194305
-
-[sub_resource type="Shortcut" id="Shortcut_qcbyi"]
-events = [SubResource("InputEventKey_7co8h")]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hwx1e"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -45,52 +32,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_73mdt")
 
-[node name="MenuPanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -175.5
-offset_right = 104.0
-offset_bottom = 175.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="StdGameplay" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(1.41125, 1.57895)
+texture = ExtResource("4_mtvbw")
 
-[node name="MarginContainer" type="MarginContainer" parent="MenuPanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="NewGameButton" type="Button" parent="MenuPanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "New Game"
-
-[node name="ContinueButton" type="Button" parent="MenuPanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Continue
-"
-
-[node name="LoadButton" type="Button" parent="MenuPanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Load
-"
-
-[node name="OptionsButton" type="Button" parent="MenuPanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Options"
-
-[node name="QuitButton" type="Button" parent="MenuPanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-shortcut = SubResource("Shortcut_qcbyi")
-text = "Quit"
+[node name="dim" type="TextureRect" parent="."]
+modulate = Color(0, 1, 0, 0.505882)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("PlaceholderTexture2D_hwx1e")
 
 [node name="TitleContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -120,62 +72,8 @@ horizontal_alignment = 1
 [node name="creeps" type="Node2D" parent="."]
 position = Vector2(82, 82)
 
-[node name="Ajit50" type="Sprite2D" parent="creeps"]
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_ljbut")
-
-[node name="Rissa50" type="Sprite2D" parent="creeps"]
-position = Vector2(83, -2)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_m60iu")
-
-[node name="Ash50" type="Sprite2D" parent="creeps"]
-position = Vector2(165, -2)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_jxre2")
-
-[node name="Rufus50" type="Sprite2D" parent="creeps"]
-position = Vector2(251, 2)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_m4l0b")
-
-[node name="Angel50" type="Sprite2D" parent="creeps"]
-position = Vector2(46, 79)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_qemth")
-
-[node name="Devil50" type="Sprite2D" parent="creeps"]
-position = Vector2(203, 84)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("8_d2oyf")
-
 [node name="towers" type="Node2D" parent="."]
 position = Vector2(780, 238)
-
-[node name="TowerBlue1" type="Sprite2D" parent="towers"]
-position = Vector2(178, 423)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("10_sk4vg")
-
-[node name="TowerBlue2" type="Sprite2D" parent="towers"]
-position = Vector2(265.5, 421.5)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("11_xc3l5")
-
-[node name="TowerGreen1" type="Sprite2D" parent="towers"]
-position = Vector2(354.5, 419.5)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("12_1pr03")
-
-[node name="TowerRed1" type="Sprite2D" parent="towers"]
-position = Vector2(441, 418)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("13_3yman")
-
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -190,13 +88,25 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="ButtonsVBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.5
+offset_top = -134.0
+offset_right = 187.5
+offset_bottom = 262.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-theme_override_constants/separation = 35
+theme = ExtResource("14_y851h")
+theme_override_constants/separation = 20
 
-[node name="NewGameButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="NewGameButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -204,7 +114,7 @@ texture_normal = ExtResource("15_3ccp4")
 texture_pressed = ExtResource("16_mitxq")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NewGameButton2"]
+[node name="Label" type="Label" parent="ButtonsVBoxContainer/NewGameButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,7 +125,7 @@ text = "New Game"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingsButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="SettingsButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -223,7 +133,7 @@ texture_normal = ExtResource("15_3ccp4")
 texture_pressed = ExtResource("16_mitxq")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SettingsButton2"]
+[node name="Label" type="Label" parent="ButtonsVBoxContainer/SettingsButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,7 +144,7 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AboutButton" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="AboutButton" type="TextureButton" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -242,7 +152,7 @@ texture_normal = ExtResource("15_3ccp4")
 texture_pressed = ExtResource("16_mitxq")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AboutButton"]
+[node name="Label" type="Label" parent="ButtonsVBoxContainer/AboutButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -253,18 +163,28 @@ text = "About"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="ButtonsVBoxContainer"]
 layout_mode = 2
 
-[node name="QuitButton2" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="ButtonsVBoxContainer"]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="ButtonsVBoxContainer"]
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="ButtonsVBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+shortcut = ExtResource("17_j7v6t")
 texture_normal = ExtResource("15_3ccp4")
 texture_pressed = ExtResource("16_mitxq")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/QuitButton2"]
+[node name="Label" type="Label" parent="ButtonsVBoxContainer/QuitButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,9 +195,7 @@ text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MenuPanelContainer/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/NewGameButton2" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsButton2" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton2" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/NewGameButton2" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/SettingsButton2" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/QuitButton2" to="." method="_on_quit_button_pressed"]

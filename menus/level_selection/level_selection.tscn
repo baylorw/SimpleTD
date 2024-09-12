@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://kjtk0whpobva"]
+[gd_scene load_steps=10 format=3 uid="uid://kjtk0whpobva"]
 
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_rg7jx"]
 [ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="1_yo5ie"]
@@ -12,6 +12,28 @@ keycode = 4194305
 
 [sub_resource type="Shortcut" id="Shortcut_l246c"]
 events = [SubResource("InputEventKey_0lgvy")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c68rl"]
+bg_color = Color(0, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy0bl"]
+bg_color = Color(0, 0, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [node name="LevelsScreen" type="Control"]
 layout_mode = 3
@@ -112,6 +134,9 @@ offset_left = 328.0
 offset_top = 592.0
 offset_right = 1045.0
 offset_bottom = 651.0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_c68rl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qy0bl")
 text = "Play"
 
 [node name="CurrentLevelNameLabel" type="Label" parent="."]
@@ -122,6 +147,14 @@ offset_top = 565.0
 offset_right = 473.0
 offset_bottom = 588.0
 text = "level_name"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 533.0
+offset_right = 848.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "Select A Level"
 
 [connection signal="pressed" from="MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="LoadLevelButton" to="." method="_on_load_level_button_pressed"]

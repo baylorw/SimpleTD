@@ -38,8 +38,10 @@ collision_layer = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7dej4")
-max_health = 400
-kill_value = 40
+max_speed = 32.5
+base_max_health = 3000
+base_kill_value = 20
+value_increase = 3
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

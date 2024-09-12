@@ -53,6 +53,13 @@ var speed      : float
 @onready var health_bar : TextureProgressBar = %HealthBar
 @onready var effects_polling_timer: Timer = %EffectsPollingTimer
 @onready var status_icon_container: HBoxContainer = %StatusIconContainer
+@onready var slow_icon: TextureRect = %SlowIcon
+@onready var stun_icon: TextureRect = %StunIcon
+@onready var poison_icon: TextureRect = %PoisonIcon
+@onready var death_animation: AnimatedSprite2D = %DeathAnimation
+
+var expected_health_bar_position : Vector2
+var expected_status_position : Vector2
 
 var path : Array[Vector2]
 var desired_position : Vector2
@@ -70,12 +77,17 @@ func _ready():
 	set_level(level)
 	speed  = max_speed
 	
-	#sprite.texture = _texture
+	#print("hp position=" + str(health_bar.position) + " and status=" + str(status_icon_container.position))
+	expected_health_bar_position = health_bar.position
+	expected_status_position = status_icon_container.position
+	
 	health_bar.max_value = health
 	health_bar.value = health
 	health_bar.visible = false
 	#--- HP bar doesn't match object's position, rotation, etc.
-	#health_bar.top_level = true
+	# NOTE: If you turn this on you have to move the HP bar manually :(
+	health_bar.top_level = true
+	status_icon_container.top_level = true
 	
 	for icon in status_icon_container.get_children():
 		icon.visible = false
@@ -86,6 +98,8 @@ func _ready():
 	effects_polling_timer.autostart = true
 	
 	setup_procedural_animation()
+	if death_animation:
+		death_animation.visible = false
 
 func set_level(new_level: int):
 	self.level = new_level
@@ -122,6 +136,10 @@ func setup_procedural_animation():
 func get_size() -> Vector2 :
 	return $Sprite2D.texture.get_size()
 
+func get_sprite() -> AnimatedSprite2D:
+	# Need this to access value if the object isn't in the screengraph.
+	return $Sprite2D
+	
 func follow(new_path : Array[Vector2]):
 	self.path = new_path.duplicate()
 	
@@ -136,7 +154,12 @@ func follow(new_path : Array[Vector2]):
 	is_seeking = true
 
 func _physics_process(delta):
-	#print("_physics_process slow_ticks="+str(self.slow_ticks) + " for name=" + name)
+	#if !is_instance_valid(status_icon_container):
+		#print("THIS SHOULD NEVER HAPPEN!!! status icons are dead but not the creep")
+		#return
+	
+	health_bar.position = global_position + expected_health_bar_position
+	status_icon_container.position = global_position + expected_status_position
 	_physics_process_steering(delta)
 
 func _physics_process_simple(_delta):
@@ -185,10 +208,11 @@ func _physics_process_steering(_delta):
 	move_and_slide()
 
 func on_destroy():
+	#--- Stop calling the _physics_process() method.
+	set_physics_process(false)
+
 	#print("i am destroyed. " + name)
 	i_am = false
-	
-	# TODO: Play death animation
 	
 	#--- Give the player money
 	CurrentLevel.money += kill_value
@@ -199,21 +223,28 @@ func on_destroy():
 	%Sprite2D.queue_free()
 	%StatusIconContainer.queue_free()
 
-	%AudioStreamPlayer2D.play()
-	await %AudioStreamPlayer2D.finished
+	#--- Death sound and spectacle
+	if %AudioStreamPlayer2D:
+		%AudioStreamPlayer2D.play()
+	if death_animation:
+		death_animation.visible = true
+		death_animation.play()
+	if %AudioStreamPlayer2D:
+		await %AudioStreamPlayer2D.finished
+	if death_animation:
+		# TODO: AnimatedSprite2D signal doesn't work. Figure out something else.
+		#await death_animation.animation_finished
+		await get_tree().create_timer(1.5).timeout
+		#death_animation.queue_free()
 	
-	# TODO: Play an explosion animation
-	
-	# TODO: Why do we do this? Sound effect maybe?
-	#await get_tree().create_timer(0.2).timeout
 	self.queue_free()
-	#print("i'm a destroyed creep and i'm free!")
 	destroyed.emit()
 
 ## Right now this assumes there's only one level of slow, 50%
 func slow(my_tick_count: int):
 	self.slow_ticks = my_tick_count
 	modify_speed()
+	self.self_modulate = Color.CYAN
 
 func stun(tick_count: int):
 	stun_ticks = tick_count
@@ -269,23 +300,26 @@ func modify_speed():
 		#print("stun means turning off the slow icon")
 		%StunIcon.visible = true
 		%SlowIcon.visible = false
+		self.self_modulate = Color.BLUE
 		speed = 0.0
 	elif slow_ticks > 0:
 		#print("turning on the slow icon")
 		%StunIcon.visible = false
 		%SlowIcon.visible = true
+		self_modulate = Color.CYAN
 		speed = 0.50 * max_speed
 	else:
 		#print("turning off the slow icon")
 		%StunIcon.visible = false
 		%SlowIcon.visible = false
+		self.self_modulate = Color.WHITE
 		speed = max_speed
 
 ###########################################################
 # Animations
 ###########################################################
 func fade(start: float, end: float, time_length_s: float, should_loop: bool):
-	var tween = create_tween()
+	var tween = sprite.create_tween()
 	if should_loop:
 		tween.set_loops()
 	tween.tween_property(sprite, "modulate:a", end, time_length_s).from(start)
@@ -293,7 +327,7 @@ func fade(start: float, end: float, time_length_s: float, should_loop: bool):
 		tween.tween_property(sprite, "modulate:a", start, time_length_s).from(end)
 
 func grow(start: Vector2, end: Vector2, time_length_s: float, should_loop: bool):
-	var tween = create_tween()
+	var tween = sprite.create_tween()
 	#tween.set_trans(Tween.TRANS_BOUNCE)
 	#tween.set_ease(Tween.EASE_IN_OUT)
 	if should_loop:
@@ -303,7 +337,7 @@ func grow(start: Vector2, end: Vector2, time_length_s: float, should_loop: bool)
 		tween.tween_property(sprite, "scale", start, time_length_s).from(end)
 
 func rotate_anim(start: float, end: float, time_length_s: float, should_loop: bool):
-	var tween = create_tween()
+	var tween = sprite.create_tween()
 	if should_loop:
 		tween.set_loops()
 	tween.tween_property(sprite, "rotation_degrees", end, time_length_s).from(start)
@@ -315,10 +349,10 @@ func rotate_anim(start: float, end: float, time_length_s: float, should_loop: bo
 	#tween.tween_property(sprite, "scale", max, time_length_s/2).from(min)
 	#tween.tween_property(sprite, "scale", min, time_length_s/2).from_current()
 
-func spin(spin_speed: float, should_loop: bool):
+func spin(new_spin_speed: float, should_loop: bool):
 	#var degrees_360 = TAU    # i hate this so much
-	var tween = create_tween()
+	var tween = sprite.create_tween()
 	if should_loop:
 		tween.set_loops()
 	#tween.tween_property(sprite, "rotation", degrees_360, spin_speed).from(0)
-	tween.tween_property(sprite, "rotation_degrees", 360, spin_speed).from(0)
+	tween.tween_property(sprite, "rotation_degrees", 360, new_spin_speed).from(0)

@@ -3,11 +3,12 @@ extends Control
 const grayed_out_color := Color("48484888")
 
 var level_name_by_id := {
-	"tutorial": "Tutorial",
+	#"tutorial": "Tutorial",
 	"elementalish": "Elementalish",
 	"frog": "Frog",
 	"dq_halls_of_the_god_king": "God King",
 	"no_left_turns": "No Left Turns",
+	"std": "SimpleTD",
 	"slim_pickings": "Slim Pickings",
 	"snaking_path": "Snaking Path",
 	"switchback": "Switchback",
