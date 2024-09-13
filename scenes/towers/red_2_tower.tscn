@@ -25,10 +25,14 @@ _data = {
 
 [node name="Red2Tower" type="Node2D"]
 script = ExtResource("1_3gyme")
+type = "Red 2"
 cost = 800
-damage_per_shot = 400
+cost_per_level = 400
+base_damage_per_shot = 600
+damage_per_level = 272
 shot_delay_in_ms = 100
-range_in_pixels = 350
+base_range_in_pixels = 360
+range_per_level = 16
 projectile_resource = ExtResource("2_cslcq")
 purpose = "Fast tower. Random targets."
 

@@ -25,10 +25,14 @@ _data = {
 
 [node name="Red3Tower" type="Node2D"]
 script = ExtResource("1_d0gro")
+type = "Red 3"
 cost = 2500
-damage_per_shot = 30000
+cost_per_level = 1250
+base_damage_per_shot = 2500
+damage_per_level = 1250
 shot_delay_in_ms = 1000
-range_in_pixels = 700
+base_range_in_pixels = 600
+range_per_level = 28
 projectile_resource = ExtResource("2_j71lq")
 purpose = "Slow but powerful."
 

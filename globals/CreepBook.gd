@@ -38,7 +38,7 @@ func _ready():
 			#print("not implemented creep=" + creep_name)
 	
 func load_creep(creep_name: String) -> Resource:
-	print("want to load creep=" + creep_name)
+	#print("want to load creep=" + creep_name)
 	#var scene_fqn := "res://scenes/creeps/%s/%s.tscn"
 	var scene_fqn := "res://scenes/creeps/%s/%s.tscn" % [creep_name, creep_name]
 	print("loading creep=" + scene_fqn)

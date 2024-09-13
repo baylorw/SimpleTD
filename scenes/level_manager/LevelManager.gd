@@ -7,7 +7,7 @@ const good_color := Color(0,1,0, 0.5)
 const bad_color  := Color(1,0,0, 0.5)
 const message_time_s : float = 0.75
 
-var money : int
+#var money : int
 
 @onready var ui: LevelUI = %UI
 @onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
@@ -15,6 +15,7 @@ var money : int
 @onready var wave_end_message: VBoxContainer = %WaveEndMessage
 @onready var wave_start_label: Label = %WaveStartLabel
 @onready var wave_end_label: Label = %WaveEndLabel
+@onready var tower_info_popup_panel: PopupPanel = %TowerInfoPopupPanel
 
 @onready var shade_tile_map: TileMapLayer = %ShadeTileMap
 @onready var tile_borders_tile_map: TileMapLayer = %TileBordersTileMap
@@ -37,11 +38,10 @@ var new_tower : Tower
 var should_show_path := true
 var tower_by_map_coord : Dictionary = {}
 
-# TODO: Move this to a Wave object
-#var spawn_delay_in_wave_ms : float = 300
 var current_wave : Wave
 var max_wave_ticks : int
 
+var selected_tower : Tower
 
 func _ready():
 	Engine.time_scale = 1
@@ -50,13 +50,14 @@ func _ready():
 	map_view_settings_panel.hide()
 	wave_start_message.visible = false
 	wave_end_message.visible = false
+	tower_info_popup_panel.hide()
 	
 	load_level()
 	build_astar_grid()
 	calculate_default_paths()
 	show_default_paths()
 	
-	CurrentLevel.money_starting = money
+	CurrentLevel.money_starting = CurrentLevel.money
 	CurrentLevel.reset()
 	ui.show_health()
 	ui.show_money()
@@ -76,9 +77,10 @@ func load_level():
 		assert(packed_scene)
 	play_area = packed_scene.instantiate() as LevelData
 	
-	print("play_area.starting_money=" + str(play_area.starting_money))
-	self.money = play_area.starting_money
-	print("my money=" + str(money))
+	#print("play_area.starting_money=" + str(play_area.starting_money))
+	#self.money = play_area.starting_money
+	CurrentLevel.money = play_area.starting_money
+	#print("my money=" + str(money))
 	
 	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
 	#---	where it would block the Win message.
@@ -197,19 +199,46 @@ func _unhandled_input(event: InputEvent):
 			#print("input=" + str(event))
 			
 	elif event.is_action_pressed("left_click"):
+		if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+			return
 		var tile_position = coordinate_global_to_map(get_global_mouse_position())
 		if null == tile_position:
 			return
 		if tower_by_map_coord.has(tile_position):
-			var tower = tower_by_map_coord[tile_position]
-			tower.toggle_show_range()
-			ui.show_details(tower.get_description())
+			selected_tower = tower_by_map_coord[tile_position]
+			selected_tower.toggle_show_range()
+			ui.show_details(selected_tower.get_description())
+			show_tower_info(get_global_mouse_position())
+	elif event.is_action_pressed("right_click"):
+		if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+			return
+		var tile_position = coordinate_global_to_map(get_global_mouse_position())
+		if null == tile_position:
+			return
+		if tower_by_map_coord.has(tile_position):
+			selected_tower = tower_by_map_coord[tile_position]
+			selected_tower.toggle_show_range()
+			ui.show_details(selected_tower.get_description())
+			show_tower_info(get_global_mouse_position())
 	#elif !is_attempting_tower_placement and event.is_action_pressed("left_click"):
 		#new_tower.fire_at_mouse()
 		
 	elif event.is_action_pressed("ui_cancel"):
 		_on_quit_button_pressed()
 
+func show_tower_info(new_position: Vector2):
+	if tower_info_popup_panel.visible:
+		print("it's already showing so we're hiding it.")
+		tower_info_popup_panel.hide()
+		tower_info_popup_panel.visible = false
+	print("popup.visible=" + str(tower_info_popup_panel.visible))
+	tower_info_popup_panel.position = new_position + Vector2(50, 0)
+	tower_info_popup_panel.set_info(selected_tower)
+	#print("popping up")
+	#tower_info_popup_panel.popup_centered()
+	print("popping up again, damn it")
+	tower_info_popup_panel.popup()
+	
 func build_tower():
 	is_attempting_tower_placement = false
 
@@ -218,6 +247,7 @@ func build_tower():
 
 	var map_coord = coordinate_global_to_map(new_tower.position)
 	new_tower.position = coordinate_map_to_global(map_coord)
+	new_tower.position_tile = map_coord
 	tower_by_map_coord[map_coord] = new_tower
 
 	new_tower.show_range(false)
@@ -262,7 +292,7 @@ func show_wave_contents(wave_number: int):
 	var animation_name = sprite.animation
 	%CurrentWaveIcon.texture = sprite.sprite_frames.get_frame_texture(animation_name, 0)
 	%CurrentWaveIcon.modulate = sprite.modulate
-	%CurrentWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.base_kill_value]
+	%CurrentWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.kill_value]
 	
 	if wave_number >= CurrentLevel.wave_number_max:
 		%NextWaveIcon.texture = null
@@ -273,12 +303,12 @@ func show_wave_contents(wave_number: int):
 		animation_name = sprite.animation
 		%NextWaveIcon.texture = sprite.sprite_frames.get_frame_texture(animation_name, 0)
 		%NextWaveIcon.modulate = sprite.modulate
-		%NextWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.base_kill_value]
+		%NextWaveDetails.text = "%s lvl %s\n%shp $%s" % [first_creep.name, first_creep.level, first_creep.health, first_creep.kill_value]
 
 func get_first_creep_in_wave(wave_number: int) -> Creep:
-	var current_wave : Wave = play_area.waves[wave_number-1]
+	var wave : Wave = play_area.waves[wave_number-1]
 	var first_creep : Creep
-	for path_wave in current_wave.wave_by_path.values():
+	for path_wave in wave.wave_by_path.values():
 		var specifier : CreepSpecifier = path_wave.creeps[0]
 		var creep_resource = CreepBook.creep_by_name[specifier.name]
 		#var new_enemy : Creep = creep_resource.instantiate()
@@ -436,7 +466,7 @@ func on_creep_destroyed():
 ##	in the other methods (on_destroyed, etc.).
 func on_creep_freed():
 	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
-	ui.show_details("#creeps=" + str(%Creeps.get_child_count()))
+	#ui.show_details("#creeps=" + str(%Creeps.get_child_count()))
 
 	#--- If we've already lost it doesn't matter what the creeps are doing now.
 	if CurrentLevel.level_status == CurrentLevel.LevelStatus.LOST:
@@ -508,6 +538,7 @@ func center_control(control : Container):
 ###########################################################
 # UI Buttons
 ###########################################################
+#region UI Button events
 func _on_quit_button_pressed():
 	#get_tree().change_scene_to_file("res://menus/level_selection/level_selection.tscn")
 	SceneNavigation.go_to_level_manager()
@@ -541,3 +572,28 @@ func _on_r_pressed() -> void:
 	ui.show_wave()
 	print("creep count=" + str(%Creeps.get_child_count()))
 	map_view_settings_panel.popup_centered()
+#endregion
+
+#region Tower Info popup events
+func _on_sell_button_pressed() -> void:
+	var old_money = CurrentLevel.money
+	CurrentLevel.money += selected_tower.get_sell_value()
+	print("money before=%s, increase=%s, now=%s" % [old_money, selected_tower.get_sell_value(), CurrentLevel.money])
+	ui.show_money()
+	tower_by_map_coord.erase(selected_tower.position_tile)
+	selected_tower.queue_free()
+	tower_info_popup_panel.hide()
+
+func _on_upgrade_button_pressed() -> void:
+	if selected_tower.level >= selected_tower.max_level:
+		print("It can't level any higher. Max="+str(selected_tower.max_level))
+		return
+	if CurrentLevel.money < selected_tower.cost_per_level:
+		print("you can't afford an upgrade. %s vs %s" % [CurrentLevel.money, selected_tower.cost_per_level])
+		return
+	print("increasing the level")
+	selected_tower.increment_level()
+	CurrentLevel.money -= selected_tower.cost_per_level
+	ui.show_money()
+	tower_info_popup_panel.set_info(selected_tower)
+#endregion

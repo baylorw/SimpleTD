@@ -120,10 +120,14 @@ _data = {
 
 [node name="Green3Tower" type="Node2D"]
 script = ExtResource("1_ejmky")
+type = "Green 3"
 cost = 2000
-damage_per_shot = 180
-shot_delay_in_ms = 100
-range_in_pixels = 300
+cost_per_level = 1000
+base_damage_per_shot = 100
+damage_per_level = 90
+shot_delay_in_ms = 50
+base_range_in_pixels = 280
+range_per_level = 12
 purpose = "Fast tower. Bounces twice."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://clp7bwlrw68bu"]
+[gd_scene load_steps=28 format=3 uid="uid://clp7bwlrw68bu"]
 
 [ext_resource type="Script" path="res://scenes/level_manager/LevelManager.gd" id="1_sy73o"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_517ca"]
@@ -18,6 +18,12 @@
 [ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="13_br6wb"]
 [ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="13_x2o6q"]
 [ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="14_qajva"]
+[ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="15_0w8kr"]
+[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="20_ar8l6"]
+[ext_resource type="Script" path="res://scenes/level_manager/tower_info_popup_panel.gd" id="21_gq8yv"]
+[ext_resource type="Texture2D" uid="uid://c2wcpgwwfrkay" path="res://assets/tilesets/annotations/target aiming.png" id="21_ncker"]
+[ext_resource type="Texture2D" uid="uid://bsrgfe8rg0q7q" path="res://assets/images/creeps/plus.png" id="21_wgbd4"]
+[ext_resource type="Texture2D" uid="uid://b1xb5sp5b4ln8" path="res://assets/tilesets/annotations/arrow up.png" id="23_15ljh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1rr4"]
 bg_color = Color(1.63645e-06, 0, 0.534552, 1)
@@ -292,6 +298,10 @@ text = "5"
 [node name="LevelData" type="Node2D" parent="."]
 unique_name_in_owner = true
 
+[node name="MapAreaTileMapLayer" type="TileMapLayer" parent="LevelData"]
+unique_name_in_owner = true
+tile_set = ExtResource("15_0w8kr")
+
 [node name="MapAreaBoundaries" type="Sprite2D" parent="LevelData"]
 position = Vector2(525, 375)
 texture = SubResource("PlaceholderTexture2D_n6u17")
@@ -492,6 +502,7 @@ horizontal_alignment = 1
 
 [node name="WaveEndMessage" type="VBoxContainer" parent="MessagesCanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -528,6 +539,135 @@ visible = false
 unique_name_in_owner = true
 wait_time = 0.25
 
+[node name="TowerInfoPopupPanel" type="PopupPanel" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+position = Vector2i(828, 25)
+size = Vector2i(350, 456)
+visible = true
+min_size = Vector2i(300, 0)
+theme = ExtResource("20_ar8l6")
+script = ExtResource("21_gq8yv")
+
+[node name="MarginContainer2" type="MarginContainer" parent="TowerInfoPopupPanel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 345.0
+offset_bottom = 451.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TowerInfoPopupPanel/MarginContainer2"]
+layout_mode = 2
+
+[node name="TowerNameLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+text = "Green 3"
+
+[node name="DescriptionLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Fast. Bounces twice."
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(225, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="Range" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Range:"
+horizontal_alignment = 2
+
+[node name="RangeLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "425
+"
+
+[node name="Label5" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Damage:"
+horizontal_alignment = 2
+
+[node name="DamageLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "110"
+
+[node name="Label4" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Rate of Fire:"
+horizontal_alignment = 2
+
+[node name="RoFLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2.0/sec"
+
+[node name="Label8" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Damage Done:"
+horizontal_alignment = 2
+
+[node name="DamageDoneLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "42,000"
+
+[node name="Label10" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Kills:"
+horizontal_alignment = 2
+
+[node name="KillsLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "31	"
+
+[node name="TargetButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Target"
+icon = ExtResource("21_ncker")
+expand_icon = true
+
+[node name="Label" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SellButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Sell"
+icon = ExtResource("21_wgbd4")
+expand_icon = true
+
+[node name="SellValueLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UpgradeButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upgrade"
+icon = ExtResource("23_15ljh")
+expand_icon = true
+
+[node name="UpgradedStatsLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+
 [connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
 [connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_entered"]
@@ -545,3 +685,5 @@ wait_time = 0.25
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]
+[connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

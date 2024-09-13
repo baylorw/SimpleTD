@@ -120,10 +120,14 @@ _data = {
 
 [node name="Red1Tower" type="Node2D"]
 script = ExtResource("1_il3db")
+type = "Red 1"
 cost = 200
-damage_per_shot = 110
+cost_per_level = 100
+base_damage_per_shot = 110
+damage_per_level = 49
 shot_delay_in_ms = 500
-range_in_pixels = 350
+base_range_in_pixels = 320
+range_per_level = 16
 purpose = "Area of Effect."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]

@@ -118,3 +118,5 @@ modulate = Color(1, 1, 0, 1)
 position = Vector2(-2.5, -5)
 scale = Vector2(0.338235, 0.270588)
 animation = &"explode"
+frame = 0
+frame_progress = 0.0

@@ -25,7 +25,8 @@ func fire():
 	fire_sound.play()
 	
 	for enemy in enemies:
-		enemy.on_hit(damage_per_shot)
+		enemy.on_hit(current_damage_per_shot)
+		self.damage_done += current_damage_per_shot
 
 func clear_shots():
 	for shot in %Shots.get_children():

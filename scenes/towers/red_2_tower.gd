@@ -20,3 +20,5 @@ func fire():
 	bullet.target = target
 	%Shots.add_child(bullet)
 	fire_sound.play()
+	# TODO: Only give credit when/if it hits
+	self.damage_done += current_damage_per_shot

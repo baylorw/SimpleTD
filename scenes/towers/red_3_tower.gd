@@ -17,7 +17,9 @@ func fire():
 	
 	var bullet : Projectile = load("res://scenes/projectiles/red_3_bullet.tscn").instantiate()
 	bullet.target = target
-	bullet.damage = self.damage_per_shot
+	bullet.damage = self.current_damage_per_shot
+	# TODO: Only give credit when/if it hits
+	self.damage_done += current_damage_per_shot
 	#bullet.scale = Vector2(2,2)
 	%Shots.add_child(bullet)
 	fire_sound.play()
