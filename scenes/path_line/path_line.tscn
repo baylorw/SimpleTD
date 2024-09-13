@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scenes/path_line/path_line.gd" id="3_83fvq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hp682"]
+resource_local_to_scene = true
 shader = ExtResource("1_3nid6")
 shader_parameter/speed = 0.75
 

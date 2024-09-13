@@ -77,10 +77,7 @@ func load_level():
 		assert(packed_scene)
 	play_area = packed_scene.instantiate() as LevelData
 	
-	#print("play_area.starting_money=" + str(play_area.starting_money))
-	#self.money = play_area.starting_money
 	CurrentLevel.money = play_area.starting_money
-	#print("my money=" + str(money))
 	
 	#--- Adding to a specific node to put it in the middle of the tree rather than at the end
 	#---	where it would block the Win message.
@@ -112,6 +109,7 @@ func load_level():
 		%Paths.add_child(path_view)
 	
 	CurrentLevel.wave_number_max = play_area.waves.size()
+	current_wave = play_area.waves[CurrentLevel.wave_number]
 	
 func setup_build_buttons():
 	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
@@ -283,7 +281,13 @@ func calculate_default_paths():
 		path.waypoints_global = coords_map_to_global(path.waypoints_map)
 
 func show_default_paths():
-	for path in path_by_name.values():
+	#for path in path_by_name.values():
+	for path_name in path_by_name.keys():
+		var path : Path = path_by_name[path_name]
+		if current_wave.wave_by_path.keys().has(path_name):
+			path.display.show_as_active()
+		else:
+			path.display.show_as_inactive()
 		path.display.points = PackedVector2Array(path.waypoints_global)
 
 func show_wave_contents(wave_number: int):
@@ -322,6 +326,7 @@ func spawn_creeps():
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
 	ui.show_wave()
 	#show_wave_contents(CurrentLevel.wave_number)
+	show_default_paths()
 	
 	current_wave = play_area.waves[CurrentLevel.wave_number-1]
 	max_wave_ticks = current_wave.max_wave_ticks()
@@ -494,8 +499,6 @@ func on_wave_ended():
 	
 	show_wave_contents(CurrentLevel.wave_number+1)
 	
-	#OS.alert("Ain't done this yet, yo", 'Nope')
-	#OS.alert("Wave completion bonus: $" + str(current_wave.completion_bonus), "Survived wave " + str(CurrentLevel.wave_number))
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
 	CurrentLevel.money += current_wave.completion_bonus
 	# TODO: Show "$ for completing round" message
