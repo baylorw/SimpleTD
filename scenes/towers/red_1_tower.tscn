@@ -128,6 +128,8 @@ damage_per_level = 49
 shot_delay_in_ms = 500
 base_range_in_pixels = 320
 range_per_level = 16
+allowed_targeting_strategies = Array[int]([5])
+targeting_strategy = 5
 purpose = "Area of Effect."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]

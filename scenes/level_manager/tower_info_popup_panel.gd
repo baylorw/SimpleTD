@@ -20,6 +20,7 @@ func set_info(tower: Tower):
 	rof_label.text = str(tower.shot_delay_in_ms)
 	damage_done_label.text = str(tower.damage_done)
 	kills_label.text = str(tower.kills)
+	%TargetStrategyLabel.text = tower.get_targeting_strategy_name()
 	sell_value_label.text = str(tower.get_sell_value_at(tower.level))
 	upgraded_stats_label.text = "Cost: %s\n%s dmg\n%s range" \
 		% [tower.cost_per_level, tower.get_damage_at(tower.level+1), tower.get_range_at(tower.level+1)]

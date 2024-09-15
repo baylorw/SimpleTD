@@ -33,6 +33,9 @@ damage_per_level = 272
 shot_delay_in_ms = 100
 base_range_in_pixels = 360
 range_per_level = 16
+allowed_targeting_strategies = Array[int]([5])
+targeting_strategy = 5
+should_stay_on_target = false
 projectile_resource = ExtResource("2_cslcq")
 purpose = "Fast tower. Random targets."
 

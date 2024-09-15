@@ -29,7 +29,7 @@ var path_by_name := {}
 #--- Pointers to run-time loaded map.
 var terrain_tilemap : TileMapLayer 
 var blocker_tilemap : TileMapLayer 
-var path_follower_prototype: Creep 
+#var path_follower_prototype: Creep 
 
 var astar_grid = AStarGrid2D.new()
 var is_attempting_tower_placement = false
@@ -53,20 +53,20 @@ func _ready():
 	tower_info_popup_panel.hide()
 	
 	load_level()
-	build_astar_grid()
-	calculate_default_paths()
-	show_default_paths()
-	
 	CurrentLevel.money_starting = CurrentLevel.money
 	CurrentLevel.reset()
 	ui.show_health()
 	ui.show_money()
 	ui.show_wave()
+	
+	build_astar_grid()
+	calculate_default_paths()
+	setup_next_wave()
 	show_wave_contents(1)
 	
-	creep_reached_base.connect(on_creep_reached_base)
-	
 	setup_build_buttons()
+	
+	creep_reached_base.connect(on_creep_reached_base)
 
 func load_level():
 	if "" == Globals.level_name:
@@ -109,7 +109,6 @@ func load_level():
 		%Paths.add_child(path_view)
 	
 	CurrentLevel.wave_number_max = play_area.waves.size()
-	current_wave = play_area.waves[CurrentLevel.wave_number]
 	
 func setup_build_buttons():
 	for i in get_tree().get_nodes_in_group("build_tower_buttons"):
@@ -320,17 +319,18 @@ func get_first_creep_in_wave(wave_number: int) -> Creep:
 		first_creep.set_level(specifier.level)
 	return first_creep
 
-func spawn_creeps():
+func setup_next_wave():
 	CurrentLevel.wave_number += 1
-	CurrentLevel.wave_tick = 0
-	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
-	ui.show_wave()
-	#show_wave_contents(CurrentLevel.wave_number)
-	show_default_paths()
-	
 	current_wave = play_area.waves[CurrentLevel.wave_number-1]
+	CurrentLevel.wave_tick = 0
 	max_wave_ticks = current_wave.max_wave_ticks()
 	%WaveTickTimer.wait_time = current_wave.time_between_creeps_sec
+	ui.show_wave()
+	show_wave_contents(CurrentLevel.wave_number)
+	show_default_paths()
+
+func spawn_creeps():
+	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
 	
 	wave_start_label.text = "Wave %s" % [CurrentLevel.wave_number]
 	wave_start_message.visible = true
@@ -497,13 +497,11 @@ func on_wave_ended():
 	await tween.finished
 	wave_end_message.visible = false
 	
-	show_wave_contents(CurrentLevel.wave_number+1)
-	
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.BUILD
 	CurrentLevel.money += current_wave.completion_bonus
-	# TODO: Show "$ for completing round" message
 	ui.show_money()
 	%SendWaveButton.disabled = false
+	setup_next_wave()
 
 func on_creep_reached_base():
 	#print("on_creep_reached_base")
@@ -586,6 +584,15 @@ func _on_sell_button_pressed() -> void:
 	tower_by_map_coord.erase(selected_tower.position_tile)
 	selected_tower.queue_free()
 	tower_info_popup_panel.hide()
+
+func _on_target_button_pressed() -> void:
+	var strategies = selected_tower.allowed_targeting_strategies
+	var index = strategies.find(selected_tower.targeting_strategy)
+	index += 1
+	if index >= strategies.size():
+		index = 0
+	selected_tower.targeting_strategy = strategies[index]
+	%TargetStrategyLabel.text = selected_tower.get_targeting_strategy_name()
 
 func _on_upgrade_button_pressed() -> void:
 	if selected_tower.level >= selected_tower.max_level:

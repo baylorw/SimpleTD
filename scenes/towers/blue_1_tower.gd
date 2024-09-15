@@ -16,7 +16,6 @@ func fire():
 	
 	var enemies : Array[Creep] = []
 	var number_of_targets = min(4, enemies_in_range.size())
-	# TODO: Sort by who's closest to goal after slowing
 	for i in number_of_targets:
 		enemies.append(enemies_in_range[i])
 		var new_beam = beam.duplicate()

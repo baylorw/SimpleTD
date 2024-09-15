@@ -1,7 +1,7 @@
 class_name PathLine extends Line2D
 
 var active_texture : Texture = load("res://scenes/path_line/arrow.png")
-var inactive_texture : Texture = load("res://scenes/path_line/arrow gray.png")
+var inactive_texture : Texture = load("res://scenes/path_line/line segment - gray.png")
 
 const active_speed := 0.75
 const inactive_speed := 0.25

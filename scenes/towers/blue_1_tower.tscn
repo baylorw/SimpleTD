@@ -100,14 +100,13 @@ script = ExtResource("1_0ubbq")
 type = "Blue 1"
 cost = 300
 cost_per_level = 150
-damage_per_shot = 500
 base_damage_per_shot = 500
 damage_per_level = 227
 shot_delay_in_ms = 500
 base_range_in_pixels = 280
-range_in_pixels = 280
 range_per_level = 12
-allowed_targeting_strategies = Array[int]([0, 1, 2, 3, 4, 5])
+targeting_strategy = 1
+should_stay_on_target = false
 purpose = "Slowing. Slows 4 creeps 50%."
 
 [node name="RangeSprite" type="Sprite2D" parent="."]

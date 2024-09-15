@@ -56,6 +56,7 @@ func fire():
 	var number_of_targets = min(max_targets, enemies_in_range.size())
 	for i in number_of_targets:
 		enemies.append(enemies_in_range[i])
+		#--- Instead of beams hitting the center, let them bounce around a little to look cooler.
 		var x_offset = randf_range(-5, 5)
 		var y_offset = randf_range(-5, 5)
 		var shoot_point = enemies_in_range[i].position + Vector2(x_offset, y_offset)

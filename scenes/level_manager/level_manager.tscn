@@ -83,26 +83,6 @@ text = "Towers"
 layout_mode = 2
 columns = 3
 
-[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 5
-texture_normal = ExtResource("4_ai65a")
-ignore_texture_size = true
-stretch_mode = 5
-metadata/tower_name = "blue_1_tower"
-
-[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 5
-texture_normal = ExtResource("5_26e73")
-ignore_texture_size = true
-stretch_mode = 5
-metadata/tower_name = "brown1"
-
 [node name="G1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -162,6 +142,26 @@ texture_normal = ExtResource("11_4rw3p")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "red_3_tower"
+
+[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("4_ai65a")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "blue_1_tower"
+
+[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 5
+size_flags_vertical = 5
+texture_normal = ExtResource("5_26e73")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/tower_name = "brown1"
 
 [node name="DetailsLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -542,7 +542,7 @@ wait_time = 0.25
 [node name="TowerInfoPopupPanel" type="PopupPanel" parent="."]
 unique_name_in_owner = true
 transparent_bg = true
-position = Vector2i(828, 25)
+position = Vector2i(972, 454)
 size = Vector2i(350, 456)
 visible = true
 min_size = Vector2i(300, 0)
@@ -643,7 +643,8 @@ text = "Target"
 icon = ExtResource("21_ncker")
 expand_icon = true
 
-[node name="Label" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+[node name="TargetStrategyLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="SellButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
@@ -668,10 +669,10 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 
-[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
 [connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_exited"]
+[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/R" to="." method="_on_r_pressed"]
@@ -685,5 +686,6 @@ theme_override_font_sizes/font_size = 18
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]
+[connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/TargetButton" to="." method="_on_target_button_pressed"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/SellButton" to="." method="_on_sell_button_pressed"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]

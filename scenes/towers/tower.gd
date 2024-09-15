@@ -21,7 +21,17 @@ var current_range_in_pixels : int
 @export var range_per_level : int
 # ERROR: Trying to assign an array of type Array to a variable of type Array[int]
 #@export var allowed_targeting_strategies : Array[TargetingStrategy] = TargetingStrategy.keys()
-@export var allowed_targeting_strategies : Array[TargetingStrategy]
+@export var allowed_targeting_strategies : Array[TargetingStrategy] = \
+	[
+		TargetingStrategy.Closest_To_Goal,
+		TargetingStrategy.Most_Health,
+		TargetingStrategy.Least_Health,
+		TargetingStrategy.Fastest,
+		TargetingStrategy.Nearest,
+		TargetingStrategy.Random
+	]
+@export var targeting_strategy : TargetingStrategy = TargetingStrategy.Closest_To_Goal
+@export var should_stay_on_target := true
 @export var projectile_resource : PackedScene
 @export var purpose : String
 #@export var range : int:
@@ -30,8 +40,9 @@ var current_range_in_pixels : int
 	#set(value):
 		#set_range(value)
 
-var should_stay_on_target := true
+var current_target : Creep
 var enemies_in_range := []
+
 var is_ready_to_fire := true
 var in_attack_mode := false
 var projectile_prototype : Projectile
@@ -97,6 +108,7 @@ func _physics_process(_delta: float) -> void:
 func fire():
 	is_ready_to_fire = false
 	shot_timer.start()
+	current_target = select_target()
 
 func get_description() -> String:
 	var description = """
@@ -130,6 +142,51 @@ func show_range(should_show : bool):
 func toggle_show_range():
 	show_range(!range_sprite.visible)
 
+## Can't used this method because you can't pass an invalid target to a method. :(
+func is_valid_target(target: Creep) -> bool:
+	if !is_instance_valid(target):
+		return false
+	if !target.i_am:
+		return false
+	return true
+	
+func sort_enemies():
+	match targeting_strategy:
+		TargetingStrategy.Closest_To_Goal:
+			enemies_in_range.sort_custom(func(a:Creep, b:Creep): return a.path.size() < b.path.size())
+		TargetingStrategy.Most_Health:
+			enemies_in_range.sort_custom(func(a:Creep, b:Creep): return a.health > b.health)
+		TargetingStrategy.Least_Health:
+			enemies_in_range.sort_custom(func(a:Creep, b:Creep): return a.health < b.health)
+		TargetingStrategy.Fastest:
+			enemies_in_range.sort_custom(func(a:Creep, b:Creep): return a.speed > b.speed)
+		TargetingStrategy.Nearest:
+			enemies_in_range.sort_custom(
+				func(a:Creep, b:Creep): 
+					return position.distance_to(a.position) > position.distance_to(b.position)
+			)
+		TargetingStrategy.Random:
+			return enemies_in_range
+	return enemies_in_range
+	
+func get_targeting_strategy_name() -> String:
+	var name : String = TargetingStrategy.keys()[targeting_strategy]
+	return name
+
+func select_target() -> Creep:
+	if 0 == enemies_in_range.size():
+		return null
+	#if should_stay_on_target and is_valid_target(current_target):
+	if should_stay_on_target and is_instance_valid(current_target) and current_target.i_am:
+		return current_target
+	var targets = sort_enemies()
+	current_target = targets[0]
+	if targeting_strategy == TargetingStrategy.Random:
+		var enemy_index := randi() % enemies_in_range.size()
+		return targets[enemy_index]
+	else:
+		return targets[0]
+	
 func _on_range_body_entered(body: Node2D) -> void:
 	enemies_in_range.append(body)
 	in_attack_mode = true
