@@ -5,14 +5,14 @@ func setup_paths():
 	path.name = "path_1"
 	path_by_name[path.name] = path
 	path.start_coord_map = coordinate_global_to_map(%StartGroup1.position)
-	path.end_coord_map   = coordinate_global_to_map(%EndPoint.position)
+	path.end_coord_map   = coordinate_global_to_map(%EndGroup1.position)
 	path.kill_zone       = %KillZone
 
 	path = Path.new()
 	path.name = "path_2"
 	path_by_name[path.name] = path
 	path.start_coord_map = coordinate_global_to_map(%StartGroup2.position)
-	path.end_coord_map   = coordinate_global_to_map(%EndPoint.position)
+	path.end_coord_map   = coordinate_global_to_map(%EndGroup2.position)
 	path.kill_zone       = %KillZone
 
 func setup_waves():

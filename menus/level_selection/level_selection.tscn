@@ -137,7 +137,7 @@ offset_bottom = 651.0
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_c68rl")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qy0bl")
-text = "Play"
+text = "PLAY"
 
 [node name="CurrentLevelNameLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -154,7 +154,7 @@ offset_left = 533.0
 offset_right = 848.0
 offset_bottom = 67.0
 theme_override_font_sizes/font_size = 48
-text = "Select A Level"
+text = "SELECT_LEVEL"
 
 [connection signal="pressed" from="MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="LoadLevelButton" to="." method="_on_load_level_button_pressed"]

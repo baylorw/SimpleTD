@@ -56,7 +56,7 @@ var speed      : float
 @onready var slow_icon: TextureRect = %SlowIcon
 @onready var stun_icon: TextureRect = %StunIcon
 @onready var poison_icon: TextureRect = %PoisonIcon
-@onready var death_animation: AnimatedSprite2D = %DeathAnimation
+var death_animation: AnimatedSprite2D
 
 var expected_health_bar_position : Vector2
 var expected_status_position : Vector2
@@ -98,7 +98,8 @@ func _ready():
 	effects_polling_timer.autostart = true
 	
 	setup_procedural_animation()
-	if death_animation:
+	if is_instance_valid(%DeathAnimation):
+		death_animation = %DeathAnimation
 		death_animation.visible = false
 
 func set_level(new_level: int):

@@ -47,7 +47,7 @@ func _ready():
 	Engine.time_scale = 1
 	Music.play_song("apple")
 	
-	map_view_settings_panel.hide()
+	#map_view_settings_panel.hide()
 	wave_start_message.visible = false
 	wave_end_message.visible = false
 	tower_info_popup_panel.hide()
@@ -182,6 +182,7 @@ func build_astar_grid():
 	for blocker_position in blocker_positions:
 		astar_grid.set_point_solid(blocker_position)
 
+#func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent):
 	if is_attempting_tower_placement:
 		if event.is_action_pressed("left_click"):
@@ -196,18 +197,26 @@ func _unhandled_input(event: InputEvent):
 			#print("input=" + str(event))
 			
 	elif event.is_action_pressed("left_click"):
-		if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+		#print("left click")
+		if (CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD) and (CurrentLevel.level_status != CurrentLevel.LevelStatus.WAVE):
 			return
 		var tile_position = coordinate_global_to_map(get_global_mouse_position())
 		if null == tile_position:
 			return
 		if tower_by_map_coord.has(tile_position):
+			var previous_selected_tower = selected_tower
 			selected_tower = tower_by_map_coord[tile_position]
 			selected_tower.toggle_show_range()
-			ui.show_details(selected_tower.get_description())
-			show_tower_info(get_global_mouse_position())
+			#ui.show_details(selected_tower.get_description())
+			ui.log_clear()
+			if (CurrentLevel.level_status == CurrentLevel.LevelStatus.BUILD):
+				#--- Don't show the info for the tower if it's already showing.
+				if !tower_info_popup_panel.visible or (selected_tower != previous_selected_tower):
+					selected_tower.show_range(true)
+					show_tower_info(get_global_mouse_position())
 	elif event.is_action_pressed("right_click"):
-		if CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD:
+		#print("right click")
+		if (CurrentLevel.level_status != CurrentLevel.LevelStatus.BUILD) and (CurrentLevel.level_status != CurrentLevel.LevelStatus.WAVE):
 			return
 		var tile_position = coordinate_global_to_map(get_global_mouse_position())
 		if null == tile_position:
@@ -215,8 +224,8 @@ func _unhandled_input(event: InputEvent):
 		if tower_by_map_coord.has(tile_position):
 			selected_tower = tower_by_map_coord[tile_position]
 			selected_tower.toggle_show_range()
-			ui.show_details(selected_tower.get_description())
-			show_tower_info(get_global_mouse_position())
+			#ui.show_details(selected_tower.get_description())
+			#show_tower_info(get_global_mouse_position())
 	#elif !is_attempting_tower_placement and event.is_action_pressed("left_click"):
 		#new_tower.fire_at_mouse()
 		
@@ -225,15 +234,10 @@ func _unhandled_input(event: InputEvent):
 
 func show_tower_info(new_position: Vector2):
 	if tower_info_popup_panel.visible:
-		print("it's already showing so we're hiding it.")
-		tower_info_popup_panel.hide()
-		tower_info_popup_panel.visible = false
-	print("popup.visible=" + str(tower_info_popup_panel.visible))
+		#--- You can't show a popup if one's open unless you wait a little.
+		await get_tree().create_timer(0.001).timeout
 	tower_info_popup_panel.position = new_position + Vector2(50, 0)
 	tower_info_popup_panel.set_info(selected_tower)
-	#print("popping up")
-	#tower_info_popup_panel.popup_centered()
-	print("popping up again, damn it")
 	tower_info_popup_panel.popup()
 	
 func build_tower():
@@ -555,7 +559,8 @@ func _on_send_wave_button_pressed():
 	spawn_creeps()
 
 func _on_pause_button_pressed() -> void:
-	get_tree().paused = !get_tree().is_paused()
+	#get_tree().paused = !get_tree().is_paused()
+	Engine.time_scale = 0.0
 	
 func _on_speed_half_button_pressed() -> void:
 	Engine.time_scale = 0.5

@@ -2,6 +2,7 @@ class_name GreenTower extends Tower
 
 @onready var beam: Line2D = %Beam
 @onready var fire_sound: AudioStreamPlayer2D = %FireSound
+@onready var hit_effects: Node2D = %HitEffects
 
 var max_targets := 1
 
@@ -60,13 +61,19 @@ func fire():
 		var x_offset = randf_range(-5, 5)
 		var y_offset = randf_range(-5, 5)
 		var shoot_point = enemies_in_range[i].position + Vector2(x_offset, y_offset)
+		#--- We need to use to_local and i truly don't know why.
 		points.append(beam.to_local(shoot_point))
+		var particle_system : GPUParticles2D = hit_effects.get_child(i)
+		particle_system.position = to_local(shoot_point)
+		particle_system.restart()
+		particle_system.emitting = true
 	beam.points = points
 	for enemy in enemies:
 		enemy.on_hit(current_damage_per_shot)
 		self.damage_done += current_damage_per_shot
 	shot_animator.play("fire")
 	fire_sound.play()
+	
 
 func get_description() -> String:
 	return super.get_description()

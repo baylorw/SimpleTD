@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dos4cfuhm2v3"]
+[gd_scene load_steps=10 format=3 uid="uid://dos4cfuhm2v3"]
 
 [ext_resource type="Script" path="res://scenes/towers/green_1_tower.gd" id="1_gtsu7"]
 [ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="2_kp6dm"]
 [ext_resource type="Texture2D" uid="uid://37wxjgq3kga8" path="res://assets/images/towers/range_circle_edge_colored_no_center.png" id="2_rtg5u"]
 [ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_xanjk"]
+[ext_resource type="Material" uid="uid://nk0apy67el1o" path="res://effects/hit_particles.tres" id="5_08u4l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
 radius = 25.0
@@ -127,6 +128,7 @@ shape = SubResource("CircleShape2D_ku21i")
 unique_name_in_owner = true
 points = PackedVector2Array(0, 0, 100, 100)
 width = 3.0
+default_color = Color(0, 1, 0, 1)
 
 [node name="FireAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -141,6 +143,17 @@ pitch_scale = 5.0
 
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 0.25
+
+[node name="HitEffects" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Target1" type="GPUParticles2D" parent="HitEffects"]
+unique_name_in_owner = true
+emitting = false
+process_material = ExtResource("5_08u4l")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="body_entered" from="RangeArea" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="RangeArea" to="." method="_on_range_body_exited"]

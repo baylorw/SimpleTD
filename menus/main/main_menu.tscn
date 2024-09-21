@@ -1,15 +1,38 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1sevivxrbf43"]
+[gd_scene load_steps=15 format=3 uid="uid://b1sevivxrbf43"]
 
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="1_t35b5"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_73mdt"]
 [ext_resource type="Script" path="res://menus/main/main_menu.gd" id="2_p7udw"]
 [ext_resource type="Texture2D" uid="uid://b535bf25jyc15" path="res://menus/main/std gameplay.png" id="4_mtvbw"]
+[ext_resource type="Theme" uid="uid://bndkslnqff03v" path="res://resources/main_menu.tres" id="6_0ugqs"]
+[ext_resource type="FontFile" uid="uid://b81ras7t82yj4" path="res://assets/fonts/Kenney Future Narrow.ttf" id="7_rslw0"]
 [ext_resource type="Theme" uid="uid://couiaiuvnhxfa" path="res://resources/theme_2.tres" id="14_y851h"]
 [ext_resource type="Texture2D" uid="uid://cgchsrrgij4d6" path="res://assets/ui/button_rectangle_depth_gradient.png" id="15_3ccp4"]
 [ext_resource type="Texture2D" uid="uid://36o530vbr4eg" path="res://assets/ui/button_rectangle_depth_flat.png" id="16_mitxq"]
 [ext_resource type="Shortcut" uid="uid://d78ymx7m4ad2" path="res://resources/quit_key_shortcut.tres" id="17_j7v6t"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hwx1e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2tx0"]
+texture = ExtResource("16_mitxq")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y0r3o"]
+texture = ExtResource("15_3ccp4")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h6wic"]
+texture = ExtResource("16_mitxq")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -106,62 +129,41 @@ size_flags_vertical = 4
 theme = ExtResource("14_y851h")
 theme_override_constants/separation = 20
 
-[node name="NewGameButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
+[node name="NewGameButton3" type="Button" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("15_3ccp4")
-texture_pressed = ExtResource("16_mitxq")
-stretch_mode = 0
+theme = ExtResource("6_0ugqs")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_rslw0")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/hover = SubResource("StyleBoxTexture_w2tx0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y0r3o")
+theme_override_styles/normal = SubResource("StyleBoxTexture_h6wic")
+text = "NEW_GAME"
 
-[node name="Label" type="Label" parent="ButtonsVBoxContainer/NewGameButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "New Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SettingsButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
+[node name="SettingsButton" type="Button" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("15_3ccp4")
-texture_pressed = ExtResource("16_mitxq")
-stretch_mode = 0
+theme = ExtResource("6_0ugqs")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_rslw0")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/hover = SubResource("StyleBoxTexture_w2tx0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y0r3o")
+theme_override_styles/normal = SubResource("StyleBoxTexture_h6wic")
+text = "SETTINGS"
 
-[node name="Label" type="Label" parent="ButtonsVBoxContainer/SettingsButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AboutButton" type="TextureButton" parent="ButtonsVBoxContainer"]
+[node name="AboutButton" type="Button" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("15_3ccp4")
-texture_pressed = ExtResource("16_mitxq")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="ButtonsVBoxContainer/AboutButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "About"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme = ExtResource("6_0ugqs")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_rslw0")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/hover = SubResource("StyleBoxTexture_w2tx0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y0r3o")
+theme_override_styles/normal = SubResource("StyleBoxTexture_h6wic")
+text = "ABOUT"
 
 [node name="Control" type="Control" parent="ButtonsVBoxContainer"]
 layout_mode = 2
@@ -175,27 +177,39 @@ layout_mode = 2
 [node name="Control4" type="Control" parent="ButtonsVBoxContainer"]
 layout_mode = 2
 
-[node name="QuitButton2" type="TextureButton" parent="ButtonsVBoxContainer"]
+[node name="QuitButton" type="Button" parent="ButtonsVBoxContainer"]
 custom_minimum_size = Vector2(375, 50)
 layout_mode = 2
-size_flags_horizontal = 4
+theme = ExtResource("6_0ugqs")
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("7_rslw0")
+theme_override_font_sizes/font_size = 42
+theme_override_styles/hover = SubResource("StyleBoxTexture_w2tx0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y0r3o")
+theme_override_styles/normal = SubResource("StyleBoxTexture_h6wic")
 shortcut = ExtResource("17_j7v6t")
-texture_normal = ExtResource("15_3ccp4")
-texture_pressed = ExtResource("16_mitxq")
-stretch_mode = 0
+text = "QUIT"
 
-[node name="Label" type="Label" parent="ButtonsVBoxContainer/QuitButton2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Quit"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="LanguagesDDLB" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 1109.0
+offset_top = 622.0
+offset_right = 1243.0
+offset_bottom = 676.0
+selected = 0
+item_count = 1
+popup/item_0/text = "British"
 
-[connection signal="pressed" from="ButtonsVBoxContainer/NewGameButton2" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="ButtonsVBoxContainer/SettingsButton2" to="." method="_on_options_button_pressed"]
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 985.0
+offset_top = 632.0
+offset_right = 1097.0
+offset_bottom = 666.0
+text = "Language"
+
+[connection signal="pressed" from="ButtonsVBoxContainer/NewGameButton3" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/SettingsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="ButtonsVBoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
-[connection signal="pressed" from="ButtonsVBoxContainer/QuitButton2" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="ButtonsVBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="item_selected" from="LanguagesDDLB" to="." method="_on_option_button_item_selected"]

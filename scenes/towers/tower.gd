@@ -73,13 +73,11 @@ func _ready() -> void:
 func increment_level():
 	level += 1
 func set_level(value: int):
-	print("set_level to " + str(value))
 	level = value
-	print("so now the fucking level is " + str(level))
 	current_damage_per_shot = get_damage_at(level)
 	current_range_in_pixels = get_range_at(level)
 	set_range(current_range_in_pixels)
-	print("new values level=%s, dmg=%s, range=%s" % [level, current_damage_per_shot, current_range_in_pixels])
+	#print("new values level=%s, dmg=%s, range=%s" % [level, current_damage_per_shot, current_range_in_pixels])
 
 func get_damage_at(target_level: int):
 	var value = base_damage_per_shot + (damage_per_level * (target_level-1))
@@ -88,8 +86,8 @@ func get_damage_at(target_level: int):
 func get_range_at(target_level: int):
 	var level_bonus = range_per_level * (target_level-1)
 	var value = base_range_in_pixels + level_bonus
-	print("base=%s, increase per level=%s, level=%s, increase=%s" % 
-		[base_range_in_pixels, range_per_level, target_level, level_bonus])
+	#print("base=%s, increase per level=%s, level=%s, increase=%s" % 
+		#[base_range_in_pixels, range_per_level, target_level, level_bonus])
 	return value
 	
 func get_sell_value():
@@ -170,8 +168,8 @@ func sort_enemies():
 	return enemies_in_range
 	
 func get_targeting_strategy_name() -> String:
-	var name : String = TargetingStrategy.keys()[targeting_strategy]
-	return name
+	var strategy_name : String = TargetingStrategy.keys()[targeting_strategy]
+	return strategy_name
 
 func select_target() -> Creep:
 	if 0 == enemies_in_range.size():

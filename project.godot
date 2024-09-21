@@ -79,6 +79,10 @@ camera_drag={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation")
+
 [layer_names]
 
 2d_physics/layer_1="Walls"
