@@ -161,7 +161,7 @@ func sort_enemies():
 		TargetingStrategy.Nearest:
 			enemies_in_range.sort_custom(
 				func(a:Creep, b:Creep): 
-					return position.distance_to(a.position) > position.distance_to(b.position)
+					return position.distance_to(a.position) < position.distance_to(b.position)
 			)
 		TargetingStrategy.Random:
 			return enemies_in_range
@@ -172,18 +172,24 @@ func get_targeting_strategy_name() -> String:
 	return strategy_name
 
 func select_target() -> Creep:
+	#print("in range=" + str(enemies_in_range.size()))
 	if 0 == enemies_in_range.size():
 		return null
-	#if should_stay_on_target and is_valid_target(current_target):
+	if 1 == enemies_in_range.size():
+		return enemies_in_range[0]
 	if should_stay_on_target and is_instance_valid(current_target) and current_target.i_am:
 		return current_target
-	var targets = sort_enemies()
-	current_target = targets[0]
 	if targeting_strategy == TargetingStrategy.Random:
 		var enemy_index := randi() % enemies_in_range.size()
-		return targets[enemy_index]
-	else:
-		return targets[0]
+		return enemies_in_range[enemy_index]
+	var targets = sort_enemies()
+	#if targets.size() > 5:
+		#print("lots of targets=" + str(targets.size()))
+		#for t in targets:
+			#print("%s path steps left=%s" % [t, t.path.size()])
+		#print("my choice is %s with %s left" % [targets[0], targets[0].path.size()] )
+	current_target = targets[0]
+	return targets[0]
 	
 func _on_range_body_entered(body: Node2D) -> void:
 	enemies_in_range.append(body)

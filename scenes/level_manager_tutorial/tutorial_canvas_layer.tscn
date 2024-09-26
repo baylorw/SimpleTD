@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://db1xjdvrs2v33"]
+
+[ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_manager.gd" id="1_2ndyq"]
+[ext_resource type="Shader" path="res://effects/cutout.gdshader" id="1_j5qbl"]
+[ext_resource type="Texture2D" uid="uid://b6l5b7oklc8b3" path="res://assets/tilesets/floor 50 white.png" id="2_txsle"]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="3_3i2oa"]
+[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="4_5amrh"]
+[ext_resource type="Texture2D" uid="uid://b4l3ye4x5hlpo" path="res://assets/images/ui/cursor_pointer3D_shadow.png" id="5_2kpso"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27iyv"]
+shader = ExtResource("1_j5qbl")
+shader_parameter/tlx = 0.0
+shader_parameter/tly = 0.0
+shader_parameter/brx = 0.0
+shader_parameter/bry = 0.0
+
+[node name="Tutorial" type="Node"]
+script = ExtResource("1_2ndyq")
+
+[node name="TutorialCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Shade" type="TextureRect" parent="TutorialCanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.745098)
+material = SubResource("ShaderMaterial_27iyv")
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("2_txsle")
+
+[node name="TutorialDialog" type="MarginContainer" parent="TutorialCanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+offset_left = 296.0
+offset_top = 296.0
+offset_right = 826.0
+offset_bottom = 411.0
+
+[node name="TextureRect" type="TextureRect" parent="TutorialCanvasLayer/TutorialDialog"]
+modulate = Color(1, 1, 0.788235, 1)
+layout_mode = 2
+texture = ExtResource("3_3i2oa")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TutorialCanvasLayer/TutorialDialog"]
+layout_mode = 2
+texture = ExtResource("4_5amrh")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="TutorialCanvasLayer/TutorialDialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvasLayer/TutorialDialog/MarginContainer"]
+layout_mode = 2
+
+[node name="TutorialLabel" type="Label" parent="TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Let's learn how to play this game."
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="ContinueButton" type="Button" parent="TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Continue"
+
+[node name="HighlightArrow" type="TextureRect" parent="TutorialCanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0, 1)
+offset_left = 1824.0
+offset_top = 85.0001
+offset_right = 1864.0
+offset_bottom = 125.0
+rotation = 2.79253
+texture = ExtResource("5_2kpso")
+
+[node name="FSM" type="Node" parent="."]
+
+[node name="Node" type="Node" parent="FSM"]

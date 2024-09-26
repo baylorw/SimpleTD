@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://upvkxv0hvkuf"]
+[gd_scene load_steps=7 format=3 uid="uid://upvkxv0hvkuf"]
 
+[ext_resource type="Script" path="res://menus/about/about_screen.gd" id="1_au4cs"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="1_bqmu5"]
 [ext_resource type="Texture2D" uid="uid://bpjiwwcrnk41l" path="res://menus/about/i heart TD.png" id="2_kjrbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yw2ym"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ln2tl"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_xhig0"]
+events = [SubResource("InputEventKey_ln2tl")]
 
 [node name="AboutScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_au4cs")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -21,6 +32,7 @@ grow_vertical = 2
 texture = ExtResource("1_bqmu5")
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 70.0
 offset_top = 185.0
@@ -37,6 +49,7 @@ SimpleTD doesn't have a lot of variety. It's a simple game that tries to do one 
 fit_content = true
 
 [node name="CreditsLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1012.0
 offset_top = 185.0
@@ -65,9 +78,9 @@ fit_content = true
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
-offset_left = 268.0
+offset_left = 200.0
 offset_top = 26.0
-offset_right = 1012.0
+offset_right = 1151.0
 offset_bottom = 158.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -77,10 +90,343 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 5
 theme_override_font_sizes/font_size = 96
-text = "About SimpleTD"
+text = "About Vector(ish) TD"
 horizontal_alignment = 1
 
 [node name="IHeartTd" type="Sprite2D" parent="."]
 position = Vector2(123, 94)
 rotation = -0.279253
 texture = ExtResource("2_kjrbq")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_yw2ym")
+current_tab = 2
+
+[node name="About" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/About"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="DescriptionLabel2" type="RichTextLabel" parent="TabContainer/About/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.99003, 1, 0.585901, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "A lot of people love tower defense for the bright colors, cute characters, variety of towers, rogue-like randomness and the feeling of progress as you level up and unlock things but what made me fall in love with it was the spatial reasoning - solving puzzles using nothing but your understanding of the map. Games like [i]Vector TD[/i], [i]GemCraft[/i] and [i]Defender's Quest[/i].
+
+[i]Vector(ish) TD[/i] is a free fan tribute to [i]Vector TD[/i], one of my favorite games. [i]Vector(ish) TD[/i] doesn't have a lot of variety. It's a simple game that tries to do one thing well. My hope is that there's a place in the world for games like that."
+fit_content = true
+
+[node name="Team" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Team"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 598.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Team/MarginContainer2"]
+layout_mode = 2
+
+[node name="CreditsLabel2" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[i]Vector(ish) TD[/i] is a one boy project. i wanted to learn how to program in Godot so i made this. It's just a free fan game but i like it.
+"
+fit_content = true
+
+[node name="Label" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Team/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 20
+columns = 3
+
+[node name="CreditsLabel3" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]President and CEO[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel9" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Executive Producer[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel8" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Intern[/u]
+baylor"
+fit_content = true
+
+[node name="Label" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CreditsLabel4" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Level Design[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel5" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Programming[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel6" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]\"Art\"[/u]
+baylor"
+fit_content = true
+
+[node name="Label4" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CreditsLabel7" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Catering[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel10" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Janitor[/u]
+baylor"
+fit_content = true
+
+[node name="CreditsLabel11" type="RichTextLabel" parent="TabContainer/Team/MarginContainer2/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Fish Monger[/u]
+baylor"
+fit_content = true
+
+[node name="Programming" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Programming"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Programming/MarginContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="TabContainer/Programming/MarginContainer2/GridContainer"]
+layout_mode = 2
+text = "Author:
+Name:
+Link:
+License: "
+
+[node name="Label2" type="Label" parent="TabContainer/Programming/MarginContainer2/GridContainer"]
+layout_mode = 2
+text = "Gabbinetto
+Trail2D-addon
+https://github.com/Gabbinetto/Trail2D-addon
+MIT License"
+
+[node name="Art" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="TabContainer/Art"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Art/MarginContainer3"]
+layout_mode = 2
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="TabContainer/Art/MarginContainer3/GridContainer"]
+layout_mode = 2
+text = "Author:
+Name:
+Link:
+License: "
+
+[node name="font" type="Label" parent="TabContainer/Art/MarginContainer3/GridContainer"]
+layout_mode = 2
+text = "Kenney
+Kenney Future Narrow (font)
+ https://kenney.nl/assets/kenney-fonts
+CCO 1.0 Universal"
+
+[node name="Label3" type="Label" parent="TabContainer/Art/MarginContainer3/GridContainer"]
+layout_mode = 2
+text = "Author:
+Name:
+Link:
+License: "
+
+[node name="explosion" type="Label" parent="TabContainer/Art/MarginContainer3/GridContainer"]
+layout_mode = 2
+text = "Unity
+Explosion00 (sprite sheet)
+https://unity.com/blog/engine-platform/free-vfx-image-sequences-flipbooks
+CC0"
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="MarginContainer4" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Sound/MarginContainer4"]
+layout_mode = 2
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/MarginContainer4/GridContainer"]
+layout_mode = 2
+text = "Author:
+Name:
+Link:
+License: "
+
+[node name="apple cider" type="Label" parent="TabContainer/Sound/MarginContainer4/GridContainer"]
+layout_mode = 2
+text = "Zane Little
+Apple Cider.mp3
+https://opengameart.org/content/apple-cider
+CC0"
+
+[node name="Label3" type="Label" parent="TabContainer/Sound/MarginContainer4/GridContainer"]
+layout_mode = 2
+text = "Author:
+Name:
+Link:
+License: "
+
+[node name="insect factory" type="Label" parent="TabContainer/Sound/MarginContainer4/GridContainer"]
+layout_mode = 2
+text = "Zane Little
+Insect Factory.mp3
+https://opengameart.org/content/insect-factory-wii-style-music
+CC0"
+
+[node name="QuitMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -56.0
+offset_right = -1.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="QuitButton" type="Button" parent="QuitMarginContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_xhig0")
+text = "Exit"
+
+[connection signal="pressed" from="QuitMarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]

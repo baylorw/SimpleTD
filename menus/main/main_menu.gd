@@ -5,7 +5,9 @@ extends Control
 var english_index = 1
 var languages := {
 	"British":  "uk",
+	"German":   "de",
 	"English":  "en",
+	"French":   "fr",
 	"Japanese": "jp",
 	"Latin":    "pl",
 	"Spanish":  "es",
@@ -13,9 +15,19 @@ var languages := {
 }
 
 func _ready() -> void:
-	Music.play_song("celtic")
+	#Music.play_song("celtic")
+	Music.play_song("insect")
 	load_language_options()
+	show_current_language()
 
+func show_current_language():
+	# TODO:  Put this in settings file
+	var current_locale = TranslationServer.get_locale()
+	if !languages.values().has(current_locale):
+		current_locale = "en"
+	var index = languages.values().find(current_locale)
+	languages_ddlb.select(index)
+	
 func load_language_options():
 	languages_ddlb.clear()
 	for i in languages.size():

@@ -1,31 +1,38 @@
-[gd_scene load_steps=31 format=3 uid="uid://df1708oe6gjag"]
+[gd_scene load_steps=39 format=3 uid="uid://b5du67lh81da7"]
 
 [ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_level_manager.gd" id="1_44fsp"]
-[ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_egvtc"]
-[ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_ui.gd" id="3_eh4r1"]
-[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="4_stjsc"]
-[ext_resource type="Texture2D" uid="uid://c4ee0oo3kyv8a" path="res://assets/images/towers/g2 50.png" id="5_po11w"]
-[ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="6_2uwqu"]
-[ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="7_4c523"]
-[ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="8_5lkpo"]
-[ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="9_fpaox"]
-[ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="10_jaa55"]
-[ext_resource type="Texture2D" uid="uid://dqnrqx422iwpw" path="res://assets/images/towers/br 50.png" id="11_gky5y"]
-[ext_resource type="Texture2D" uid="uid://b2r82gqumvuq7" path="res://assets/images/creeps/devil 50.png" id="12_v3gtm"]
-[ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="13_rtp7o"]
-[ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="14_67t54"]
-[ext_resource type="TileSet" uid="uid://hpa7s01mxw5t" path="res://assets/tilesets/annotations/school_tileset.tres" id="15_q0k7g"]
-[ext_resource type="Script" path="res://scenes/tilemap_annotations/annotations_tile_map.gd" id="16_g7io1"]
-[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="17_a6w6h"]
-[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="18_gnny5"]
-[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="20_hp4k3"]
-[ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_tower_info_popup_panel.gd" id="21_ydrcn"]
-[ext_resource type="Texture2D" uid="uid://c2wcpgwwfrkay" path="res://assets/tilesets/annotations/target aiming.png" id="22_4ntsu"]
-[ext_resource type="Texture2D" uid="uid://bsrgfe8rg0q7q" path="res://assets/images/creeps/plus.png" id="23_y47f7"]
+[ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_yib50"]
+[ext_resource type="Script" path="res://scenes/level_manager/ui.gd" id="3_l2mqg"]
+[ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="4_wcsul"]
+[ext_resource type="Texture2D" uid="uid://c4ee0oo3kyv8a" path="res://assets/images/towers/g2 50.png" id="5_wiagk"]
+[ext_resource type="Texture2D" uid="uid://dpg0yjerqoves" path="res://assets/images/towers/g3 50.png" id="6_1fo2d"]
+[ext_resource type="Texture2D" uid="uid://dyfd5aekx8jgm" path="res://assets/images/towers/r1 50.png" id="7_ywtyc"]
+[ext_resource type="Texture2D" uid="uid://bwx0fifbhoqic" path="res://assets/images/towers/r2 50.png" id="8_eigub"]
+[ext_resource type="Texture2D" uid="uid://bkxpeau23jagv" path="res://assets/images/towers/r3 50.png" id="9_7ky7k"]
+[ext_resource type="Texture2D" uid="uid://bdmnawu3n4ms5" path="res://assets/images/towers/b1 50.png" id="10_cjp7a"]
+[ext_resource type="Texture2D" uid="uid://b2r82gqumvuq7" path="res://assets/images/creeps/devil 50.png" id="12_tvce7"]
+[ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="13_wwah3"]
+[ext_resource type="Texture2D" uid="uid://b5001kb6nf704" path="res://assets/ui/icons/heart 4.PNG" id="14_a13qp"]
+[ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="14_c2crw"]
+[ext_resource type="TileSet" uid="uid://hpa7s01mxw5t" path="res://assets/tilesets/annotations/school_tileset.tres" id="15_kbury"]
+[ext_resource type="Texture2D" uid="uid://5ni5lqnkpuh" path="res://assets/ui/icons/money 5.PNG" id="15_lul5w"]
+[ext_resource type="Script" path="res://scenes/tilemap_annotations/annotations_tile_map.gd" id="16_kupye"]
+[ext_resource type="Texture2D" uid="uid://by4x6nnilrqu3" path="res://assets/ui/white square.png" id="17_cdvds"]
+[ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="18_vomsp"]
+[ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="19_h2jbg"]
+[ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="20_54yuy"]
+[ext_resource type="Script" path="res://scenes/level_manager/tower_info_popup_panel.gd" id="21_ouu6l"]
+[ext_resource type="Texture2D" uid="uid://c2wcpgwwfrkay" path="res://assets/tilesets/annotations/target aiming.png" id="22_i7d5h"]
+[ext_resource type="Texture2D" uid="uid://bsrgfe8rg0q7q" path="res://assets/images/creeps/plus.png" id="23_gbwfh"]
 [ext_resource type="Texture2D" uid="uid://b6l5b7oklc8b3" path="res://assets/tilesets/floor 50 white.png" id="24_cvumy"]
+[ext_resource type="Texture2D" uid="uid://b1xb5sp5b4ln8" path="res://assets/tilesets/annotations/arrow up.png" id="24_p12xy"]
 [ext_resource type="Shader" path="res://effects/cutout.gdshader" id="24_ujbma"]
-[ext_resource type="Texture2D" uid="uid://b1xb5sp5b4ln8" path="res://assets/tilesets/annotations/arrow up.png" id="24_xx43b"]
 [ext_resource type="Texture2D" uid="uid://b4l3ye4x5hlpo" path="res://assets/images/ui/cursor_pointer3D_shadow.png" id="25_aepf2"]
+[ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_manager.gd" id="27_yb36a"]
+[ext_resource type="Script" path="res://scenes/level_manager_tutorial/tutorial_dialog.gd" id="30_ph7s4"]
+[ext_resource type="PackedScene" uid="uid://bdgfnkf5kl5ox" path="res://scenes/tutorial_step_manager/tutorial_step_manager.tscn" id="32_065f8"]
+[ext_resource type="PackedScene" uid="uid://7e6uv2dxtcnp" path="res://scenes/tutorial_step_manager/tutorial_step.tscn" id="33_0ajut"]
+[ext_resource type="Texture2D" uid="uid://da0oaocb0xxt6" path="res://assets/images/tutorial/tutorial-1.png" id="33_7ms1f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1rr4"]
 bg_color = Color(1.63645e-06, 0, 0.534552, 1)
@@ -39,14 +46,17 @@ border_width_bottom = 3
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n6u17"]
 size = Vector2(1150, 850)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_27iyv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_82jss"]
 shader = ExtResource("24_ujbma")
 shader_parameter/tlx = 0.0
 shader_parameter/tly = 0.0
 shader_parameter/brx = 0.0
 shader_parameter/bry = 0.0
 
-[node name="TutorialLevelManager" type="Node2D"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m1est"]
+size = Vector2(50, 50)
+
+[node name="LevelManager" type="Node2D"]
 script = ExtResource("1_44fsp")
 metadata/_edit_vertical_guides_ = [-84.0]
 
@@ -59,16 +69,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_egvtc")
+texture = ExtResource("2_yib50")
 flip_h = true
 metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
-script = ExtResource("3_eh4r1")
+script = ExtResource("3_l2mqg")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI"]
+[node name="LeftControlsMarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -77,196 +87,192 @@ offset_left = -158.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/LeftControlsMarginContainer"]
 self_modulate = Color(0.0431373, 0.152941, 0.25098, 1)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Towers"
 
-[node name="ButtonsGridContainer" type="GridContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="TowerButtonsGridContainer" type="GridContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="G1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="G1Button" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("4_stjsc")
+texture_normal = ExtResource("4_wcsul")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "green_1_tower"
 
-[node name="G2Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="G2Button" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("5_po11w")
+texture_normal = ExtResource("5_wiagk")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "green_2_tower"
 
-[node name="G3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="G3Button" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("6_2uwqu")
+texture_normal = ExtResource("6_1fo2d")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "green_3_tower"
 
-[node name="R1Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="R1Button" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("7_4c523")
+texture_normal = ExtResource("7_ywtyc")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "red_1_tower"
 
-[node name="R2Button2" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="R2Button2" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("8_5lkpo")
+texture_normal = ExtResource("8_eigub")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "red_2_tower"
 
-[node name="R3Button" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="R3Button" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("9_fpaox")
+texture_normal = ExtResource("9_7ky7k")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "red_3_tower"
 
-[node name="BlueButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
+[node name="BlueButton" type="TextureButton" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer" groups=["build_tower_buttons", "buttons"]]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 5
 size_flags_vertical = 5
-texture_normal = ExtResource("10_jaa55")
+texture_normal = ExtResource("10_cjp7a")
 ignore_texture_size = true
 stretch_mode = 5
 metadata/tower_name = "blue_1_tower"
 
-[node name="BrownButton" type="TextureButton" parent="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer" groups=["build_tower_buttons"]]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 5
-texture_normal = ExtResource("11_gky5y")
-ignore_texture_size = true
-stretch_mode = 5
-metadata/tower_name = "brown1"
-
-[node name="DetailsLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="DetailsLabel" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 3
 autowrap_mode = 3
 
-[node name="WavesVBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="WavesVBoxContainer" type="VBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer"]
 layout_mode = 2
 
-[node name="CurrentWaveIcon" type="TextureRect" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer"]
+[node name="CurrentWaveIcon" type="TextureRect" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("12_v3gtm")
+texture = ExtResource("12_tvce7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CurrentWaveDetails" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer"]
+[node name="CurrentWaveDetails" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Fast lvl 1
 HP: 1234
 Value: 100"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer"]
 layout_mode = 2
 
-[node name="NextWaveIcon" type="TextureRect" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer2"]
+[node name="NextWaveIcon" type="TextureRect" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("12_v3gtm")
+texture = ExtResource("12_tvce7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="NextWaveDetails" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer2"]
+[node name="NextWaveDetails" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Fast lvl 1
 HP: 1234
 Value: 100"
 
-[node name="WaveLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="WaveLabel2" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Wave: 0 / 6"
 autowrap_mode = 3
 
-[node name="HealthLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="HealthLabel2" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Lives: 20/20"
 autowrap_mode = 3
 
-[node name="MoneyLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="MoneyLabel2" type="Label" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Lives: 20/20"
 autowrap_mode = 3
 
-[node name="WaveHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="WaveHBoxContainer" type="HBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SendWaveButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+[node name="SendWaveButton" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer" groups=["buttons"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = ExtResource("13_rtp7o")
+theme_override_styles/normal = ExtResource("13_wwah3")
 text = "Send Wave"
 
-[node name="QuitButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+[node name="QuitButton" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
 
-[node name="SpeedHBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="SpeedHBoxContainer" type="HBoxContainer" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PauseButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+[node name="PauseButton" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "II"
 
-[node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+[node name="SpeedHalfButton" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -274,7 +280,8 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "1/2"
 
-[node name="SpeedNormalButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+[node name="SpeedNormalButton" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -283,7 +290,8 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "1"
 
-[node name="Speed2Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+[node name="Speed2Button" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -291,7 +299,8 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "2"
 
-[node name="Speed5Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+[node name="Speed5Button" type="Button" parent="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer" groups=["buttons"]]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -299,12 +308,72 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "5"
 
+[node name="StatusHBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="LifeIcon" type="TextureRect" parent="UI/StatusHBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(35, 20)
+layout_mode = 2
+texture = ExtResource("14_a13qp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthLabel" type="Label" parent="UI/StatusHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "20/20"
+
+[node name="SpacerLabel" type="Label" parent="UI/StatusHBoxContainer"]
+layout_mode = 2
+text = "    "
+
+[node name="MoneyIcon" type="TextureRect" parent="UI/StatusHBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 40)
+layout_mode = 2
+texture = ExtResource("15_lul5w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyLabel" type="Label" parent="UI/StatusHBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.784314, 0, 1)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "$123"
+
+[node name="SpacerLabel2" type="Label" parent="UI/StatusHBoxContainer"]
+layout_mode = 2
+text = "    "
+
+[node name="WaveDescLabel" type="Label" parent="UI/StatusHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "WAVE"
+
+[node name="WaveLabel" type="Label" parent="UI/StatusHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "1/10"
+
 [node name="LevelData" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="MapAreaTileMapLayer" type="TileMapLayer" parent="LevelData"]
 unique_name_in_owner = true
-tile_set = ExtResource("14_67t54")
+tile_set = ExtResource("14_c2crw")
 
 [node name="MapAreaBoundaries" type="Sprite2D" parent="LevelData"]
 position = Vector2(525, 375)
@@ -315,23 +384,23 @@ metadata/_edit_lock_ = true
 
 [node name="ShadeTileMap" type="TileMapLayer" parent="Annotations"]
 unique_name_in_owner = true
-tile_set = ExtResource("15_q0k7g")
-script = ExtResource("16_g7io1")
+tile_set = ExtResource("15_kbury")
+script = ExtResource("16_kupye")
 
 [node name="TileBordersTileMap" type="TileMapLayer" parent="Annotations"]
 unique_name_in_owner = true
-tile_set = ExtResource("15_q0k7g")
-script = ExtResource("16_g7io1")
+tile_set = ExtResource("15_kbury")
+script = ExtResource("16_kupye")
 
 [node name="PathTileMap" type="TileMapLayer" parent="Annotations"]
 unique_name_in_owner = true
-tile_set = ExtResource("15_q0k7g")
-script = ExtResource("16_g7io1")
+tile_set = ExtResource("15_kbury")
+script = ExtResource("16_kupye")
 
 [node name="AnnotationsTileMap" type="TileMapLayer" parent="Annotations"]
 unique_name_in_owner = true
-tile_set = ExtResource("15_q0k7g")
-script = ExtResource("16_g7io1")
+tile_set = ExtResource("15_kbury")
+script = ExtResource("16_kupye")
 
 [node name="Paths" type="Node2D" parent="Annotations"]
 unique_name_in_owner = true
@@ -357,11 +426,11 @@ offset_bottom = 267.0
 [node name="TextureRect" type="TextureRect" parent="MessagesCanvasLayer/WinnerMessage"]
 modulate = Color(1, 1, 0.788235, 1)
 layout_mode = 2
-texture = ExtResource("17_a6w6h")
+texture = ExtResource("17_cdvds")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MessagesCanvasLayer/WinnerMessage"]
 layout_mode = 2
-texture = ExtResource("18_gnny5")
+texture = ExtResource("18_vomsp")
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
@@ -423,11 +492,11 @@ offset_bottom = 547.0
 [node name="TextureRect" type="TextureRect" parent="MessagesCanvasLayer/LoserMessage"]
 modulate = Color(0.392345, 7.94759e-06, 3.63387e-06, 1)
 layout_mode = 2
-texture = ExtResource("17_a6w6h")
+texture = ExtResource("17_cdvds")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MessagesCanvasLayer/LoserMessage"]
 layout_mode = 2
-texture = ExtResource("18_gnny5")
+texture = ExtResource("18_vomsp")
 patch_margin_left = 12
 patch_margin_top = 12
 patch_margin_right = 12
@@ -534,6 +603,11 @@ theme_override_font_sizes/font_size = 36
 text = "Completion Bonus $0"
 horizontal_alignment = 1
 
+[node name="MapViewSettingsPanel" parent="." instance=ExtResource("19_h2jbg")]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+
 [node name="WaveTickTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.25
@@ -541,17 +615,15 @@ wait_time = 0.25
 [node name="TowerInfoPopupPanel" type="PopupPanel" parent="."]
 unique_name_in_owner = true
 transparent_bg = true
-position = Vector2i(840, 70)
-size = Vector2i(350, 456)
-min_size = Vector2i(300, 0)
-theme = ExtResource("20_hp4k3")
-script = ExtResource("21_ydrcn")
+size = Vector2i(284, 458)
+theme = ExtResource("20_54yuy")
+script = ExtResource("21_ouu6l")
 
 [node name="MarginContainer2" type="MarginContainer" parent="TowerInfoPopupPanel"]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 345.0
-offset_bottom = 451.0
+offset_right = 279.0
+offset_bottom = 453.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -625,6 +697,7 @@ layout_mode = 2
 text = "42,000"
 
 [node name="Label10" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+visible = false
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
 text = "Kills:"
@@ -632,23 +705,36 @@ horizontal_alignment = 2
 
 [node name="KillsLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "31	"
 
 [node name="TargetButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Target"
-icon = ExtResource("22_4ntsu")
+icon = ExtResource("22_i7d5h")
 expand_icon = true
 
 [node name="TargetStrategyLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "123"
+
+[node name="Label9" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Stay on Target:"
+horizontal_alignment = 2
+
+[node name="StickyTargetingCheckBox" type="CheckBox" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="SellButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Sell"
-icon = ExtResource("23_y47f7")
+icon = ExtResource("23_gbwfh")
 expand_icon = true
 
 [node name="SellValueLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
@@ -659,7 +745,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade"
-icon = ExtResource("24_xx43b")
+icon = ExtResource("24_p12xy")
 expand_icon = true
 
 [node name="UpgradedStatsLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
@@ -667,44 +753,266 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 
-[node name="TutorialCanvasLayer" type="CanvasLayer" parent="."]
+[node name="Tutorial" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("27_yb36a")
 
-[node name="Shade" type="TextureRect" parent="TutorialCanvasLayer"]
+[node name="TutorialCanvasLayer" type="CanvasLayer" parent="Tutorial"]
+unique_name_in_owner = true
+layer = 2
+
+[node name="Shade" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
 unique_name_in_owner = true
 visible = false
-modulate = Color(0, 0, 0, 0.745098)
-material = SubResource("ShaderMaterial_27iyv")
+modulate = Color(0, 0, 0, 0.686275)
+material = SubResource("ShaderMaterial_82jss")
 offset_right = 1280.0
 offset_bottom = 720.0
+mouse_filter = 2
 texture = ExtResource("24_cvumy")
 
-[node name="HighlightArrow" type="TextureRect" parent="TutorialCanvasLayer"]
+[node name="TutorialImage" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
 unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="TutorialDialog" type="MarginContainer" parent="Tutorial/TutorialCanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+offset_left = 176.0
+offset_top = 348.0
+offset_right = 916.0
+offset_bottom = 473.0
+pivot_offset = Vector2(134, 98)
+script = ExtResource("30_ph7s4")
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/TutorialCanvasLayer/TutorialDialog"]
+modulate = Color(1, 1, 0.788235, 1)
+layout_mode = 2
+texture = ExtResource("17_cdvds")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tutorial/TutorialCanvasLayer/TutorialDialog"]
+layout_mode = 2
+texture = ExtResource("18_vomsp")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial/TutorialCanvasLayer/TutorialDialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer"]
+layout_mode = 2
+
+[node name="TutorialLabel" type="Label" parent="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Let's learn how to play this game."
+autowrap_mode = 3
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Main Menu"
+
+[node name="ContinueButton" type="Button" parent="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/ButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Continue"
+
+[node name="HighlightArrow" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
+unique_name_in_owner = true
+visible = false
 modulate = Color(0, 1, 0, 1)
 offset_left = 1824.0
 offset_top = 85.0001
 offset_right = 1864.0
 offset_bottom = 125.0
 rotation = 2.79253
-scale = Vector2(2, 2)
 texture = ExtResource("25_aepf2")
 
-[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_exited"]
-[connection signal="mouse_entered" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
-[connection signal="mouse_exited" from="UI/MarginContainer/PanelContainer/VBoxContainer/ButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedHalfButton" to="." method="_on_speed_half_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed2Button" to="." method="_on_speed_2_button_pressed"]
-[connection signal="pressed" from="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed5Button" to="." method="_on_speed_5_button_pressed"]
+[node name="StartMarker" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0, 0, 1, 1)
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 250.0
+offset_bottom = 250.0
+texture = SubResource("PlaceholderTexture2D_m1est")
+
+[node name="EndMarker" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0, 0, 1, 1)
+offset_left = 750.0
+offset_top = 200.0
+offset_right = 800.0
+offset_bottom = 250.0
+texture = SubResource("PlaceholderTexture2D_m1est")
+
+[node name="GSpot" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
+visible = false
+offset_left = 450.0
+offset_top = 150.0
+offset_right = 500.0
+offset_bottom = 200.0
+texture = ExtResource("24_cvumy")
+
+[node name="BSpot" type="TextureRect" parent="Tutorial/TutorialCanvasLayer"]
+visible = false
+offset_left = 450.0
+offset_top = 250.0
+offset_right = 500.0
+offset_bottom = 300.0
+texture = ExtResource("24_cvumy")
+
+[node name="TutorialStepManager" parent="Tutorial" node_paths=PackedStringArray("tutorial_manager") instance=ExtResource("32_065f8")]
+unique_name_in_owner = true
+tutorial_manager = NodePath("..")
+
+[node name="Welcome" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+disable_buttons = true
+dialog_lines = Array[String](["This is a Tower Defense game. 
+Let's talk about what that means."])
+
+[node name="Part of path" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+disable_buttons = true
+dialog_lines = Array[String](["Enemies come from the start point and try to reach your goal.", "You lose a life every time an  enemy reaches the goal."])
+image_to_show = ExtResource("33_7ms1f")
+
+[node name="Send Wave" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_started"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton")
+dialog_lines = Array[String](["Let's watch the devastation unfold.
+In the bottom right corner is the Send Wave button. Press it."])
+
+[node name="Wave" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_ended"
+
+[node name="Explain what happened" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/StatusHBoxContainer/HealthLabel")
+dialog_lines = Array[String](["The enemies walked into our base. There used to be 10 people in there. 3 just got ate."])
+
+[node name="Towers" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer")
+dialog_lines = Array[String](["We don't like that. We should try to defend our base. With towers.", "You defend your base by buying a few of these towers. 
+Towers you can't afford are grayed out.", "Mouse over the towers to learn their properties (cost, speed, power, etc.)"])
+
+[node name="Select G1" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "build_tower_button_pressed"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/G1Button")
+dialog_lines = Array[String](["Green 1 is a cheap, fast attach tower. Click on it."])
+
+[node name="Place G1" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "tower_built"
+highlight_item = NodePath("../../TutorialCanvasLayer/GSpot")
+dialog_lines = Array[String](["You can put towers on walls (blue) but not roads (black). The range circle turns green when over a valid spot. 
+
+Click the highlighted square to place the tower there. "])
+
+[node name="Send Wave2" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_started"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton")
+dialog_lines = Array[String](["Let's try that fight again.
+Press Send Wave."])
+
+[node name="Wave2" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_ended"
+
+[node name="Wave 2 Explanation" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/StatusHBoxContainer/HealthLabel")
+dialog_lines = Array[String](["Much better! "])
+
+[node name="Send Wave3" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_started"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton")
+dialog_lines = Array[String](["Each new wave of enemies is tougher.
+Press Send Wave again."])
+
+[node name="Wave3" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_ended"
+
+[node name="Wave 3 Explanation" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/StatusHBoxContainer/HealthLabel")
+dialog_lines = Array[String](["Oops. They were too fast for us. We need a way to slow them down."])
+
+[node name="Select B1" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "build_tower_button_pressed"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/BlueButton")
+dialog_lines = Array[String](["Blue is blue like ice and snow if ice and snow were blue. It slows down enemies. Click on it."])
+
+[node name="Place B1" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "tower_built"
+highlight_item = NodePath("../../TutorialCanvasLayer/BSpot")
+dialog_lines = Array[String](["Place it on the highlight square."])
+
+[node name="Send Wave4" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_started"
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton")
+dialog_lines = Array[String](["Let's try again.
+Press Send Wave again."])
+
+[node name="Wave4" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+signal_name_to_wait_for = "wave_ended"
+
+[node name="Wave 4 Explanation2" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/StatusHBoxContainer/HealthLabel")
+dialog_lines = Array[String](["There we go. Green (and red) towers to attack, blue to slow."])
+
+[node name="More Info - Tower" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+hide_everything = true
+dialog_lines = Array[String](["Left click any tower on the map to see it's info screen. You can sell and upgrade the tower there.", "Right click a tower to toggle showing it's range circle."])
+
+[node name="More Info - Speed" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer")
+dialog_lines = Array[String](["You can control how fast everything moves here."])
+
+[node name="More Info - Waves" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WavesVBoxContainer")
+dialog_lines = Array[String](["This shows who you're fighting this wave and who's in the next one."])
+
+[node name="Quit" parent="Tutorial/TutorialStepManager" node_paths=PackedStringArray("highlight_item") instance=ExtResource("33_0ajut")]
+highlight_item = NodePath("../../../UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton")
+dialog_lines = Array[String](["That about covers it. You should know enough now to get started. 
+Press Quit to go back to the level list."])
+
+[node name="No-Op" parent="Tutorial/TutorialStepManager" instance=ExtResource("33_0ajut")]
+dialog_lines = Array[String](["You pressed Quit, right? Then you shouldn't have been able to get to this screen. Huh."])
+
+[connection signal="mouse_entered" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/G2Button" to="UI" method="_on_g_2_button_mouse_exited"]
+[connection signal="mouse_entered" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/TowerButtonsGridContainer/BlueButton" to="UI" method="_on_blue_button_mouse_exited"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/SendWaveButton" to="." method="_on_send_wave_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedHalfButton" to="." method="_on_speed_half_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/SpeedNormalButton" to="." method="_on_speed_normal_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed2Button" to="." method="_on_speed_2_button_pressed"]
+[connection signal="pressed" from="UI/LeftControlsMarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer/Speed5Button" to="." method="_on_speed_5_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/WinnerMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/TargetButton" to="." method="_on_target_button_pressed"]
+[connection signal="toggled" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/StickyTargetingCheckBox" to="." method="_on_sticky_targeting_check_box_toggled"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/SellButton" to="." method="_on_sell_button_pressed"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/ButtonsContainer/QuitButton" to="Tutorial/TutorialCanvasLayer/TutorialDialog" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Tutorial/TutorialCanvasLayer/TutorialDialog/MarginContainer/VBoxContainer/ButtonsContainer/ContinueButton" to="Tutorial/TutorialCanvasLayer/TutorialDialog" method="_on_continue_button_pressed"]

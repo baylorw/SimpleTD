@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dhql4hgh1nypb" path="res://assets/images/towers/g1 50.png" id="2_kp6dm"]
 [ext_resource type="Texture2D" uid="uid://37wxjgq3kga8" path="res://assets/images/towers/range_circle_edge_colored_no_center.png" id="2_rtg5u"]
 [ext_resource type="AudioStream" uid="uid://b473sb6cq7tf3" path="res://assets/audio/effects/jump.wav" id="4_xanjk"]
-[ext_resource type="Material" uid="uid://nk0apy67el1o" path="res://effects/hit_particles.tres" id="5_08u4l"]
+[ext_resource type="Material" uid="uid://ceuhy1h360hpv" path="res://effects/hit_particles_g.tres" id="5_yq7ep"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku21i"]
 radius = 25.0
@@ -100,7 +100,7 @@ script = ExtResource("1_gtsu7")
 type = "Green 1"
 cost = 100
 cost_per_level = 50
-base_damage_per_shot = 11
+base_damage_per_shot = 15
 damage_per_level = 10
 shot_delay_in_ms = 50
 base_range_in_pixels = 280
@@ -150,7 +150,7 @@ unique_name_in_owner = true
 [node name="Target1" type="GPUParticles2D" parent="HitEffects"]
 unique_name_in_owner = true
 emitting = false
-process_material = ExtResource("5_08u4l")
+process_material = ExtResource("5_yq7ep")
 lifetime = 0.8
 one_shot = true
 explosiveness = 1.0

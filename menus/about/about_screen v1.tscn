@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyfnuewie04l6"]
+
+[ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="1_6rjqd"]
+[ext_resource type="Texture2D" uid="uid://bpjiwwcrnk41l" path="res://menus/about/i heart TD.png" id="2_perku"]
+
+[node name="AboutScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6rjqd")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 185.0
+offset_right = 922.0
+offset_bottom = 661.0
+theme_override_colors/default_color = Color(0.99003, 1, 0.585901, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "A lot of people love tower defense for the bright colors, cute characters, variety of towers, rogue-like randomness and the feeling of progress as you level up and unlock things but what made me fall in love with it was the spatial reasoning - solving puzzles using nothing but your understanding of the map. Games like [i]Vector TD[/i], [i]GemCraft[/i] and [i]Defender's Quest[/i].
+
+SimpleTD doesn't have a lot of variety. It's a simple game that tries to do one thing well. My hope is that there's a place in the world for games like that."
+fit_content = true
+
+[node name="CreditsLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1012.0
+offset_top = 185.0
+offset_right = 1252.0
+offset_bottom = 664.0
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[u]Executive Producer[/u]
+baylor
+
+[u]Level Design[/u]
+baylor
+
+[u]Programming[/u]
+baylor
+
+[u]Art[/u]
+baylor
+
+[u]Janitor[/u]
+baylor
+
+[u]Intern[/u]
+baylor"
+fit_content = true
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 268.0
+offset_top = 26.0
+offset_right = 1012.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 96
+text = "About SimpleTD"
+horizontal_alignment = 1
+
+[node name="IHeartTd" type="Sprite2D" parent="."]
+position = Vector2(123, 94)
+rotation = -0.279253
+texture = ExtResource("2_perku")

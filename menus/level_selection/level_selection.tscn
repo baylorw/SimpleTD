@@ -149,12 +149,14 @@ offset_bottom = 588.0
 text = "level_name"
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 533.0
-offset_right = 848.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 67.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
 text = "SELECT_LEVEL"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="LoadLevelButton" to="." method="_on_load_level_button_pressed"]

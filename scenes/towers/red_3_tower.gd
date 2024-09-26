@@ -10,13 +10,13 @@ func _ready() -> void:
 func fire():
 	if enemies_in_range.is_empty():
 		return
-	var enemy_index := randi() % enemies_in_range.size()
-	var target = enemies_in_range[enemy_index]
+	#var enemy_index := randi() % enemies_in_range.size()
+	#var target = enemies_in_range[enemy_index]
 	
 	super.fire()
 	
 	var bullet : Projectile = load("res://scenes/projectiles/red_3_bullet.tscn").instantiate()
-	bullet.target = target
+	bullet.target = current_target
 	bullet.damage = self.current_damage_per_shot
 	# TODO: Only give credit when/if it hits
 	self.damage_done += current_damage_per_shot

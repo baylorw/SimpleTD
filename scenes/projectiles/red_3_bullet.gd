@@ -1,15 +1,19 @@
 class_name Red3Bullet extends Projectile
 
+var explosion_resource : Resource
+
+func _ready():
+	explosion_resource = preload("res://effects/explosion.tscn")
+	pass
+	
 func impact():
-	# Can play an animated sprite or particle effect.
-	# Can play a sound.
-	#--- Wait a little for impact animations and sounds to finish.
-	await get_tree().create_timer(0.2).timeout
+	var explosion = explosion_resource.instantiate()
+	var x_pos = (randi() % 40) - 20
+	var y_pos = (randi() % 40) - 20
+	var impact_location = self.position + Vector2(x_pos, y_pos)
+	explosion.position = impact_location
+	#--- Add to scene tree as sibling to the bullet or the particles won't show (not sure why).
+	get_parent().add_child(explosion)
+	explosion.play()
 	self.queue_free()
 	
-	#var x_pos = (randi() % 40) - 20
-	#var y_pos = (randi() % 40) - 20
-	#var impact_location = Vector2(x_pos, y_pos)
-	#var new_impact = gun_impact.instantiate()
-	#new_impact.position = impact_location
-	#impact_area.add_child(new_impact)

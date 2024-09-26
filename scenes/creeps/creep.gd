@@ -58,6 +58,9 @@ var speed      : float
 @onready var poison_icon: TextureRect = %PoisonIcon
 var death_animation: AnimatedSprite2D
 
+var should_show_distance := false
+var distance_label: Label
+
 var expected_health_bar_position : Vector2
 var expected_status_position : Vector2
 
@@ -101,6 +104,13 @@ func _ready():
 	if is_instance_valid(%DeathAnimation):
 		death_animation = %DeathAnimation
 		death_animation.visible = false
+		
+	distance_label = Label.new()
+	distance_label.position = status_icon_container.position - Vector2(0,23)
+	if should_show_distance:
+		add_child(distance_label)
+	else:
+		distance_label.visible = false
 
 func set_level(new_level: int):
 	self.level = new_level
@@ -187,6 +197,7 @@ func _physics_process_steering(_delta):
 		if path.is_empty():
 			is_seeking = false
 		else:
+			distance_label.text = str(path.size())
 			desired_position = path.pop_front()
 			look_at(desired_position)
 			#--- Is this the last segment?

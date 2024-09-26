@@ -54,7 +54,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_082v6")
 max_speed = 150.0
-base_max_health = 150
+base_max_health = 300
 base_kill_value = 4
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

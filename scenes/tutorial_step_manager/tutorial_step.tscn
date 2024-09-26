@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7e6uv2dxtcnp"]
+
+[ext_resource type="Script" path="res://scenes/tutorial_step_manager/tutorial_step.gd" id="1_4uwkf"]
+
+[node name="TutorialState" type="Node"]
+script = ExtResource("1_4uwkf")

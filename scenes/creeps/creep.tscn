@@ -88,3 +88,11 @@ visible = false
 animation = &"explode"
 frame = 0
 frame_progress = 0.0
+
+[node name="DistanceLabel" type="Label" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -66.0
+offset_right = 15.0
+offset_bottom = -43.0
+text = "20"

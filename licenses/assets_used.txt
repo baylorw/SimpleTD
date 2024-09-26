@@ -1,5 +1,10 @@
 Assets Used In This Demo
 ------------------------
+Author:  Gabbinetto
+Name:    Trail2D-addon
+Link:    https://github.com/Gabbinetto/Trail2D-addon
+License: MIT License
+
 Author:  Kenney
 Name:    Top-down Tanks Redux
 Link:    https://kenney.nl/assets/top-down-tanks-redux
@@ -10,7 +15,22 @@ Name:    Tower Defense (Top-Down)
 Link:    https://kenney.nl/assets/tower-defense-top-down
 License: CCO 1.0 Universal
 
+Author:  Kenney
+Name:    Kenney Future Narrow (font)
+Link:    https://kenney.nl/assets/kenney-fonts
+License: CCO 1.0 Universal
+
 Author:  Unity
-Name:    CC0
+Name:    Explosion00
 Link:    https://unity.com/blog/engine-platform/free-vfx-image-sequences-flipbooks
-License: 
+License: CC0
+
+Author:  Zane Little
+Name:    Apple Cider.mp3
+Link:    https://opengameart.org/content/apple-cider
+License: CC0
+
+Author:  Zane Little
+Name:    Insect Factory.mp3
+Link:    https://opengameart.org/content/insect-factory-wii-style-music
+License: CC0

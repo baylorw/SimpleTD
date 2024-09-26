@@ -30,6 +30,8 @@ Towers="*res://globals/TowerBook.gd"
 CurrentLevel="*res://globals/CurrentLevel.gd"
 SceneNavigation="*res://globals/SceneNavigation.gd"
 CreepBook="*res://globals/CreepBook.gd"
+Events="*res://globals/Events.gd"
+Sfx="*res://globals/SFX.tscn"
 
 [display]
 
@@ -37,6 +39,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/initial_position_type=3
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/trail_2d/plugin.cfg")
 
 [input]
 
@@ -81,7 +87,7 @@ camera_drag={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation")
+locale/translations=PackedStringArray("res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation", "res://resources/translations/SimpleTD translation - Sheet1.de.translation", "res://resources/translations/SimpleTD translation - Sheet1.fr.translation")
 
 [layer_names]
 

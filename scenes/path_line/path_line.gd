@@ -8,11 +8,12 @@ const inactive_speed := 0.25
 
 func show_as_active():
 	texture = active_texture
-	modulate.a = 1.0
+	#modulate.a = 0.25
+	#default_color.a = 0.25
 	self.material.set_shader_parameter("speed", active_speed)
 
 func show_as_inactive():
 	texture = inactive_texture
-	default_color.a = 0.1
+	#default_color.a = 0.1
 	#modulate.a = 0.1
 	self.material.set_shader_parameter("speed", inactive_speed)

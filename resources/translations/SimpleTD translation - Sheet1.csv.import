@@ -6,10 +6,10 @@ uid="uid://yugo00p8n6s"
 
 [deps]
 
-files=["res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation"]
+files=["res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.de.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation", "res://resources/translations/SimpleTD translation - Sheet1.fr.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation"]
 
 source_file="res://resources/translations/SimpleTD translation - Sheet1.csv"
-dest_files=["res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation"]
+dest_files=["res://resources/translations/SimpleTD translation - Sheet1.en.translation", "res://resources/translations/SimpleTD translation - Sheet1.de.translation", "res://resources/translations/SimpleTD translation - Sheet1.es.translation", "res://resources/translations/SimpleTD translation - Sheet1.fr.translation", "res://resources/translations/SimpleTD translation - Sheet1.uk.translation", "res://resources/translations/SimpleTD translation - Sheet1.jp.translation", "res://resources/translations/SimpleTD translation - Sheet1.pl.translation", "res://resources/translations/SimpleTD translation - Sheet1.th.translation"]
 
 [params]
 

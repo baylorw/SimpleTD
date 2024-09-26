@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" load_steps=12 format=3 uid="uid://bmdyj28ichv7b"]
 
-[ext_resource type="Texture2D" uid="uid://btdaaxb056th5" path="res://assets/tilesets/wall 50 v2.png" id="1_f82ma"]
+[ext_resource type="Texture2D" uid="uid://dks5wnde3oxek" path="res://assets/tilesets/wall 50 dup.png" id="1_f3esc"]
 [ext_resource type="Texture2D" uid="uid://dqb5a1q1q22gu" path="res://assets/tilesets/wall 50.png" id="1_pbnl0"]
 [ext_resource type="Texture2D" uid="uid://dhsde0d87kmpg" path="res://assets/tilesets/floor 50.png" id="2_k5c7u"]
 [ext_resource type="Texture2D" uid="uid://bkeg8ycap8ggt" path="res://assets/tilesets/floor gray border 50.png" id="3_4386a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i56dh"]
 resource_name = "Wall no blocking"
-texture = ExtResource("1_f82ma")
+texture = ExtResource("1_f3esc")
 texture_region_size = Vector2i(50, 50)
 0:0/0 = 0
 

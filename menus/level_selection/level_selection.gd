@@ -8,15 +8,13 @@ var level_name_by_id := {
 	"frog": "Frog",
 	"dq_halls_of_the_god_king": "God King",
 	"no_left_turns": "No Left Turns",
-	"std": "SimpleTD",
+	#"std": "SimpleTD",
 	"slim_pickings": "Slim Pickings",
 	"snaking_path": "Snaking Path",
 	"switchback": "Switchback",
 	"up_and_down": "Up And Down",
 	"void": "Void",
-	#"t1": "test",
-	#"t2": "test",
-	#"t3": "test",
+
 	"dq_zelemir": "Zelemir"
 }
 var current_level : String
@@ -51,10 +49,12 @@ func setup_level_buttons():
 
 func _on_load_level_button_pressed() -> void:
 	if current_level == "tutorial":
-		Globals.level_name = "res://levels/%s/%s.tscn" % [current_level, current_level]
+		#Globals.level_name = "res://levels/%s/%s.tscn" % [current_level, current_level]
+		Globals.level_name = "res://levels/tutorial/tutorial.tscn"
 		print("gonna load " + Globals.level_name)
 		get_tree().change_scene_to_file("res://scenes/level_manager_tutorial/tutorial_level_manager.tscn")
 	else:
+		print("wasn't tutorial, loading something else")
 		SceneNavigation.go_to_level(current_level)
 
 func _on_level_selection_button_pressed(level_id : String):
@@ -64,12 +64,10 @@ func _on_level_selection_button_pressed(level_id : String):
 func _on_quit_button_pressed():
 	get_tree().change_scene_to_file("res://menus/main/main_menu.tscn")
 
-
 func show_level_info(level_id: String):
 	var preview_texture_fqn = "res://levels/%s/%s.png" % [level_id, level_id]
 	%CurrentLevelNameLabel.text = level_id
 	%level_preview_image.texture = load(preview_texture_fqn)
-
 
 # TODO: Fix the alert window
 ## This works but wipes out your level when it's done.

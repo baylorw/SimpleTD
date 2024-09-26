@@ -1,8 +1,15 @@
-key,en,es,uk,jp,pl,th
-NEW_GAME,New Game,Juego Nuevo,Novel Pleasure,New Game Uwu,Ew-nay Ame-gay,เกมใหม่
-SETTINGS,Settings,Ajustes,Combobulation,Settings-dattebayo,Ettings-say,การตั้งค่า
-ABOUT,About,Acerca de,Aboot,About-dattebayo,Bout-ay,เกี่ยวกับ
-QUIT,Quit,Cerrar,Depart,Quit-dattebayo,It-quay,ออก
-SELECT_LEVEL,Select A Level,"
-Seleccione Un Nivel",Choosie Woosie,Select A Level-dattebayo,Elect-say A Evel-Lay,เลือกระดับ
-PLAY,Play,Jugar,Tea Time,Play-dattebayo,Ay-play,เล่น
+key,en,de,es,fr,uk,jp,pl,th
+NEW_GAME,New Game,Neues Spiel,Juego Nuevo,Nouvelle partie,Novel Pleasure,New Game Uwu,Ew-nay Ame-gay,เกมใหม่
+SETTINGS,Settings,Einstellungen,Ajustes,Paramètres,Combobulation,Settings-dattebayo,Ettings-say,การตั้งค่า
+ABOUT,About,Info,Acerca de,À propos,Aboot,About-dattebayo,Bout-ay,เกี่ยวกับ
+QUIT,Quit,Beenden,Cerrar,Quitter,Depart,Quit-dattebayo,It-quay,ออก
+SELECT_LEVEL,Select A Level,Level auswählen,"
+Seleccione Un Nivel",Sélectionner un niveau,Choosie Woosie,Select A Level-dattebayo,Elect-say A Evel-Lay,เลือกระดับ
+PLAY,Play,Spielen,Jugar,Jouer,Tea Time,Play-dattebayo,Ay-play,เล่น
+Closest_To_Goal,Closest to Goal,Erste,Primera,D'abord,Toppers,ゴールに最も近い,Irst-Fay,อันดับแรก
+Most_Health,Most Health,Höchste Gesundheit,Mayor salud,Le plus en santé,Stonkers,最も健康,Ealthiest-Hay,สุขภาพมากที่สุด
+Least_Health,Least Health,Wenigste Gesundheit,Menor salud,Le moins en santé,Knackered,最低の健康,Eakest-Way,สุขภาพน้อยที่สุด
+Fastest,Fastest,Am schnellsten,Más rápido,Le plus rapide,Experditious,最速,Astest-Fay,เร็วที่สุด
+Nearest,Nearest,Nächste,Más cercano,Le plus proche,Nigh,最も近い,Earest-Nay,ใกล้ที่สุด
+Random,Random,Zufällig,Aleatorio,Aléatoire,Monty,ランダム,Andom-Ray,สุ่ม
+WAVE,Wave:,Welle:,Ola:,Vague:,Wave:,波:,Ave-Way:,คลื่น

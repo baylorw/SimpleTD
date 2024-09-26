@@ -1,9 +1,19 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://xbaauqu77y27"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://xbaauqu77y27"]
 
 [ext_resource type="StyleBox" uid="uid://bj0l136cfw2lp" path="res://resources/green_menu_button hover.tres" id="1_p0m4c"]
 [ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="1_y1tus"]
 [ext_resource type="StyleBox" uid="uid://cresh6f4fpl17" path="res://resources/panel canvas.tres" id="2_5svaw"]
 [ext_resource type="StyleBox" uid="uid://dxqkc6hty1bs" path="res://resources/green_menu_button pressed.tres" id="2_tc3us"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spwy2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfsoj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1p4d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8kdx5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2sej"]
 
 [resource]
 Button/colors/font_hover_color = Color(1, 1, 0, 1)
@@ -13,6 +23,11 @@ Button/font_sizes/font_size = 24
 Button/styles/hover = ExtResource("1_p0m4c")
 Button/styles/normal = ExtResource("1_y1tus")
 Button/styles/pressed = ExtResource("2_tc3us")
+CheckBox/styles/disabled = SubResource("StyleBoxEmpty_spwy2")
+CheckBox/styles/focus = SubResource("StyleBoxEmpty_vfsoj")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_f1p4d")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_8kdx5")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_v2sej")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.196078)
 Label/constants/outline_size = 5

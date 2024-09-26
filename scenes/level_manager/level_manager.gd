@@ -10,12 +10,18 @@ const message_time_s : float = 0.75
 #var money : int
 
 @onready var ui: LevelUI = %UI
-@onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
+#@onready var map_view_settings_panel: PopupPanel = %MapViewSettingsPanel
 @onready var wave_start_message: VBoxContainer = %WaveStartMessage
 @onready var wave_end_message: VBoxContainer = %WaveEndMessage
 @onready var wave_start_label: Label = %WaveStartLabel
 @onready var wave_end_label: Label = %WaveEndLabel
 @onready var tower_info_popup_panel: PopupPanel = %TowerInfoPopupPanel
+
+#@onready var send_wave_button: Button = %SendWaveButton
+#@onready var quit_button: Button = %QuitButton
+#@onready var pause_button: Button = %PauseButton
+#@onready var speed_normal_button: Button = %SpeedNormalButton
+#@onready var speed_2_button: Button = %Speed2Button
 
 @onready var shade_tile_map: TileMapLayer = %ShadeTileMap
 @onready var tile_borders_tile_map: TileMapLayer = %TileBordersTileMap
@@ -50,6 +56,7 @@ func _ready():
 	#map_view_settings_panel.hide()
 	wave_start_message.visible = false
 	wave_end_message.visible = false
+	#Events.wave_ended.connect(on_wave_ended)
 	tower_info_popup_panel.hide()
 	
 	load_level()
@@ -69,6 +76,7 @@ func _ready():
 	creep_reached_base.connect(on_creep_reached_base)
 
 func load_level():
+	#print_debug("load_level, Globals.level_name=" + Globals.level_name)
 	if "" == Globals.level_name:
 		Globals.level_name = "res://levels/default/default_level.tscn"
 	var packed_scene = load(Globals.level_name)
@@ -98,7 +106,10 @@ func load_level():
 	path_by_name = play_area.path_by_name
 	var path_line_resource = load("res://scenes/path_line/path_line.tscn")
 	for path in path_by_name.values():
-		path.kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+		if !path.kill_zone.body_entered.is_connected(_on_kill_zone_body_entered):
+			path.kill_zone.body_entered.connect(_on_kill_zone_body_entered)
+		else:
+			printerr("Already connected to killzone")
 		#--- Calculate some data.
 		path.start_coord_global = coordinate_map_to_global(path.start_coord_map)
 		path.end_coord_global   = coordinate_map_to_global(path.end_coord_map)
@@ -143,6 +154,8 @@ func on_build_tower_button_pressed(tower_name : String):
 	%Towers.add_child(new_tower)
 	new_tower.set_range_color(bad_color)
 	new_tower.show_range(true)
+
+	Events.build_tower_button_pressed.emit()
 
 func _physics_process(_delta: float) -> void:
 	if !is_attempting_tower_placement:
@@ -252,6 +265,8 @@ func build_tower():
 	tower_by_map_coord[map_coord] = new_tower
 
 	new_tower.show_range(false)
+	
+	Events.tower_built.emit()
 
 func cancel_build():
 	is_attempting_tower_placement =false
@@ -334,6 +349,8 @@ func setup_next_wave():
 	show_default_paths()
 
 func spawn_creeps():
+	Events.wave_started.emit()
+	
 	CurrentLevel.level_status = CurrentLevel.LevelStatus.WAVE
 	
 	wave_start_label.text = "Wave %s" % [CurrentLevel.wave_number]
@@ -474,7 +491,7 @@ func on_creep_destroyed():
 ## Because it was queued, we can't get an accurate count of creeps remaining
 ##	in the other methods (on_destroyed, etc.).
 func on_creep_freed():
-	print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
+	#print("tree_exited, remaining creeps=" + str(%Creeps.get_child_count()))
 	#ui.show_details("#creeps=" + str(%Creeps.get_child_count()))
 
 	#--- If we've already lost it doesn't matter what the creeps are doing now.
@@ -486,6 +503,7 @@ func on_creep_freed():
 			CurrentLevel.level_status = CurrentLevel.LevelStatus.WON
 			on_win()
 		else:
+			#Events.wave_ended.emit()
 			on_wave_ended()
 
 func on_wave_ended():
@@ -506,14 +524,17 @@ func on_wave_ended():
 	ui.show_money()
 	%SendWaveButton.disabled = false
 	setup_next_wave()
+	Events.wave_ended.emit()
 
 func on_creep_reached_base():
 	#print("on_creep_reached_base")
 	CurrentLevel.base_health -= 1
 	ui.show_health()
-	if 0 == CurrentLevel.base_health:
+	if 0 >= CurrentLevel.base_health:
 		CurrentLevel.level_status = CurrentLevel.LevelStatus.LOST
 		on_lose()
+	else:
+		Sfx.play_sound("homer_confused")
 
 func _on_kill_zone_body_entered(body: Node2D):
 	#print("kill zone entered by " + str(body))
@@ -570,25 +591,20 @@ func _on_speed_2_button_pressed() -> void:
 	Engine.time_scale = 2
 func _on_speed_5_button_pressed() -> void:
 	Engine.time_scale = 5
-
-
-func _on_r_pressed() -> void:
-	ui.show_health()
-	ui.show_money()
-	ui.show_wave()
-	print("creep count=" + str(%Creeps.get_child_count()))
-	map_view_settings_panel.popup_centered()
 #endregion
 
 #region Tower Info popup events
 func _on_sell_button_pressed() -> void:
-	var old_money = CurrentLevel.money
 	CurrentLevel.money += selected_tower.get_sell_value()
-	print("money before=%s, increase=%s, now=%s" % [old_money, selected_tower.get_sell_value(), CurrentLevel.money])
 	ui.show_money()
 	tower_by_map_coord.erase(selected_tower.position_tile)
 	selected_tower.queue_free()
 	tower_info_popup_panel.hide()
+	Events.tower_sold.emit()
+
+
+func _on_sticky_targeting_check_box_toggled(toggled_on: bool) -> void:
+	selected_tower.should_stay_on_target = toggled_on
 
 func _on_target_button_pressed() -> void:
 	var strategies = selected_tower.allowed_targeting_strategies
@@ -598,6 +614,7 @@ func _on_target_button_pressed() -> void:
 		index = 0
 	selected_tower.targeting_strategy = strategies[index]
 	%TargetStrategyLabel.text = selected_tower.get_targeting_strategy_name()
+	Events.tower_targeting_changed.emit()
 
 func _on_upgrade_button_pressed() -> void:
 	if selected_tower.level >= selected_tower.max_level:
@@ -611,4 +628,5 @@ func _on_upgrade_button_pressed() -> void:
 	CurrentLevel.money -= selected_tower.cost_per_level
 	ui.show_money()
 	tower_info_popup_panel.set_info(selected_tower)
+	Events.tower_upgraded.emit()
 #endregion

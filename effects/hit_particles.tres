@@ -7,6 +7,7 @@ colors = PackedColorArray(0, 1, 0, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_33nlx")
 
 [resource]
+resource_local_to_scene = true
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 emission_shape = 1

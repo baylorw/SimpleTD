@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://clp7bwlrw68bu"]
+[gd_scene load_steps=30 format=3 uid="uid://clp7bwlrw68bu"]
 
 [ext_resource type="Script" path="res://scenes/level_manager/level_manager.gd" id="1_k67i1"]
 [ext_resource type="Texture2D" uid="uid://bjiyrb7l3c570" path="res://assets/images/backgrounds/main_menu_background.jpg" id="2_517ca"]
@@ -17,8 +17,10 @@
 [ext_resource type="Script" path="res://scenes/tilemap_annotations/annotations_tile_map.gd" id="13_068kf"]
 [ext_resource type="Texture2D" uid="uid://ds6mxqe5bvoie" path="res://assets/ui/hollow frame 2.png" id="13_br6wb"]
 [ext_resource type="StyleBox" uid="uid://c5u8tjttfwnaf" path="res://resources/green_menu_button.tres" id="13_hiqgf"]
+[ext_resource type="Texture2D" uid="uid://b5001kb6nf704" path="res://assets/ui/icons/heart 4.PNG" id="14_p76m3"]
 [ext_resource type="PackedScene" uid="uid://c0qn226nbfu51" path="res://menus/map_view_settings/map_view_settings_panel.tscn" id="14_qajva"]
 [ext_resource type="TileSet" uid="uid://bmdyj28ichv7b" path="res://assets/tilesets/vectorTDTileSet.tres" id="15_0w8kr"]
+[ext_resource type="Texture2D" uid="uid://5ni5lqnkpuh" path="res://assets/ui/icons/money 5.PNG" id="15_vqo8g"]
 [ext_resource type="Theme" uid="uid://xbaauqu77y27" path="res://resources/map_popup_menu.tres" id="20_ar8l6"]
 [ext_resource type="Script" path="res://scenes/level_manager/tower_info_popup_panel.gd" id="21_gq8yv"]
 [ext_resource type="Texture2D" uid="uid://c2wcpgwwfrkay" path="res://assets/tilesets/annotations/target aiming.png" id="21_ncker"]
@@ -210,24 +212,27 @@ text = "Fast lvl 1
 HP: 1234
 Value: 100"
 
-[node name="WaveLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="WaveLabel2" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Wave: 0 / 6"
 autowrap_mode = 3
 
-[node name="HealthLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="HealthLabel2" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
 text = "Lives: 20/20"
 autowrap_mode = 3
 
-[node name="MoneyLabel" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
+[node name="MoneyLabel2" type="Label" parent="UI/MarginContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 size_flags_vertical = 1
@@ -245,6 +250,7 @@ theme_override_styles/normal = ExtResource("13_hiqgf")
 text = "Send Wave"
 
 [node name="QuitButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/WaveHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
@@ -253,11 +259,13 @@ text = "Quit"
 layout_mode = 2
 
 [node name="PauseButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "II"
 
 [node name="SpeedHalfButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -266,6 +274,7 @@ button_group = SubResource("ButtonGroup_0odd4")
 text = "1/2"
 
 [node name="SpeedNormalButton" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -275,6 +284,7 @@ button_group = SubResource("ButtonGroup_0odd4")
 text = "1"
 
 [node name="Speed2Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
@@ -283,12 +293,73 @@ button_group = SubResource("ButtonGroup_0odd4")
 text = "2"
 
 [node name="Speed5Button" type="Button" parent="UI/MarginContainer/PanelContainer/VBoxContainer/SpeedHBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/pressed = SubResource("StyleBoxFlat_l1rr4")
 toggle_mode = true
 button_group = SubResource("ButtonGroup_0odd4")
 text = "5"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="LifeIcon" type="TextureRect" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(35, 20)
+layout_mode = 2
+texture = ExtResource("14_p76m3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthLabel" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "20/20"
+
+[node name="SpacerLabel" type="Label" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "    "
+
+[node name="MoneyIcon" type="TextureRect" parent="UI/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(22, 40)
+layout_mode = 2
+texture = ExtResource("15_vqo8g")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyLabel" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.784314, 0, 1)
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "20"
+
+[node name="SpacerLabel2" type="Label" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "    "
+
+[node name="WaveDescLabel" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "WAVE"
+
+[node name="WaveLabel" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "1/10"
 
 [node name="LevelData" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -537,17 +608,15 @@ wait_time = 0.25
 [node name="TowerInfoPopupPanel" type="PopupPanel" parent="."]
 unique_name_in_owner = true
 transparent_bg = true
-position = Vector2i(840, 70)
-size = Vector2i(350, 456)
-min_size = Vector2i(300, 0)
+size = Vector2i(284, 458)
 theme = ExtResource("20_ar8l6")
 script = ExtResource("21_gq8yv")
 
 [node name="MarginContainer2" type="MarginContainer" parent="TowerInfoPopupPanel"]
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 345.0
-offset_bottom = 451.0
+offset_right = 279.0
+offset_bottom = 453.0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -621,6 +690,7 @@ layout_mode = 2
 text = "42,000"
 
 [node name="Label10" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+visible = false
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
 text = "Kills:"
@@ -628,6 +698,7 @@ horizontal_alignment = 2
 
 [node name="KillsLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "31	"
 
@@ -640,6 +711,18 @@ expand_icon = true
 [node name="TargetStrategyLabel" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+text = "123"
+
+[node name="Label9" type="Label" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+modulate = Color(1, 1, 0, 1)
+layout_mode = 2
+text = "Stay on Target:"
+horizontal_alignment = 2
+
+[node name="StickyTargetingCheckBox" type="CheckBox" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="SellButton" type="Button" parent="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -680,5 +763,6 @@ theme_override_font_sizes/font_size = 18
 [connection signal="pressed" from="MessagesCanvasLayer/LoserMessage/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="WaveTickTimer" to="." method="_on_wave_tick_timer_timeout"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/TargetButton" to="." method="_on_target_button_pressed"]
+[connection signal="toggled" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/StickyTargetingCheckBox" to="." method="_on_sticky_targeting_check_box_toggled"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/SellButton" to="." method="_on_sell_button_pressed"]
 [connection signal="pressed" from="TowerInfoPopupPanel/MarginContainer2/VBoxContainer/GridContainer/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
